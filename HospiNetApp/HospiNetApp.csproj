@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E22245E-103D-4D7D-AE41-ADE6DF98E04D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HospiNetApp</RootNamespace>
+    <AssemblyName>HospiNetApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\AdminDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboardForm.Designer.cs">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DoctorDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DoctorDashboardForm.Designer.cs">
+      <DependentUpon>DoctorDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HomeScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HomeScreen.Designer.cs">
+      <DependentUpon>HomeScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PatientDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PatientDashboardForm.Designer.cs">
+      <DependentUpon>PatientDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Utilities\WindowDragging.cs" />
+    <Compile Include="Models\ModAppointment.cs" />
+    <Compile Include="Models\ModDoctor.cs" />
+    <Compile Include="Models\ModHospital.cs" />
+    <Compile Include="Models\ModPatient.cs" />
+    <Compile Include="Models\ModSpeciality.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\AdminDashboard\Doctors\ManageDoctorsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Doctors\ManageDoctorsControl.Designer.cs">
+      <DependentUpon>ManageDoctorsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\AddHospitalControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\AddHospitalControl.Designer.cs">
+      <DependentUpon>AddHospitalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\AddRoomControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\AddRoomControl.Designer.cs">
+      <DependentUpon>AddRoomControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageAppointmentsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageAppointmentsControl.Designer.cs">
+      <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageHospitalsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageHospitalsControl.Designer.cs">
+      <DependentUpon>ManageHospitalsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.Designer.cs">
+      <DependentUpon>ManageRoomsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalcontrol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalcontrol.Designer.cs">
+      <DependentUpon>UpdateHospitalcontrol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Patients\AddPatientControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Patients\AddPatientControl.Designer.cs">
+      <DependentUpon>AddPatientControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Patients\ManagePatientsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Patients\ManagePatientsControl.Designer.cs">
+      <DependentUpon>ManagePatientsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Patients\UpdatePatientControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Patients\UpdatePatientControl.Designer.cs">
+      <DependentUpon>UpdatePatientControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DoctorDashboard\ShowAppointmentsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DoctorDashboard\ShowAppointmentsControl.Designer.cs">
+      <DependentUpon>ShowAppointmentsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HomeScreen\LoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\HomeScreen\LoginControl.Designer.cs">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MainControl.cs" />
+    <Compile Include="UserControls\PatientDashboard\ManageAppointmentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PatientDashboard\ManageAppointmentControl.Designer.cs">
+      <DependentUpon>ManageAppointmentControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PatientDashboard\NewAppointmentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PatientDashboard\NewAppointmentControl.Designer.cs">
+      <DependentUpon>NewAppointmentControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\AdminDashboardForm.resx">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DoctorDashboardForm.resx">
+      <DependentUpon>DoctorDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HomeScreen.resx">
+      <DependentUpon>HomeScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PatientDashboardForm.resx">
+      <DependentUpon>PatientDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Doctors\ManageDoctorsControl.resx">
+      <DependentUpon>ManageDoctorsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\AddHospitalControl.resx">
+      <DependentUpon>AddHospitalControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\AddRoomControl.resx">
+      <DependentUpon>AddRoomControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageAppointmentsControl.resx">
+      <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageHospitalsControl.resx">
+      <DependentUpon>ManageHospitalsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.resx">
+      <DependentUpon>ManageRoomsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalcontrol.resx">
+      <DependentUpon>UpdateHospitalcontrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Patients\AddPatientControl.resx">
+      <DependentUpon>AddPatientControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Patients\ManagePatientsControl.resx">
+      <DependentUpon>ManagePatientsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Patients\UpdatePatientControl.resx">
+      <DependentUpon>UpdatePatientControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DoctorDashboard\ShowAppointmentsControl.resx">
+      <DependentUpon>ShowAppointmentsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\HomeScreen\LoginControl.resx">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PatientDashboard\ManageAppointmentControl.resx">
+      <DependentUpon>ManageAppointmentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PatientDashboard\NewAppointmentControl.resx">
+      <DependentUpon>NewAppointmentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{cbbeb49c-4b3e-47e3-922d-332543df916b}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\doctor-removebg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

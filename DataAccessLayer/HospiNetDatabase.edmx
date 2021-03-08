@@ -36,6 +36,7 @@
         </Function>
         <Function Name="usp_AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
           <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="hospital_Id" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="usp_GetAllRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
         <Function Name="usp_GetHospitals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
@@ -66,9 +67,6 @@
             <Parameter Name="Address" Mode="In" Type="String" />
             <Parameter Name="ZipCode" Mode="In" Type="Int32" />
             <Parameter Name="City" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="usp_AddRoom">
-          <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_GetHospitals" ReturnType="Collection(HospiNetModel.usp_GetHospitals_Result)" />
           <FunctionImport Name="usp_UserExists" ReturnType="Collection(Guid)">
@@ -101,6 +99,10 @@
             <Parameter Name="Birthday" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="usp_GetAllRooms" ReturnType="Collection(HospiNetModel.usp_GetAllRooms_Result)" />
+          <FunctionImport Name="usp_AddRoom">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="hospital_Id" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
           <Property Type="Guid" Name="Id" Nullable="false" />
@@ -167,7 +169,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_AddHospital" FunctionName="HospiNetModel.Store.usp_AddHospital" />
-          <FunctionImportMapping FunctionImportName="usp_AddRoom" FunctionName="HospiNetModel.Store.usp_AddRoom" />
           <FunctionImportMapping FunctionImportName="usp_GetHospitals" FunctionName="HospiNetModel.Store.usp_GetHospitals">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HospiNetModel.usp_GetHospitals_Result">
@@ -244,6 +245,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_AddRoom" FunctionName="HospiNetModel.Store.usp_AddRoom" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

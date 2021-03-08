@@ -21,8 +21,8 @@ namespace DataAccessLayer
         /// Returns 1 if user exists
         /// Returns 0 if user doesn't exist
         /// </summary>
-        /// <param name="FirstName">admin</param>
-        /// <param name="LastName">admin</param>
+        /// <param name="FirstName">Admin</param>
+        /// <param name="LastName">Admin</param>
         /// <param name="Type">Patient/Admin/Doctor</param>
         /// <returns></returns>
         public Guid? UserExists(string FirstName, string LastName, string Type)
@@ -36,6 +36,14 @@ namespace DataAccessLayer
             using (var oDatabase = new HospiNetEntities())
             {
                 return oDatabase.usp_GetAllRooms().ToList();
+            }
+        }
+
+        public void AddRoom(string roomName, Guid HospitalId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_AddRoom(roomName, HospitalId);
             }
         }
     }

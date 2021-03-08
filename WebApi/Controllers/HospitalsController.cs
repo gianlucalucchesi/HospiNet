@@ -51,6 +51,23 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/hospitals/AddRoom")]
+        public IHttpActionResult AddRoom(dynamic room)
+        {
+            BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
+
+            try
+            {
+                oData.AddRoom(room.roomName, room.hospitalName);
+                return Created("Database", room.roomName);
+            }
+            catch (Exception)
+            {
+                return Conflict();
+            }
+        }
+
         //// GET: api/Hospitals/5
         //public string Get(int id)
         //{

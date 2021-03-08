@@ -56,9 +56,9 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.label_Failed.ForeColor = System.Drawing.Color.DarkRed;
             this.label_Failed.Location = new System.Drawing.Point(400, 166);
             this.label_Failed.Name = "label_Failed";
-            this.label_Failed.Size = new System.Drawing.Size(184, 24);
+            this.label_Failed.Size = new System.Drawing.Size(179, 24);
             this.label_Failed.TabIndex = 24;
-            this.label_Failed.Text = "Patient already exists";
+            this.label_Failed.Text = "Room already exists";
             this.label_Failed.Visible = false;
             // 
             // label_Success
@@ -68,9 +68,9 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.label_Success.ForeColor = System.Drawing.Color.ForestGreen;
             this.label_Success.Location = new System.Drawing.Point(379, 166);
             this.label_Success.Name = "label_Success";
-            this.label_Success.Size = new System.Drawing.Size(231, 24);
+            this.label_Success.Size = new System.Drawing.Size(226, 24);
             this.label_Success.TabIndex = 23;
-            this.label_Success.Text = "Patient successfully added";
+            this.label_Success.Text = "Room successfully added";
             this.label_Success.Visible = false;
             // 
             // button_AddRoom
@@ -83,11 +83,12 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.button_AddRoom.TabIndex = 22;
             this.button_AddRoom.Text = "Add Room";
             this.button_AddRoom.UseVisualStyleBackColor = true;
+            this.button_AddRoom.Click += new System.EventHandler(this.button_AddRoom_Click);
             // 
             // textBox_RoomName
             // 
             this.textBox_RoomName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_RoomName.Location = new System.Drawing.Point(414, 237);
+            this.textBox_RoomName.Location = new System.Drawing.Point(404, 237);
             this.textBox_RoomName.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_RoomName.Name = "textBox_RoomName";
             this.textBox_RoomName.Size = new System.Drawing.Size(261, 28);
@@ -98,7 +99,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(289, 278);
+            this.label2.Location = new System.Drawing.Point(279, 278);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 24);
             this.label2.TabIndex = 19;
@@ -108,7 +109,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(290, 237);
+            this.label1.Location = new System.Drawing.Point(280, 237);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 24);
             this.label1.TabIndex = 18;
@@ -119,7 +120,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.comboBox_Hospitals.Enabled = false;
             this.comboBox_Hospitals.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Hospitals.FormattingEnabled = true;
-            this.comboBox_Hospitals.Location = new System.Drawing.Point(414, 278);
+            this.comboBox_Hospitals.Location = new System.Drawing.Point(404, 278);
             this.comboBox_Hospitals.Name = "comboBox_Hospitals";
             this.comboBox_Hospitals.Size = new System.Drawing.Size(261, 32);
             this.comboBox_Hospitals.TabIndex = 25;

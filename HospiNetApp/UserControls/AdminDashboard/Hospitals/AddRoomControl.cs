@@ -60,5 +60,34 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                 comboBox_Hospitals.Items.Add(hospital.Name);
             }
         }
+
+        private async void button_AddRoom_Click(object sender, EventArgs e)
+        {
+            string sRoomName = textBox_RoomName.Text;
+            string sHospitalName = comboBox_Hospitals.SelectedItem.ToString();
+
+            const string apiRequest = "https://localhost:44310/api/hospitals/AddRoom";
+
+            var room = new
+            {
+                roomName = sRoomName,
+                hospitalName = sHospitalName
+            };
+
+            var content = JsonConvert.SerializeObject(room);
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+                }
+            }
+            catch (HttpRequestException exc)
+            {
+                Console.WriteLine(exc.Message);
+                throw;
+            }
+
+        }
     }
 }

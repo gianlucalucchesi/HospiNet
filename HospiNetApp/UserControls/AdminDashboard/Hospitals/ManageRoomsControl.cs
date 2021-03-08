@@ -45,7 +45,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                         List<Models.ModRoom> lstContent = JsonConvert.DeserializeObject<List<Models.ModRoom>>(content);
 
                         int i = 0;
-                        string specialities; // Concatenate specialities as string to be shown in DataGridView
 
                         foreach (var room in lstContent)
                         {

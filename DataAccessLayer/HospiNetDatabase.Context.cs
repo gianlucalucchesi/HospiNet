@@ -67,15 +67,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddHospital", nameParameter, addressParameter, zipCodeParameter, cityParameter);
         }
     
-        public virtual int usp_AddRoom(string name)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddRoom", nameParameter);
-        }
-    
         public virtual ObjectResult<usp_GetHospitals_Result> usp_GetHospitals()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetHospitals_Result>("usp_GetHospitals");
@@ -184,6 +175,19 @@ namespace DataAccessLayer
         public virtual ObjectResult<usp_GetAllRooms_Result> usp_GetAllRooms()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllRooms_Result>("usp_GetAllRooms");
+        }
+    
+        public virtual int usp_AddRoom(string name, Nullable<System.Guid> hospital_Id)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var hospital_IdParameter = hospital_Id.HasValue ?
+                new ObjectParameter("hospital_Id", hospital_Id) :
+                new ObjectParameter("hospital_Id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddRoom", nameParameter, hospital_IdParameter);
         }
     }
 }

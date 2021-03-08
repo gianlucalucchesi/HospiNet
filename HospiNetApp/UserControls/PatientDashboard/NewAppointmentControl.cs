@@ -102,10 +102,5 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
             comboBox_Doctors.Enabled = true;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

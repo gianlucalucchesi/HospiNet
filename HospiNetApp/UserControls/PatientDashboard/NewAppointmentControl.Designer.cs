@@ -48,7 +48,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_AppointmentMinutes = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_AddAppointment = new System.Windows.Forms.Button();
             this.label_SuccessFailed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -295,16 +295,15 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.label10.TabIndex = 21;
             this.label10.Text = "Minutes:";
             // 
-            // button1
+            // button_AddAppointment
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(693, 442);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 70);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "MAKE APPOINTMENT";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_AddAppointment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_AddAppointment.Location = new System.Drawing.Point(693, 442);
+            this.button_AddAppointment.Name = "button_AddAppointment";
+            this.button_AddAppointment.Size = new System.Drawing.Size(140, 70);
+            this.button_AddAppointment.TabIndex = 22;
+            this.button_AddAppointment.Text = "MAKE APPOINTMENT";
+            this.button_AddAppointment.UseVisualStyleBackColor = true;
             // 
             // label_SuccessFailed
             // 
@@ -322,7 +321,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label_SuccessFailed);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_AddAppointment);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.comboBox_AppointmentMinutes);
@@ -372,7 +371,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private System.Windows.Forms.ComboBox comboBox_AppointmentMinutes;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_AddAppointment;
         private System.Windows.Forms.Label label_SuccessFailed;
     }
 }

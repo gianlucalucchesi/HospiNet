@@ -14,10 +14,10 @@ namespace WebApi.Controllers
         public IHttpActionResult GetAllHospitals()
         {
             BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
-            var hospitals = oData.GetAllHospitals();
+            var lstHospitals = oData.GetAllHospitals();
 
-            if (hospitals != null)
-                return Ok(hospitals);
+            if (lstHospitals != null)
+                return Ok(lstHospitals);
             else
                 return NotFound();
         }
@@ -33,6 +33,22 @@ namespace WebApi.Controllers
                 return Ok(userId);
             else
                 return NotFound();
+        }
+
+        [HttpGet]
+        [Route("api/hospitals/GetAllRooms")]
+        public IHttpActionResult GetAllRooms()
+        {
+            BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
+            var lstRooms = oData.GetAllRooms();
+
+            if (lstRooms != null)
+            {
+                return Ok(lstRooms);
+            } else
+            {
+                return NotFound();
+            }
         }
 
         //// GET: api/Hospitals/5

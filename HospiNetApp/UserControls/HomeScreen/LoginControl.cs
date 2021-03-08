@@ -98,5 +98,12 @@ namespace HospiNetApp.UserControls
 
             return UserId;
         }
+
+        // https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-create-a-password-text-box-with-the-windows-forms-textbox-control?view=netframeworkdesktop-4.8
+        private void Login_Load(object sender, EventArgs e)
+        {
+            textBox_loginScreen_FirstName.PasswordChar = '*';
+            textBox_loginScreen_LastName.PasswordChar = '*';
+        }
     }
 }

@@ -110,9 +110,9 @@ namespace HospiNetApp.UserControls
             this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_loading.Location = new System.Drawing.Point(425, 92);
             this.label_loading.Name = "label_loading";
-            this.label_loading.Size = new System.Drawing.Size(87, 24);
+            this.label_loading.Size = new System.Drawing.Size(93, 24);
             this.label_loading.TabIndex = 7;
-            this.label_loading.Text = "loading...";
+            this.label_loading.Text = "Loading...";
             this.label_loading.Visible = false;
             // 
             // Login
@@ -129,6 +129,7 @@ namespace HospiNetApp.UserControls
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Login";
             this.Size = new System.Drawing.Size(926, 393);
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

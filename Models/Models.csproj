@@ -46,6 +46,7 @@
     <Compile Include="ModDoctorSpeciality.cs" />
     <Compile Include="ModHospital.cs" />
     <Compile Include="ModPatient.cs" />
+    <Compile Include="ModRoom.cs" />
     <Compile Include="ModSpeciality.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

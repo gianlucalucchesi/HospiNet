@@ -42,5 +42,25 @@ namespace BusinessLogic
             DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
             return oData.UserExists(FirstName, LastName, Type);
         }
+
+        public List<Models.ModRoom> GetAllRooms()
+        {
+            DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
+            var lstRooms = new List<Models.ModRoom>();
+            var lstContent = oData.GetAllRooms();
+
+            foreach (var room in lstContent)
+            {
+                var oRoom = new Models.ModRoom();
+
+                oRoom.Id = room.Id;
+                oRoom.RoomName = room.RoomName;
+                oRoom.HospitalName = room.HospitalName;
+
+                lstRooms.Add(oRoom);
+            }
+
+            return lstRooms;
+        }
     }
 }

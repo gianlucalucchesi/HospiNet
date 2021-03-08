@@ -11,8 +11,10 @@ namespace DataAccessLayer
     {
         public List<usp_GetHospitals_Result> GetAllHospitals()
         {
-            HospiNetEntities oDatabase = new HospiNetEntities();
-            return oDatabase.usp_GetHospitals().ToList();
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetHospitals().ToList();
+            }
         }
 
         /// <summary>
@@ -27,6 +29,14 @@ namespace DataAccessLayer
         {
             HospiNetEntities oDatabase = new HospiNetEntities();
             return oDatabase.usp_UserExists(FirstName, LastName, Type).FirstOrDefault();
+        }
+
+        public List<usp_GetAllRooms_Result> GetAllRooms()
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetAllRooms().ToList();
+            }
         }
     }
 }

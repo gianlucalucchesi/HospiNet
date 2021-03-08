@@ -180,5 +180,10 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("usp_AddPatient", firstNameParameter, lastNameParameter, birthdayParameter);
         }
+    
+        public virtual ObjectResult<usp_GetAllRooms_Result> usp_GetAllRooms()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllRooms_Result>("usp_GetAllRooms");
+        }
     }
 }

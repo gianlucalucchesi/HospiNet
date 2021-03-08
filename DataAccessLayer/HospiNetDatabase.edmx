@@ -37,6 +37,7 @@
         <Function Name="usp_AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
           <Parameter Name="name" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetAllRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
         <Function Name="usp_GetHospitals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
         <Function Name="usp_UserExists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
@@ -99,6 +100,7 @@
             <Parameter Name="LastName" Mode="In" Type="String" />
             <Parameter Name="Birthday" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetAllRooms" ReturnType="Collection(HospiNetModel.usp_GetAllRooms_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
           <Property Type="Guid" Name="Id" Nullable="false" />
@@ -143,6 +145,11 @@
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="RegistrationNumber" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllRooms_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="HospitalName" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -228,6 +235,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_AddPatient" FunctionName="HospiNetModel.Store.usp_AddPatient" />
+          <FunctionImportMapping FunctionImportName="usp_GetAllRooms" FunctionName="HospiNetModel.Store.usp_GetAllRooms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HospiNetModel.usp_GetAllRooms_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

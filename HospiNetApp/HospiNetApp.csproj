@@ -81,6 +81,7 @@
     <Compile Include="Models\ModDoctor.cs" />
     <Compile Include="Models\ModHospital.cs" />
     <Compile Include="Models\ModPatient.cs" />
+    <Compile Include="Models\ModRoom.cs" />
     <Compile Include="Models\ModSpeciality.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

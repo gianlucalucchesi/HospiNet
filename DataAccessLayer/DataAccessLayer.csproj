@@ -78,6 +78,9 @@
     <Compile Include="usp_GetAllPatients_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetAllRooms_Result.cs">
+      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetAppointments_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>

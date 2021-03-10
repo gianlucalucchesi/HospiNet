@@ -68,7 +68,7 @@ namespace BusinessLogic
             DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
 
             var lstHospitals = GetAllHospitals();
-            Models.ModHospital hospital = (Models.ModHospital)lstHospitals.Where(x => x.Name == hospitalName).Take(1);
+            Models.ModHospital hospital = lstHospitals.SingleOrDefault(x => x.Name == hospitalName);
 
             oData.AddRoom(roomName, hospital.Id);
         }

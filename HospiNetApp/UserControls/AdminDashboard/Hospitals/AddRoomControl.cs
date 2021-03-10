@@ -74,15 +74,19 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                 hospitalName = sHospitalName
             };
 
+            //string content = "{'roomName':'"+ sRoomName +"','hospitalName':'" + sHospitalName + "'}";
+
             var content = JsonConvert.SerializeObject(room);
+
             try
             {
                 using (var client = new HttpClient())
                 {
-                    var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+                    var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json")); //Error 500
+                    //var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content)); //Error 404
                 }
             }
-            catch (HttpRequestException exc)
+            catch (OperationCanceledException exc)
             {
                 Console.WriteLine(exc.Message);
                 throw;

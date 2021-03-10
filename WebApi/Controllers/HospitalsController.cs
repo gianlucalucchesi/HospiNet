@@ -7,6 +7,12 @@ using System.Web.Http;
 
 namespace WebApi.Controllers
 {
+    public class RoomDTO
+    {
+        public string roomName { get; set; }
+        public string hospitalName { get; set; }
+    }
+
     public class HospitalsController : ApiController
     {
         [HttpGet]
@@ -51,9 +57,10 @@ namespace WebApi.Controllers
             }
         }
 
+        //DTO = Data Transfer Object
         [HttpPost]
         [Route("api/hospitals/AddRoom")]
-        public IHttpActionResult AddRoom(dynamic room)
+        public IHttpActionResult AddRoom([FromBody] RoomDTO room)
         {
             BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
 

@@ -82,8 +82,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             {
                 using (var client = new HttpClient())
                 {
-                    var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json")); //Error 500
-                    //var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content)); //Error 404
+                    var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
                 }
             }
             catch (OperationCanceledException exc)
@@ -91,7 +90,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                 Console.WriteLine(exc.Message);
                 throw;
             }
-
         }
     }
 }

@@ -31,7 +31,7 @@
         <Function Name="usp_AddHospital" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="ZipCode" Type="int" Mode="In" />
+          <Parameter Name="ZipCode" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="City" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="usp_AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
@@ -65,7 +65,7 @@
           <FunctionImport Name="usp_AddHospital">
             <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="Address" Mode="In" Type="String" />
-            <Parameter Name="ZipCode" Mode="In" Type="Int32" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
             <Parameter Name="City" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_GetHospitals" ReturnType="Collection(HospiNetModel.usp_GetHospitals_Result)" />

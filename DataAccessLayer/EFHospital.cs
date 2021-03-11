@@ -46,5 +46,13 @@ namespace DataAccessLayer
                 oDatabase.usp_AddRoom(roomName, HospitalId);
             }
         }
+
+        public void AddHospital(Models.ModHospital oHospital)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_AddHospital(oHospital.Name, oHospital.Address, oHospital.ZipCode, oHospital.City);
+            }
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_SelectAllSpecialities_Result>("usp_SelectAllSpecialities");
         }
     
-        public virtual int usp_AddHospital(string name, string address, Nullable<int> zipCode, string city)
+        public virtual int usp_AddHospital(string name, string address, string zipCode, string city)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
@@ -56,9 +56,9 @@ namespace DataAccessLayer
                 new ObjectParameter("Address", address) :
                 new ObjectParameter("Address", typeof(string));
     
-            var zipCodeParameter = zipCode.HasValue ?
+            var zipCodeParameter = zipCode != null ?
                 new ObjectParameter("ZipCode", zipCode) :
-                new ObjectParameter("ZipCode", typeof(int));
+                new ObjectParameter("ZipCode", typeof(string));
     
             var cityParameter = city != null ?
                 new ObjectParameter("City", city) :

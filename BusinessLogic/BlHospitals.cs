@@ -72,5 +72,11 @@ namespace BusinessLogic
 
             oData.AddRoom(roomName, hospital.Id);
         }
+
+        public void AddHospital(Models.ModHospital oHospital)
+        {
+            DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
+            oData.AddHospital(oHospital);
+        }
     }
 }

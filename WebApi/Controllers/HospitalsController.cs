@@ -75,25 +75,21 @@ namespace WebApi.Controllers
             }
         }
 
-        //// GET: api/Hospitals/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpPost]
+        [Route("api/hospitals/AddHospital")]
+        public IHttpActionResult AddHospital([FromBody] Models.ModHospital oHospital)
+        {
+            BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
 
-        //// POST: api/Hospitals
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT: api/Hospitals/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE: api/Hospitals/5
-        //public void Delete(int id)
-        //{
-        //}
+            try
+            {
+                oData.AddHospital(oHospital);
+                return Created("Database", oHospital.Name);
+            }
+            catch (Exception)
+            {
+                return Conflict();
+            }
+        }
     }
 }

@@ -41,6 +41,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             // 
             // dataGridView_Rooms
             // 
+            this.dataGridView_Rooms.AllowUserToAddRows = false;
             this.dataGridView_Rooms.AllowUserToDeleteRows = false;
             this.dataGridView_Rooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Rooms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

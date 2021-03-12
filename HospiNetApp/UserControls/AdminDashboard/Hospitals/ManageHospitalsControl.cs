@@ -14,6 +14,11 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 {
     public partial class ManageHospitalsControl : UserControl
     {
+        string pName;
+        string pAddress;
+        string pZipCode;
+        string pCity;
+
         public ManageHospitalsControl()
         {
             InitializeComponent();
@@ -27,7 +32,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
         private void button_UpdateHospital_Click(object sender, EventArgs e)
         {
-            UpdateHospitalcontrol oControl = new UpdateHospitalcontrol();
+            UpdateHospitalcontrol oControl = new UpdateHospitalcontrol(pName, pAddress, pZipCode, pCity);
             MainControl.showControl(oControl, panel_ManageHospitals);
         }
         public async void GetAllHospitals()
@@ -61,6 +66,19 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             {
                 Console.WriteLine(e.Message);
                 throw;
+            }
+        }
+
+        private void dataGridView_Hospitals_SelectionChanged(object sender, EventArgs e)
+        {
+            button_UpdateHospital.Enabled = true;
+
+            foreach (DataGridViewRow row in dataGridView_Hospitals.SelectedRows)
+            {
+                this.pName = row.Cells[0].Value.ToString();
+                this.pAddress = row.Cells[1].Value.ToString();
+                this.pZipCode = row.Cells[2].Value.ToString();
+                this.pCity = row.Cells[3].Value.ToString();
             }
         }
     }

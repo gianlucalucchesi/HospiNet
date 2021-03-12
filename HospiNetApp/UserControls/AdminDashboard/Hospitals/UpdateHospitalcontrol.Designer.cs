@@ -32,10 +32,10 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.label_Success = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button_UpdateHospital = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_City = new System.Windows.Forms.TextBox();
+            this.textBox_ZipCode = new System.Windows.Forms.TextBox();
+            this.textBox_Address = new System.Windows.Forms.TextBox();
+            this.textBox_Name = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,37 +74,37 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.button_UpdateHospital.Text = "Update Hospital";
             this.button_UpdateHospital.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // textBox_City
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(386, 357);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(347, 29);
-            this.textBox4.TabIndex = 34;
+            this.textBox_City.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_City.Location = new System.Drawing.Point(386, 357);
+            this.textBox_City.Name = "textBox_City";
+            this.textBox_City.Size = new System.Drawing.Size(347, 29);
+            this.textBox_City.TabIndex = 34;
             // 
-            // textBox3
+            // textBox_ZipCode
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(386, 310);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(347, 29);
-            this.textBox3.TabIndex = 33;
+            this.textBox_ZipCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_ZipCode.Location = new System.Drawing.Point(386, 310);
+            this.textBox_ZipCode.Name = "textBox_ZipCode";
+            this.textBox_ZipCode.Size = new System.Drawing.Size(347, 29);
+            this.textBox_ZipCode.TabIndex = 33;
             // 
-            // textBox2
+            // textBox_Address
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(386, 265);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(347, 29);
-            this.textBox2.TabIndex = 32;
+            this.textBox_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Address.Location = new System.Drawing.Point(386, 265);
+            this.textBox_Address.Name = "textBox_Address";
+            this.textBox_Address.Size = new System.Drawing.Size(347, 29);
+            this.textBox_Address.TabIndex = 32;
             // 
-            // textBox1
+            // textBox_Name
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(386, 225);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(347, 29);
-            this.textBox1.TabIndex = 31;
+            this.textBox_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Name.Location = new System.Drawing.Point(386, 225);
+            this.textBox_Name.Name = "textBox_Name";
+            this.textBox_Name.Size = new System.Drawing.Size(347, 29);
+            this.textBox_Name.TabIndex = 31;
             // 
             // label3
             // 
@@ -153,10 +153,10 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.Controls.Add(this.label_Success);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button_UpdateHospital);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_City);
+            this.Controls.Add(this.textBox_ZipCode);
+            this.Controls.Add(this.textBox_Address);
+            this.Controls.Add(this.textBox_Name);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -173,10 +173,10 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
         private System.Windows.Forms.Label label_Success;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button_UpdateHospital;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_City;
+        private System.Windows.Forms.TextBox textBox_ZipCode;
+        private System.Windows.Forms.TextBox textBox_Address;
+        private System.Windows.Forms.TextBox textBox_Name;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

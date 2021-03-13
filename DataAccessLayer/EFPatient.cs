@@ -43,5 +43,13 @@ namespace DataAccessLayer
                 }
             }
         }
+
+        public void UpdatePatient(Models.ModPatient oPatient)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_UpdatePatient(oPatient.Id, oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
+            }
+        }
     }
 }

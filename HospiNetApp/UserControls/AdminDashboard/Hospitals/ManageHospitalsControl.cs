@@ -32,7 +32,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
         private void button_UpdateHospital_Click(object sender, EventArgs e)
         {
-            UpdateHospitalcontrol oControl = new UpdateHospitalcontrol(pName, pAddress, pZipCode, pCity);
+            UpdateHospitalControl oControl = new UpdateHospitalControl(pName, pAddress, pZipCode, pCity);
             MainControl.showControl(oControl, panel_ManageHospitals);
         }
         public async void GetAllHospitals()

@@ -1,7 +1,7 @@
 ﻿
 namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 {
-    partial class UpdateHospitalcontrol
+    partial class UpdateHospitalControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -73,6 +73,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.button_UpdateHospital.TabIndex = 35;
             this.button_UpdateHospital.Text = "Update Hospital";
             this.button_UpdateHospital.UseVisualStyleBackColor = true;
+            this.button_UpdateHospital.Click += new System.EventHandler(this.button_UpdateHospital_Click);
             // 
             // textBox_City
             // 
@@ -146,7 +147,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.label_Name.TabIndex = 27;
             this.label_Name.Text = "Name:";
             // 
-            // UpdateHospitalcontrol
+            // UpdateHospitalControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -161,7 +162,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_Name);
-            this.Name = "UpdateHospitalcontrol";
+            this.Name = "UpdateHospitalControl";
             this.Size = new System.Drawing.Size(980, 647);
             this.ResumeLayout(false);
             this.PerformLayout();

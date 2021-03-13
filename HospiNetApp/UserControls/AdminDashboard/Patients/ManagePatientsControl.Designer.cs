@@ -34,6 +34,7 @@ namespace HospiNetApp.UserControls
             this.HomePatientsControlPanel = new System.Windows.Forms.Panel();
             this.label_loading = new System.Windows.Forms.Label();
             this.dataGridView_homePatients = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Birthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +95,7 @@ namespace HospiNetApp.UserControls
             this.dataGridView_homePatients.AllowUserToDeleteRows = false;
             this.dataGridView_homePatients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_homePatients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.FirstName,
             this.LastName,
             this.Birthday});
@@ -106,6 +108,13 @@ namespace HospiNetApp.UserControls
             this.dataGridView_homePatients.TabIndex = 4;
             this.dataGridView_homePatients.Visible = false;
             this.dataGridView_homePatients.SelectionChanged += new System.EventHandler(this.dataGridView_homePatients_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // FirstName
             // 
@@ -151,9 +160,10 @@ namespace HospiNetApp.UserControls
         private System.Windows.Forms.Button button_HomePatients_UpdatePatient;
         private System.Windows.Forms.Panel HomePatientsControlPanel;
         private System.Windows.Forms.DataGridView dataGridView_homePatients;
+        private System.Windows.Forms.Label label_loading;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Birthday;
-        private System.Windows.Forms.Label label_loading;
     }
 }

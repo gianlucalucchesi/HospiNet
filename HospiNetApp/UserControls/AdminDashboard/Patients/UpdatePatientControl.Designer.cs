@@ -29,7 +29,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_AddPatient_Success = new System.Windows.Forms.Label();
+            this.label_Success = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button_UpdatePatient = new System.Windows.Forms.Button();
             this.dateTimePicker_Birthday = new System.Windows.Forms.DateTimePicker();
@@ -38,19 +38,20 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label_Failed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label_AddPatient_Success
+            // label_Success
             // 
-            this.label_AddPatient_Success.AutoSize = true;
-            this.label_AddPatient_Success.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_AddPatient_Success.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label_AddPatient_Success.Location = new System.Drawing.Point(378, 189);
-            this.label_AddPatient_Success.Name = "label_AddPatient_Success";
-            this.label_AddPatient_Success.Size = new System.Drawing.Size(246, 24);
-            this.label_AddPatient_Success.TabIndex = 25;
-            this.label_AddPatient_Success.Text = "Patient successfully updated";
-            this.label_AddPatient_Success.Visible = false;
+            this.label_Success.AutoSize = true;
+            this.label_Success.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Success.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label_Success.Location = new System.Drawing.Point(378, 189);
+            this.label_Success.Name = "label_Success";
+            this.label_Success.Size = new System.Drawing.Size(246, 24);
+            this.label_Success.TabIndex = 25;
+            this.label_Success.Text = "Patient successfully updated";
+            this.label_Success.Visible = false;
             // 
             // label8
             // 
@@ -72,6 +73,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
             this.button_UpdatePatient.TabIndex = 23;
             this.button_UpdatePatient.Text = "Update Patient";
             this.button_UpdatePatient.UseVisualStyleBackColor = true;
+            this.button_UpdatePatient.Click += new System.EventHandler(this.button_UpdatePatient_Click);
             // 
             // dateTimePicker_Birthday
             // 
@@ -130,11 +132,24 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
             this.label1.TabIndex = 17;
             this.label1.Text = "First name:";
             // 
+            // label_Failed
+            // 
+            this.label_Failed.AutoSize = true;
+            this.label_Failed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Failed.ForeColor = System.Drawing.Color.DarkRed;
+            this.label_Failed.Location = new System.Drawing.Point(469, 189);
+            this.label_Failed.Name = "label_Failed";
+            this.label_Failed.Size = new System.Drawing.Size(52, 24);
+            this.label_Failed.TabIndex = 26;
+            this.label_Failed.Text = "Error";
+            this.label_Failed.Visible = false;
+            // 
             // UpdatePatientControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label_AddPatient_Success);
+            this.Controls.Add(this.label_Failed);
+            this.Controls.Add(this.label_Success);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button_UpdatePatient);
             this.Controls.Add(this.dateTimePicker_Birthday);
@@ -152,7 +167,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
 
         #endregion
 
-        private System.Windows.Forms.Label label_AddPatient_Success;
+        private System.Windows.Forms.Label label_Success;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button_UpdatePatient;
         private System.Windows.Forms.DateTimePicker dateTimePicker_Birthday;
@@ -161,5 +176,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_Failed;
     }
 }

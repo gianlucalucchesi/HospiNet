@@ -10,29 +10,25 @@ using System.Windows.Forms;
 
 namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 {
-    public partial class UpdateHospitalcontrol : UserControl
+    public partial class UpdateHospitalControl : UserControl
     {
-        public string Name2;
-        public string Address;
-        public string ZipCode;
-        public string City;
-
-        public UpdateHospitalcontrol(string name, string address, string zipCode, string city)
+        public UpdateHospitalControl(string name, string address, string zipCode, string city)
         {
             InitializeComponent();
-            this.Name2 = name;
-            this.Address = address;
-            this.ZipCode = zipCode;
-            this.City = city;
-            UpdateVariables();
+            UpdateVariables(name, address, zipCode, city);
         }
 
-        public void UpdateVariables()
+        public void UpdateVariables(string name, string address, string zipCode, string city)
         {
-            textBox_Name.Text = this.Name2;
-            textBox_Address.Text = this.Address;
-            textBox_ZipCode.Text = this.ZipCode;
-            textBox_City.Text = this.City;
+            textBox_Name.Text = name;
+            textBox_Address.Text = address;
+            textBox_ZipCode.Text = zipCode;
+            textBox_City.Text = city;
+        }
+
+        private void button_UpdateHospital_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

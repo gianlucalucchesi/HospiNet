@@ -51,6 +51,12 @@
           <Parameter Name="Birthday" Type="date" Mode="In" />
         </Function>
         <Function Name="usp_GetAllPatients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="patient" />
+        <Function Name="usp_UpdatePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="patient">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Birthday" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="HospiNetModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -102,6 +108,12 @@
           <FunctionImport Name="usp_AddRoom">
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="hospital_Id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdatePatient">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Birthday" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
@@ -246,6 +258,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_AddRoom" FunctionName="HospiNetModel.Store.usp_AddRoom" />
+          <FunctionImportMapping FunctionImportName="usp_UpdatePatient" FunctionName="HospiNetModel.Store.usp_UpdatePatient" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

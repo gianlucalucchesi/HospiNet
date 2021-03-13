@@ -21,7 +21,7 @@ namespace HospiNetApp.UserControls
 
         private async void button_AddPatient_Add_Click(object sender, EventArgs e)
         {
-            const string apiRequest = "https://localhost:44310/api/patients/addPatient";
+            const string apiRequest = "https://localhost:44310/api/patients/Add";
             // Reset labels if user already tried before
             label_AddPatient_Success.Visible = false;
             label_AddPatient_Failed.Visible = false;

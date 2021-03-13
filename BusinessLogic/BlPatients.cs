@@ -12,14 +12,31 @@ namespace BusinessLogic
         // TODO logic here instead of DAL
         public List<Models.ModPatient> GetAllPatients()
         {
-            DataAccessLayer.EFPatients oData = new DataAccessLayer.EFPatients();
-            return oData.GetAllPatients();
+            DataAccessLayer.EFPatients oDatabase = new DataAccessLayer.EFPatients();
+            return oDatabase.GetAllPatients();
         }
 
         public Guid? AddPatient(Models.ModPatient oPatient)
         {
+            DataAccessLayer.EFPatients oDatabase = new DataAccessLayer.EFPatients();
+            return oDatabase.AddPatient(oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
+        }
+
+        public bool UpdatePatient(Models.ModPatient oPatient)
+        {
             DataAccessLayer.EFPatients oData = new DataAccessLayer.EFPatients();
-            return oData.AddPatient(oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
+
+            var existingPatient = GetAllPatients().Where(s => s.Id == oPatient.Id).FirstOrDefault<Models.ModPatient>();
+
+            if (existingPatient != null)
+            {
+                oData.UpdatePatient(oPatient);
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
         }
     }
 }

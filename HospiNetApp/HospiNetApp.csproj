@@ -121,11 +121,11 @@
     <Compile Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.Designer.cs">
       <DependentUpon>ManageRoomsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalcontrol.cs">
+    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalcontrol.Designer.cs">
-      <DependentUpon>UpdateHospitalcontrol.cs</DependentUpon>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.Designer.cs">
+      <DependentUpon>UpdateHospitalControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AdminDashboard\Patients\AddPatientControl.cs">
       <SubType>UserControl</SubType>
@@ -210,8 +210,8 @@
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.resx">
       <DependentUpon>ManageRoomsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalcontrol.resx">
-      <DependentUpon>UpdateHospitalcontrol.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.resx">
+      <DependentUpon>UpdateHospitalControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Patients\AddPatientControl.resx">
       <DependentUpon>AddPatientControl.cs</DependentUpon>

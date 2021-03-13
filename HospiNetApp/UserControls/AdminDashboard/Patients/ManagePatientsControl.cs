@@ -14,9 +14,7 @@ namespace HospiNetApp.UserControls
 {
     public partial class HomePatientsControl : UserControl
     {
-        private string FirstN { get; set; }
-        private string LastN { get; set; }
-        private DateTime Birthd { get; set; }
+        public Models.ModPatient oPatient = new Models.ModPatient();
 
         public HomePatientsControl()
         {
@@ -41,7 +39,7 @@ namespace HospiNetApp.UserControls
 
                         foreach (var patient in lstContent)
                         {
-                            dataGridView_homePatients.Rows.Insert(i, patient.FirstName, patient.LastName, patient.Birthday.ToShortDateString());
+                            dataGridView_homePatients.Rows.Insert(i, patient.Id.ToString(), patient.FirstName, patient.LastName, patient.Birthday.ToShortDateString());
                             i++;
                         }
 
@@ -65,7 +63,7 @@ namespace HospiNetApp.UserControls
 
         private void button_HomePatients_UpdatePatient_Click(object sender, EventArgs e)
         {
-            AdminDashboard.Patients.UpdatePatientControl oControl = new AdminDashboard.Patients.UpdatePatientControl(this.FirstN, this.LastN, this.Birthd);
+            AdminDashboard.Patients.UpdatePatientControl oControl = new AdminDashboard.Patients.UpdatePatientControl(this.oPatient);
             MainControl.showControl(oControl, HomePatientsControlPanel);
         }
 
@@ -75,9 +73,11 @@ namespace HospiNetApp.UserControls
 
             foreach (DataGridViewRow row in dataGridView_homePatients.SelectedRows)
             {
-                this.FirstN = row.Cells[0].Value.ToString();
-                this.LastN = row.Cells[1].Value.ToString();
-                this.Birthd = DateTime.Parse(row.Cells[2].Value.ToString());
+                Guid.TryParse(row.Cells[0].Value.ToString(), out Guid convertedId);
+                this.oPatient.Id = convertedId;
+                this.oPatient.FirstName = row.Cells[1].Value.ToString();
+                this.oPatient.LastName = row.Cells[2].Value.ToString();
+                this.oPatient.Birthday = DateTime.Parse(row.Cells[3].Value.ToString());
             }
         }
     }

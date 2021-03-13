@@ -103,7 +103,7 @@ namespace WebApi.Controllers
             bool success = oData.UpdateHospital(oHospital);
 
             if (success)
-                return Ok();
+                return Ok(oHospital);
             else
                 return NotFound();
         }

@@ -47,7 +47,7 @@ namespace WebApi.Controllers
             bool success = oData.UpdatePatient(oPatient);
 
             if (success)
-                return Ok();
+                return Ok(oPatient);
             else
                 return NotFound();
         }

@@ -91,6 +91,12 @@
     <Compile Include="UserControls\AdminDashboard\Doctors\ManageDoctorsControl.Designer.cs">
       <DependentUpon>ManageDoctorsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\AddDoctorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\AddDoctorControl.Designer.cs">
+      <DependentUpon>AddDoctorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AdminDashboard\Hospitals\AddHospitalControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +126,12 @@
     </Compile>
     <Compile Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.Designer.cs">
       <DependentUpon>ManageRoomsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateDoctorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateDoctorControl.Designer.cs">
+      <DependentUpon>UpdateDoctorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.cs">
       <SubType>UserControl</SubType>
@@ -195,6 +207,9 @@
     <EmbeddedResource Include="UserControls\AdminDashboard\Doctors\ManageDoctorsControl.resx">
       <DependentUpon>ManageDoctorsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\AddDoctorControl.resx">
+      <DependentUpon>AddDoctorControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\AddHospitalControl.resx">
       <DependentUpon>AddHospitalControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.resx">
       <DependentUpon>ManageRoomsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\UpdateDoctorControl.resx">
+      <DependentUpon>UpdateDoctorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.resx">
       <DependentUpon>UpdateHospitalControl.cs</DependentUpon>

@@ -37,6 +37,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Specialities = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel_ManageDoctors = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ManageDoctors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +73,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.button_UpdateDoctor.TabIndex = 8;
             this.button_UpdateDoctor.Text = "Update Doctor";
             this.button_UpdateDoctor.UseVisualStyleBackColor = true;
+            this.button_UpdateDoctor.Click += new System.EventHandler(this.button_UpdateDoctor_Click);
             // 
             // button_AddDoctor
             // 
@@ -83,9 +85,12 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.button_AddDoctor.TabIndex = 7;
             this.button_AddDoctor.Text = "Add Doctor";
             this.button_AddDoctor.UseVisualStyleBackColor = true;
+            this.button_AddDoctor.Click += new System.EventHandler(this.button_AddDoctor_Click);
             // 
             // dataGridView_ManageDoctors
             // 
+            this.dataGridView_ManageDoctors.AllowUserToAddRows = false;
+            this.dataGridView_ManageDoctors.AllowUserToDeleteRows = false;
             this.dataGridView_ManageDoctors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_ManageDoctors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FirstName,
@@ -93,6 +98,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.Specialities});
             this.dataGridView_ManageDoctors.Location = new System.Drawing.Point(18, 155);
             this.dataGridView_ManageDoctors.Name = "dataGridView_ManageDoctors";
+            this.dataGridView_ManageDoctors.ReadOnly = true;
             this.dataGridView_ManageDoctors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_ManageDoctors.Size = new System.Drawing.Size(944, 450);
             this.dataGridView_ManageDoctors.TabIndex = 12;
@@ -102,19 +108,29 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             // 
             this.FirstName.HeaderText = "First Name";
             this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
             this.FirstName.Width = 300;
             // 
             // LastName
             // 
             this.LastName.HeaderText = "Last Name";
             this.LastName.Name = "LastName";
+            this.LastName.ReadOnly = true;
             this.LastName.Width = 300;
             // 
             // Specialities
             // 
             this.Specialities.HeaderText = "Specialities";
             this.Specialities.Name = "Specialities";
+            this.Specialities.ReadOnly = true;
             this.Specialities.Width = 300;
+            // 
+            // panel_ManageDoctors
+            // 
+            this.panel_ManageDoctors.Location = new System.Drawing.Point(0, 0);
+            this.panel_ManageDoctors.Name = "panel_ManageDoctors";
+            this.panel_ManageDoctors.Size = new System.Drawing.Size(980, 647);
+            this.panel_ManageDoctors.TabIndex = 13;
             // 
             // ManageDoctorsControl
             // 
@@ -125,6 +141,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.Controls.Add(this.label_selectPatientUpdate);
             this.Controls.Add(this.button_UpdateDoctor);
             this.Controls.Add(this.button_AddDoctor);
+            this.Controls.Add(this.panel_ManageDoctors);
             this.Name = "ManageDoctorsControl";
             this.Size = new System.Drawing.Size(980, 647);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ManageDoctors)).EndInit();
@@ -143,5 +160,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Specialities;
+        private System.Windows.Forms.Panel panel_ManageDoctors;
     }
 }

@@ -41,7 +41,8 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                     if (response.StatusCode == System.Net.HttpStatusCode.Created)
                     {
                         label_Success.Visible = true;
-                    } else
+                    }
+                    else
                     {
                         label_Failed.Visible = true;
                     }

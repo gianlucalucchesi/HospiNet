@@ -9,6 +9,10 @@
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
           <Parameter Name="LastName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="usp_AddDoctorSpeciality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor">
+          <Parameter Name="doctor_id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="speciality_id" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="usp_GetAllDoctors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor" />
         <Function Name="usp_GetAppointments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor">
           <Parameter Name="doctor_id" Type="uniqueidentifier" Mode="In" />
@@ -70,10 +74,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="HospiNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="HospiNetEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="usp_AddDoctor">
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="usp_SelectAllSpecialities" ReturnType="Collection(HospiNetModel.usp_SelectAllSpecialities_Result)" />
           <FunctionImport Name="usp_AddHospital">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -128,6 +128,14 @@
             <Parameter Name="address" Mode="In" Type="String" />
             <Parameter Name="zipcode" Mode="In" Type="String" />
             <Parameter Name="city" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_AddDoctor" ReturnType="Collection(Guid)">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_AddDoctorSpeciality">
+            <Parameter Name="doctor_id" Mode="In" Type="Guid" />
+            <Parameter Name="speciality_id" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
@@ -185,7 +193,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HospiNetModelStoreContainer" CdmEntityContainer="HospiNetEntities" >
-          <FunctionImportMapping FunctionImportName="usp_AddDoctor" FunctionName="HospiNetModel.Store.usp_AddDoctor" />
           <FunctionImportMapping FunctionImportName="usp_SelectAllSpecialities" FunctionName="HospiNetModel.Store.usp_SelectAllSpecialities">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HospiNetModel.usp_SelectAllSpecialities_Result">
@@ -274,6 +281,8 @@
           <FunctionImportMapping FunctionImportName="usp_AddRoom" FunctionName="HospiNetModel.Store.usp_AddRoom" />
           <FunctionImportMapping FunctionImportName="usp_UpdatePatient" FunctionName="HospiNetModel.Store.usp_UpdatePatient" />
           <FunctionImportMapping FunctionImportName="usp_UpdateHospital" FunctionName="HospiNetModel.Store.usp_UpdateHospital" />
+          <FunctionImportMapping FunctionImportName="usp_AddDoctor" FunctionName="HospiNetModel.Store.usp_AddDoctor" />
+          <FunctionImportMapping FunctionImportName="usp_AddDoctorSpeciality" FunctionName="HospiNetModel.Store.usp_AddDoctorSpeciality" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

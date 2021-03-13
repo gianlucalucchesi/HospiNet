@@ -64,12 +64,21 @@ namespace WebApi.Controllers
                 return NotFound();
         }
 
-        //[HttpPost]
-        //[Route("api/doctors/getDoctorBasedOnSpeciality")]
-        //public IEnumerable<Models.ModDoctor> GetDoctorBasedOnSpeciality([FromBody] string speciality)
-        //{
-        //    BusinessLogic.BlDoctors oData = new BusinessLogic.BlDoctors();
-        //    return oData.GetDoctorBasedOnSpeciality(speciality);
-        //}
+        [HttpPost]
+        [Route("api/doctors/Add")]
+        public IHttpActionResult AddDoctor(Models.ModDoctor oDoctor)
+        {
+            BusinessLogic.BlDoctors oData = new BusinessLogic.BlDoctors();
+
+            try
+            {
+                oData.AddDoctor(oDoctor);
+                return Created("Database", oDoctor);
+            }
+            catch (Exception)
+            {
+                return Conflict();
+            }
+        }
     }
 }

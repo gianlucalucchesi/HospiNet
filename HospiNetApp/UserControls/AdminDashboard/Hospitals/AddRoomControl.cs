@@ -74,8 +74,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                 hospitalName = sHospitalName
             };
 
-            //string content = "{'roomName':'"+ sRoomName +"','hospitalName':'" + sHospitalName + "'}";
-
             var content = JsonConvert.SerializeObject(room);
 
             try

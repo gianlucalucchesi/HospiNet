@@ -46,6 +46,22 @@ namespace DataAccessLayer
             }
         }
 
+        public Guid? AddDoctor(string firstName, string lastName)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_AddDoctor(firstName, lastName).FirstOrDefault();
+            }
+        }
+
+        public void AddDoctorSpeciality(Guid? doctorId, Guid specialityId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_AddDoctorSpeciality(doctorId, specialityId);
+            }
+        }
+
         //public int? AddApointment(Models.ModAppointment oAppointment)
         //{
         //    using (var oDatabase = new HospiNetEntities())

@@ -28,19 +28,6 @@ namespace DataAccessLayer
         }
     
     
-        public virtual int usp_AddDoctor(string firstName, string lastName)
-        {
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctor", firstNameParameter, lastNameParameter);
-        }
-    
         public virtual ObjectResult<usp_SelectAllSpecialities_Result> usp_SelectAllSpecialities()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_SelectAllSpecialities_Result>("usp_SelectAllSpecialities");
@@ -234,6 +221,32 @@ namespace DataAccessLayer
                 new ObjectParameter("city", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateHospital", idParameter, nameParameter, addressParameter, zipcodeParameter, cityParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.Guid>> usp_AddDoctor(string firstName, string lastName)
+        {
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("usp_AddDoctor", firstNameParameter, lastNameParameter);
+        }
+    
+        public virtual int usp_AddDoctorSpeciality(Nullable<System.Guid> doctor_id, Nullable<System.Guid> speciality_id)
+        {
+            var doctor_idParameter = doctor_id.HasValue ?
+                new ObjectParameter("doctor_id", doctor_id) :
+                new ObjectParameter("doctor_id", typeof(System.Guid));
+    
+            var speciality_idParameter = speciality_id.HasValue ?
+                new ObjectParameter("speciality_id", speciality_id) :
+                new ObjectParameter("speciality_id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctorSpeciality", doctor_idParameter, speciality_idParameter);
         }
     }
 }

@@ -129,5 +129,16 @@ namespace BusinessLogic
 
             return lstAppointments;
         }
+
+        public void AddDoctor(Models.ModDoctor oDoctor)
+        {
+            DataAccessLayer.EFDoctors oDoctorEF = new DataAccessLayer.EFDoctors();
+            Guid? doctorId = oDoctorEF.AddDoctor(oDoctor.FirstName, oDoctor.LastName);
+
+            foreach (var speciality in oDoctor.Specialities)
+            {
+                oDoctorEF.AddDoctorSpeciality(doctorId, speciality.Id);
+            }
+        }
     }
 }

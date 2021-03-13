@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HospiNetApp.UserControls.AdminDashboard.Hospitals;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,6 +60,18 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
                 Console.WriteLine(e.Message);
                 throw;
             }
+        }
+
+        private void button_AddDoctor_Click(object sender, EventArgs e)
+        {
+            AddDoctorControl oControl = new AddDoctorControl();
+            MainControl.showControl(oControl, panel_ManageDoctors);
+        }
+
+        private void button_UpdateDoctor_Click(object sender, EventArgs e)
+        {
+            UpdateDoctorControl oControl = new UpdateDoctorControl();
+            MainControl.showControl(oControl, panel_ManageDoctors);
         }
     }
 }

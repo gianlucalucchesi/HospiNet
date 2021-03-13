@@ -40,6 +40,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Name = new System.Windows.Forms.Label();
+            this.label_Failed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_Success
@@ -147,10 +148,23 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.label_Name.TabIndex = 27;
             this.label_Name.Text = "Name:";
             // 
+            // label_Failed
+            // 
+            this.label_Failed.AutoSize = true;
+            this.label_Failed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Failed.ForeColor = System.Drawing.Color.DarkRed;
+            this.label_Failed.Location = new System.Drawing.Point(499, 175);
+            this.label_Failed.Name = "label_Failed";
+            this.label_Failed.Size = new System.Drawing.Size(52, 24);
+            this.label_Failed.TabIndex = 38;
+            this.label_Failed.Text = "Error";
+            this.label_Failed.Visible = false;
+            // 
             // UpdateHospitalControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_Failed);
             this.Controls.Add(this.label_Success);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button_UpdateHospital);
@@ -182,5 +196,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_Name;
+        private System.Windows.Forms.Label label_Failed;
     }
 }

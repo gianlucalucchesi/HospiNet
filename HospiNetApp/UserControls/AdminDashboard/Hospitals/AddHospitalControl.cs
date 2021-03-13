@@ -30,7 +30,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
             var content = JsonConvert.SerializeObject(oHospital);
 
-            const string apiRequest = "https://localhost:44310/api/hospitals/AddHospital";
+            const string apiRequest = "https://localhost:44310/api/hospitals/Add";
 
             try
             {

@@ -40,6 +40,13 @@
         </Function>
         <Function Name="usp_GetAllRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
         <Function Name="usp_GetHospitals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
+        <Function Name="usp_UpdateHospital" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="name" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="address" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="zipcode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="city" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="usp_UserExists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
           <Parameter Name="LastName" Type="nvarchar" Mode="In" />
@@ -114,6 +121,13 @@
             <Parameter Name="FirstName" Mode="In" Type="String" />
             <Parameter Name="LastName" Mode="In" Type="String" />
             <Parameter Name="Birthday" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateHospital">
+            <Parameter Name="id" Mode="In" Type="Guid" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="zipcode" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
@@ -259,6 +273,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_AddRoom" FunctionName="HospiNetModel.Store.usp_AddRoom" />
           <FunctionImportMapping FunctionImportName="usp_UpdatePatient" FunctionName="HospiNetModel.Store.usp_UpdatePatient" />
+          <FunctionImportMapping FunctionImportName="usp_UpdateHospital" FunctionName="HospiNetModel.Store.usp_UpdateHospital" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

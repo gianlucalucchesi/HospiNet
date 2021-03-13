@@ -78,5 +78,22 @@ namespace BusinessLogic
             DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
             oData.AddHospital(oHospital);
         }
+
+        public bool UpdateHospital(Models.ModHospital oHospital)
+        {
+            DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
+
+            var existingHospital = GetAllHospitals().Where(s => s.Id == oHospital.Id).FirstOrDefault<Models.ModHospital>();
+
+            if (existingHospital != null)
+            {
+                oData.UpdateHospital(oHospital);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

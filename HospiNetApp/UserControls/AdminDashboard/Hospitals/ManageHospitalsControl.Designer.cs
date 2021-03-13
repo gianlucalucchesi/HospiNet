@@ -34,6 +34,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.button_AddHospital = new System.Windows.Forms.Button();
             this.button_UpdateHospital = new System.Windows.Forms.Button();
             this.dataGridView_Hospitals = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HospitalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ZipCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,6 +93,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.dataGridView_Hospitals.AllowUserToDeleteRows = false;
             this.dataGridView_Hospitals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Hospitals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.HospitalName,
             this.Address,
             this.ZipCode,
@@ -105,6 +107,13 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
             this.dataGridView_Hospitals.TabIndex = 5;
             this.dataGridView_Hospitals.Visible = false;
             this.dataGridView_Hospitals.SelectionChanged += new System.EventHandler(this.dataGridView_Hospitals_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // HospitalName
             // 
@@ -155,6 +164,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
         private System.Windows.Forms.Button button_UpdateHospital;
         private System.Windows.Forms.DataGridView dataGridView_Hospitals;
         private System.Windows.Forms.Label label_loading;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn HospitalName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn ZipCode;

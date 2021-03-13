@@ -14,10 +14,11 @@ namespace HospiNetApp.UserControls.AdminDashboard.Patients
 {
     public partial class UpdatePatientControl : UserControl
     {
-        public Models.ModPatient UpdatedPatient = new Models.ModPatient();
+        public Models.ModPatient UpdatedPatient;
         public UpdatePatientControl(Models.ModPatient oPatient)
         {
             InitializeComponent();
+            this.UpdatedPatient = new Models.ModPatient();
             this.UpdatedPatient.Id = oPatient.Id;
             UpdateVariables(oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
         }

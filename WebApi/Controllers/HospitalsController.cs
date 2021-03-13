@@ -76,7 +76,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("api/hospitals/AddHospital")]
+        [Route("api/hospitals/Add")]
         public IHttpActionResult AddHospital([FromBody] Models.ModHospital oHospital)
         {
             BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
@@ -90,6 +90,22 @@ namespace WebApi.Controllers
             {
                 return Conflict();
             }
+        }
+
+        [HttpPut]
+        [Route("api/hospital/Update")]
+        public IHttpActionResult UpdateHospital([FromBody] Models.ModHospital oHospital)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid model");
+
+            BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
+            bool success = oData.UpdateHospital(oHospital);
+
+            if (success)
+                return Ok();
+            else
+                return NotFound();
         }
     }
 }

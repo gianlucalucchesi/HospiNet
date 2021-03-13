@@ -14,14 +14,12 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 {
     public partial class ManageHospitalsControl : UserControl
     {
-        string pName;
-        string pAddress;
-        string pZipCode;
-        string pCity;
+        Models.ModHospital oHospital;
 
         public ManageHospitalsControl()
         {
             InitializeComponent();
+            oHospital = new Models.ModHospital();
         }
 
         private void button_AddHospital_Click(object sender, EventArgs e)
@@ -32,7 +30,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
         private void button_UpdateHospital_Click(object sender, EventArgs e)
         {
-            UpdateHospitalControl oControl = new UpdateHospitalControl(pName, pAddress, pZipCode, pCity);
+            UpdateHospitalControl oControl = new UpdateHospitalControl(this.oHospital);
             MainControl.showControl(oControl, panel_ManageHospitals);
         }
         public async void GetAllHospitals()
@@ -53,7 +51,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
                         foreach (var hospital in lstContent)
                         {
-                            dataGridView_Hospitals.Rows.Insert(i, hospital.Name, hospital.Address, hospital.ZipCode, hospital.City);
+                            dataGridView_Hospitals.Rows.Insert(i, hospital.Id, hospital.Name, hospital.Address, hospital.ZipCode, hospital.City);
                             i++;
                         }
 
@@ -75,10 +73,12 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
             foreach (DataGridViewRow row in dataGridView_Hospitals.SelectedRows)
             {
-                this.pName = row.Cells[0].Value.ToString();
-                this.pAddress = row.Cells[1].Value.ToString();
-                this.pZipCode = row.Cells[2].Value.ToString();
-                this.pCity = row.Cells[3].Value.ToString();
+                Guid.TryParse(row.Cells[0].Value.ToString(), out Guid convertedId);
+                this.oHospital.Id = convertedId;
+                this.oHospital.Name = row.Cells[1].Value.ToString();
+                this.oHospital.Address = row.Cells[2].Value.ToString();
+                this.oHospital.ZipCode = row.Cells[3].Value.ToString();
+                this.oHospital.City = row.Cells[4].Value.ToString();
             }
         }
     }

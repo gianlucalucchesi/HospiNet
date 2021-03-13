@@ -54,5 +54,13 @@ namespace DataAccessLayer
                 oDatabase.usp_AddHospital(oHospital.Name, oHospital.Address, oHospital.ZipCode, oHospital.City);
             }
         }
+
+        public void UpdateHospital(Models.ModHospital oHospital)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_UpdateHospital(oHospital.Id, oHospital.Name, oHospital.Address, oHospital.ZipCode, oHospital.City);
+            }
+        }
     }
 }

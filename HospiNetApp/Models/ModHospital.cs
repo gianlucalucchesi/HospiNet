@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospiNetApp.Models
 {
-    class ModHospital
+    public class ModHospital
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

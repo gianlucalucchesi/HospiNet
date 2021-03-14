@@ -45,8 +45,11 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
                             {
                                 specialities += speciality.Name + ", ";
                             }
-                            
-                            dataGridView_ManageDoctors.Rows.Insert(i, doctor.FirstName, doctor.LastName, specialities);
+
+                            if (specialities != "")
+                                specialities = specialities.Remove(specialities.Length - 2); // To remove last space and comma from foreach loop
+
+                            dataGridView_ManageDoctors.Rows.Insert(i, doctor.Id, doctor.FirstName, doctor.LastName, specialities);
                             i++;
                         }
 
@@ -65,12 +68,6 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
         private void button_AddDoctor_Click(object sender, EventArgs e)
         {
             AddDoctorControl oControl = new AddDoctorControl();
-            MainControl.showControl(oControl, panel_ManageDoctors);
-        }
-
-        private void button_UpdateDoctor_Click(object sender, EventArgs e)
-        {
-            UpdateDoctorControl oControl = new UpdateDoctorControl();
             MainControl.showControl(oControl, panel_ManageDoctors);
         }
     }

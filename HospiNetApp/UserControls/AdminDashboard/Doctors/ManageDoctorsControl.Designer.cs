@@ -29,29 +29,17 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_selectPatientUpdate = new System.Windows.Forms.Label();
             this.label_loading = new System.Windows.Forms.Label();
-            this.button_UpdateDoctor = new System.Windows.Forms.Button();
             this.button_AddDoctor = new System.Windows.Forms.Button();
             this.dataGridView_ManageDoctors = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Specialities = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_ManageDoctors = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ManageDoctors)).BeginInit();
+            this.panel_ManageDoctors.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label_selectPatientUpdate
-            // 
-            this.label_selectPatientUpdate.AutoSize = true;
-            this.label_selectPatientUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_selectPatientUpdate.ForeColor = System.Drawing.Color.DarkRed;
-            this.label_selectPatientUpdate.Location = new System.Drawing.Point(377, 118);
-            this.label_selectPatientUpdate.Name = "label_selectPatientUpdate";
-            this.label_selectPatientUpdate.Size = new System.Drawing.Size(249, 24);
-            this.label_selectPatientUpdate.TabIndex = 11;
-            this.label_selectPatientUpdate.Text = "Please select a doctor to edit";
-            this.label_selectPatientUpdate.Visible = false;
             // 
             // label_loading
             // 
@@ -63,22 +51,10 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.label_loading.TabIndex = 10;
             this.label_loading.Text = "Loading...";
             // 
-            // button_UpdateDoctor
-            // 
-            this.button_UpdateDoctor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_UpdateDoctor.Location = new System.Drawing.Point(582, 39);
-            this.button_UpdateDoctor.Margin = new System.Windows.Forms.Padding(2);
-            this.button_UpdateDoctor.Name = "button_UpdateDoctor";
-            this.button_UpdateDoctor.Size = new System.Drawing.Size(155, 59);
-            this.button_UpdateDoctor.TabIndex = 8;
-            this.button_UpdateDoctor.Text = "Update Doctor";
-            this.button_UpdateDoctor.UseVisualStyleBackColor = true;
-            this.button_UpdateDoctor.Click += new System.EventHandler(this.button_UpdateDoctor_Click);
-            // 
             // button_AddDoctor
             // 
             this.button_AddDoctor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_AddDoctor.Location = new System.Drawing.Point(276, 39);
+            this.button_AddDoctor.Location = new System.Drawing.Point(415, 51);
             this.button_AddDoctor.Margin = new System.Windows.Forms.Padding(2);
             this.button_AddDoctor.Name = "button_AddDoctor";
             this.button_AddDoctor.Size = new System.Drawing.Size(155, 59);
@@ -93,6 +69,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.dataGridView_ManageDoctors.AllowUserToDeleteRows = false;
             this.dataGridView_ManageDoctors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_ManageDoctors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.FirstName,
             this.LastName,
             this.Specialities});
@@ -103,6 +80,13 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.dataGridView_ManageDoctors.Size = new System.Drawing.Size(944, 450);
             this.dataGridView_ManageDoctors.TabIndex = 12;
             this.dataGridView_ManageDoctors.Visible = false;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // FirstName
             // 
@@ -127,6 +111,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             // 
             // panel_ManageDoctors
             // 
+            this.panel_ManageDoctors.Controls.Add(this.button_AddDoctor);
             this.panel_ManageDoctors.Location = new System.Drawing.Point(0, 0);
             this.panel_ManageDoctors.Name = "panel_ManageDoctors";
             this.panel_ManageDoctors.Size = new System.Drawing.Size(980, 647);
@@ -138,28 +123,24 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label_loading);
             this.Controls.Add(this.dataGridView_ManageDoctors);
-            this.Controls.Add(this.label_selectPatientUpdate);
-            this.Controls.Add(this.button_UpdateDoctor);
-            this.Controls.Add(this.button_AddDoctor);
             this.Controls.Add(this.panel_ManageDoctors);
             this.Name = "ManageDoctorsControl";
             this.Size = new System.Drawing.Size(980, 647);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ManageDoctors)).EndInit();
+            this.panel_ManageDoctors.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_selectPatientUpdate;
         private System.Windows.Forms.Label label_loading;
-        private System.Windows.Forms.Button button_UpdateDoctor;
         private System.Windows.Forms.Button button_AddDoctor;
         private System.Windows.Forms.DataGridView dataGridView_ManageDoctors;
+        private System.Windows.Forms.Panel panel_ManageDoctors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Specialities;
-        private System.Windows.Forms.Panel panel_ManageDoctors;
     }
 }

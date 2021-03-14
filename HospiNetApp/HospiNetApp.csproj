@@ -127,12 +127,6 @@
     <Compile Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.Designer.cs">
       <DependentUpon>ManageRoomsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AdminDashboard\Doctors\UpdateDoctorControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\AdminDashboard\Doctors\UpdateDoctorControl.Designer.cs">
-      <DependentUpon>UpdateDoctorControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,9 +218,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageRoomsControl.resx">
       <DependentUpon>ManageRoomsControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AdminDashboard\Doctors\UpdateDoctorControl.resx">
-      <DependentUpon>UpdateDoctorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\UpdateHospitalControl.resx">
       <DependentUpon>UpdateHospitalControl.cs</DependentUpon>

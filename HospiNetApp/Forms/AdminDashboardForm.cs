@@ -80,12 +80,5 @@ namespace HospiNetApp
             MainControl.showControl(oControl, AdminDashboardControlPanel);
             oControl.GetAllHospitals();
         }
-
-        private void button_ManageAppointments_Click(object sender, EventArgs e)
-        {
-            UserControls.AdminDashboard.Hospitals.ManageAppointmentsControl oControl = new UserControls.AdminDashboard.Hospitals.ManageAppointmentsControl();
-            MainControl.showControl(oControl, AdminDashboardControlPanel);
-            //oControl.GetAppointments();
-        }
     }
 }

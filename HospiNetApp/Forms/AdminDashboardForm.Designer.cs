@@ -38,7 +38,6 @@ namespace HospiNetApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label_appName = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button_ManageAppointments = new System.Windows.Forms.Button();
             this.button_ManageHospitals = new System.Windows.Forms.Button();
             this.button_ManageRooms = new System.Windows.Forms.Button();
             this.button_ManageDoctors = new System.Windows.Forms.Button();
@@ -135,7 +134,6 @@ namespace HospiNetApp
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.button_ManageAppointments, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.button_ManageHospitals, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.button_ManageRooms, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.button_ManageDoctors, 0, 1);
@@ -143,36 +141,23 @@ namespace HospiNetApp
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 204);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(190, 539);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // button_ManageAppointments
-            // 
-            this.button_ManageAppointments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
-            this.button_ManageAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_ManageAppointments.Location = new System.Drawing.Point(6, 434);
-            this.button_ManageAppointments.Margin = new System.Windows.Forms.Padding(6);
-            this.button_ManageAppointments.Name = "button_ManageAppointments";
-            this.button_ManageAppointments.Size = new System.Drawing.Size(178, 95);
-            this.button_ManageAppointments.TabIndex = 7;
-            this.button_ManageAppointments.Text = "Manage Appointments";
-            this.button_ManageAppointments.UseVisualStyleBackColor = false;
-            this.button_ManageAppointments.Click += new System.EventHandler(this.button_ManageAppointments_Click);
             // 
             // button_ManageHospitals
             // 
             this.button_ManageHospitals.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
             this.button_ManageHospitals.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_ManageHospitals.Location = new System.Drawing.Point(6, 327);
+            this.button_ManageHospitals.Location = new System.Drawing.Point(6, 408);
             this.button_ManageHospitals.Margin = new System.Windows.Forms.Padding(6);
             this.button_ManageHospitals.Name = "button_ManageHospitals";
-            this.button_ManageHospitals.Size = new System.Drawing.Size(178, 95);
+            this.button_ManageHospitals.Size = new System.Drawing.Size(178, 125);
             this.button_ManageHospitals.TabIndex = 6;
             this.button_ManageHospitals.Text = "Manage Hospitals";
             this.button_ManageHospitals.UseVisualStyleBackColor = false;
@@ -182,10 +167,10 @@ namespace HospiNetApp
             // 
             this.button_ManageRooms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
             this.button_ManageRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_ManageRooms.Location = new System.Drawing.Point(6, 220);
+            this.button_ManageRooms.Location = new System.Drawing.Point(6, 274);
             this.button_ManageRooms.Margin = new System.Windows.Forms.Padding(6);
             this.button_ManageRooms.Name = "button_ManageRooms";
-            this.button_ManageRooms.Size = new System.Drawing.Size(178, 95);
+            this.button_ManageRooms.Size = new System.Drawing.Size(178, 122);
             this.button_ManageRooms.TabIndex = 5;
             this.button_ManageRooms.Text = "Manage Rooms";
             this.button_ManageRooms.UseVisualStyleBackColor = false;
@@ -195,10 +180,10 @@ namespace HospiNetApp
             // 
             this.button_ManageDoctors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
             this.button_ManageDoctors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_ManageDoctors.Location = new System.Drawing.Point(6, 113);
+            this.button_ManageDoctors.Location = new System.Drawing.Point(6, 140);
             this.button_ManageDoctors.Margin = new System.Windows.Forms.Padding(6);
             this.button_ManageDoctors.Name = "button_ManageDoctors";
-            this.button_ManageDoctors.Size = new System.Drawing.Size(178, 95);
+            this.button_ManageDoctors.Size = new System.Drawing.Size(178, 122);
             this.button_ManageDoctors.TabIndex = 4;
             this.button_ManageDoctors.Text = "Manage Doctors";
             this.button_ManageDoctors.UseVisualStyleBackColor = false;
@@ -211,7 +196,7 @@ namespace HospiNetApp
             this.button_ManagePatients.Location = new System.Drawing.Point(6, 6);
             this.button_ManagePatients.Margin = new System.Windows.Forms.Padding(6);
             this.button_ManagePatients.Name = "button_ManagePatients";
-            this.button_ManagePatients.Size = new System.Drawing.Size(178, 95);
+            this.button_ManagePatients.Size = new System.Drawing.Size(178, 122);
             this.button_ManagePatients.TabIndex = 3;
             this.button_ManagePatients.Text = "Manage Patients";
             this.button_ManagePatients.UseVisualStyleBackColor = false;
@@ -267,6 +252,5 @@ namespace HospiNetApp
         private System.Windows.Forms.Button button_ManageDoctors;
         private System.Windows.Forms.Button button_ManagePatients;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button_ManageAppointments;
     }
 }

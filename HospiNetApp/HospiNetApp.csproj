@@ -109,12 +109,6 @@
     <Compile Include="UserControls\AdminDashboard\Hospitals\AddRoomControl.Designer.cs">
       <DependentUpon>AddRoomControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageAppointmentsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\AdminDashboard\Hospitals\ManageAppointmentsControl.Designer.cs">
-      <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\AdminDashboard\Hospitals\ManageHospitalsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,9 +203,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\AddRoomControl.resx">
       <DependentUpon>AddRoomControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageAppointmentsControl.resx">
-      <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminDashboard\Hospitals\ManageHospitalsControl.resx">
       <DependentUpon>ManageHospitalsControl.cs</DependentUpon>

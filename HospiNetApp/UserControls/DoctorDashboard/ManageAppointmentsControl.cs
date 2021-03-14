@@ -25,15 +25,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         {
             label_ConfirmedSuccess.Visible = false;
             List<Models.ModAppointmentVw> lstAllAppointments = await GetAppointments(this.DoctorId);
-            List<Models.ModAppointmentVw> lstAppointments = new List<Models.ModAppointmentVw>();
-
-            foreach (var appointment in lstAllAppointments)
-            {
-                if (appointment.DateTimeStart.ToShortDateString() == monthCalendar1.SelectionRange.Start.ToShortDateString())
-                    lstAppointments.Add(appointment);
-            }
-
-            ShowAppointments(lstAppointments);
+            ShowAppointments(lstAllAppointments);
         }
 
         private async Task<List<Models.ModAppointmentVw>> GetAppointments(Guid? DoctorId)
@@ -130,18 +122,25 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
             foreach (var appointment in lstAppointments)
             {
-                dataGridView_Appointments[0, i].Value = appointment.HospitalName;
-                dataGridView_Appointments[1, i].Value = appointment.RoomName;
-                dataGridView_Appointments[2, i].Value = appointment.FirstName + " " + appointment.LastName;
-                dataGridView_Appointments[3, i].Value = appointment.DateTimeStart;
-                dataGridView_Appointments[4, i].Value = appointment.DateTimeEnd;
-                dataGridView_Appointments[5, i].Value = appointment.Confirmed;
-
+                if(appointment.DateTimeStart.ToShortDateString() == monthCalendar1.SelectionRange.Start.ToShortDateString())
+                {
+                    dataGridView_Appointments[0, i].Value = appointment.HospitalName;
+                    dataGridView_Appointments[1, i].Value = appointment.RoomName;
+                    dataGridView_Appointments[2, i].Value = appointment.FirstName + " " + appointment.LastName;
+                    dataGridView_Appointments[3, i].Value = appointment.DateTimeStart;
+                    dataGridView_Appointments[4, i].Value = appointment.DateTimeEnd;
+                    dataGridView_Appointments[5, i].Value = appointment.Confirmed;
+                }
                 i++;
             }
 
             label_loading.Visible = false;
             dataGridView_Appointments.Visible = true;
+        }
+
+        private async void ManageAppointmentsControl_Load(object sender, EventArgs e)
+        {
+            ShowAppointments(await GetAppointments(this.DoctorId));
         }
     }
 }

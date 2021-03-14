@@ -38,10 +38,10 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.Confirmed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_ConfirmedSuccess = new System.Windows.Forms.Label();
             this.button_Confirm = new System.Windows.Forms.Button();
             this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
             this.label_loading = new System.Windows.Forms.Label();
-            this.label_ConfirmedSuccess = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Appointments)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -130,6 +130,18 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.panel1.Size = new System.Drawing.Size(267, 622);
             this.panel1.TabIndex = 3;
             // 
+            // label_ConfirmedSuccess
+            // 
+            this.label_ConfirmedSuccess.AutoSize = true;
+            this.label_ConfirmedSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_ConfirmedSuccess.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label_ConfirmedSuccess.Location = new System.Drawing.Point(23, 523);
+            this.label_ConfirmedSuccess.Name = "label_ConfirmedSuccess";
+            this.label_ConfirmedSuccess.Size = new System.Drawing.Size(206, 24);
+            this.label_ConfirmedSuccess.TabIndex = 5;
+            this.label_ConfirmedSuccess.Text = "Appointment confirmed";
+            this.label_ConfirmedSuccess.Visible = false;
+            // 
             // button_Confirm
             // 
             this.button_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -162,18 +174,6 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label_loading.TabIndex = 6;
             this.label_loading.Text = "Loading...";
             // 
-            // label_ConfirmedSuccess
-            // 
-            this.label_ConfirmedSuccess.AutoSize = true;
-            this.label_ConfirmedSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ConfirmedSuccess.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label_ConfirmedSuccess.Location = new System.Drawing.Point(23, 523);
-            this.label_ConfirmedSuccess.Name = "label_ConfirmedSuccess";
-            this.label_ConfirmedSuccess.Size = new System.Drawing.Size(206, 24);
-            this.label_ConfirmedSuccess.TabIndex = 5;
-            this.label_ConfirmedSuccess.Text = "Appointment confirmed";
-            this.label_ConfirmedSuccess.Visible = false;
-            // 
             // ManageAppointmentsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +184,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.Controls.Add(this.panel1);
             this.Name = "ManageAppointmentsControl";
             this.Size = new System.Drawing.Size(980, 647);
+            this.Load += new System.EventHandler(this.ManageAppointmentsControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Appointments)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

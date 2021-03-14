@@ -23,12 +23,23 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
         private async void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            GetAppointments(this.DoctorId);
+            label_ConfirmedSuccess.Visible = false;
+            List<Models.ModAppointmentVw> lstAllAppointments = await GetAppointments(this.DoctorId);
+            List<Models.ModAppointmentVw> lstAppointments = new List<Models.ModAppointmentVw>();
+
+            foreach (var appointment in lstAllAppointments)
+            {
+                if (appointment.DateTimeStart.ToShortDateString() == monthCalendar1.SelectionRange.Start.ToShortDateString())
+                    lstAppointments.Add(appointment);
+            }
+
+            ShowAppointments(lstAppointments);
         }
 
-        private async void GetAppointments(Guid? DoctorId)
+        private async Task<List<Models.ModAppointmentVw>> GetAppointments(Guid? DoctorId)
         {
             const string apiRequest = "https://localhost:44310/api/doctors/GetAppointments";
+            List<Models.ModAppointmentVw> lstContent = new List<Models.ModAppointmentVw>();
 
             try
             {
@@ -39,23 +50,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                     if (response.IsSuccessStatusCode)
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
-                        List<Models.ModAppointmentVw> lstContent = JsonConvert.DeserializeObject<List<Models.ModAppointmentVw>>(content);
-
-                        int i = 0;
-
-                        foreach (var appointment in lstContent)
-                        {
-                            dataGridView_Appointments[0, i].Value = appointment.HospitalName;
-                            dataGridView_Appointments[1, i].Value = appointment.RoomName;
-                            dataGridView_Appointments[2, i].Value = appointment.FirstName + " " + appointment.LastName;
-                            dataGridView_Appointments[3, i].Value = appointment.DateTimeStart;
-                            dataGridView_Appointments[4, i].Value = appointment.DateTimeEnd;
-                            dataGridView_Appointments[5, i].Value = appointment.Confirmed;
-                            i++;
-                        }
-
-                        label_loading.Visible = false;
-                        dataGridView_Appointments.Visible = true;
+                        lstContent = JsonConvert.DeserializeObject<List<Models.ModAppointmentVw>>(content);
                     }
                 }
             }
@@ -64,6 +59,89 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                 Console.WriteLine(exc.Message);
                 throw;
             }
+
+            return lstContent;
+        }
+
+        private async void button_Confirm_Click(object sender, EventArgs e)
+        {
+            int appointmentId = 0;
+            const string apiRequest = "https://localhost:44310/api/doctors/ConfirmAppointment";
+
+            foreach (DataGridViewRow row in dataGridView_Appointments.SelectedRows)
+            {
+                Int32.TryParse(row.Cells[0].Value.ToString(), out appointmentId);
+            }
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{apiRequest}/?appointmentId={appointmentId}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        label_ConfirmedSuccess.Visible = true;
+                    }
+                }
+            }
+            catch (HttpRequestException exc)
+            {
+                Console.WriteLine(exc.Message);
+                throw;
+            }
+        }
+
+        private void dataGridView_Appointments_SelectionChanged(object sender, EventArgs e)
+        {
+            if (label_ConfirmedSuccess.Visible)
+             label_ConfirmedSuccess.Visible = false;
+        }
+
+        private async void checkBox_ConfirmedUnconfirmedAppointment_CheckedChanged(object sender, EventArgs e)
+        {
+            label_ConfirmedSuccess.Visible = false;
+            List<Models.ModAppointmentVw> lstAllAppointments = await GetAppointments(this.DoctorId);
+            List<Models.ModAppointmentVw> lstAppointments = new List<Models.ModAppointmentVw>();
+
+            if (checkBox_ConfirmedUnconfirmedAppointment.Checked)
+            {
+                foreach (var appointment in lstAllAppointments)
+                {
+                    if (appointment.Confirmed)
+                        lstAppointments.Add(appointment);
+                }
+
+                ShowAppointments(lstAppointments);
+            } 
+            else
+            {
+                ShowAppointments(lstAllAppointments);
+            }
+                
+        }
+
+        private void ShowAppointments(List<Models.ModAppointmentVw> lstAppointments)
+        {
+            int i = 0;
+            dataGridView_Appointments.Rows.Clear();
+            dataGridView_Appointments.Visible = false;
+            label_loading.Visible = true;
+
+            foreach (var appointment in lstAppointments)
+            {
+                dataGridView_Appointments[0, i].Value = appointment.HospitalName;
+                dataGridView_Appointments[1, i].Value = appointment.RoomName;
+                dataGridView_Appointments[2, i].Value = appointment.FirstName + " " + appointment.LastName;
+                dataGridView_Appointments[3, i].Value = appointment.DateTimeStart;
+                dataGridView_Appointments[4, i].Value = appointment.DateTimeEnd;
+                dataGridView_Appointments[5, i].Value = appointment.Confirmed;
+
+                i++;
+            }
+
+            label_loading.Visible = false;
+            dataGridView_Appointments.Visible = true;
         }
     }
 }

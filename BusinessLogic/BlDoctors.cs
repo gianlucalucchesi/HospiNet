@@ -140,5 +140,11 @@ namespace BusinessLogic
                 oDoctorEF.AddDoctorSpeciality(doctorId, speciality.Id);
             }
         }
+
+        public void ConfirmAppointment(int appointmentId)
+        {
+            DataAccessLayer.EFDoctors oData = new DataAccessLayer.EFDoctors();
+            oData.ConfirmAppointment(appointmentId);
+        }
     }
 }

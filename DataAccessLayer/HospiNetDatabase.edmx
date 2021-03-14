@@ -13,6 +13,9 @@
           <Parameter Name="doctor_id" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="speciality_id" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="usp_ConfirmAppointment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor">
+          <Parameter Name="appointmentId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_GetAllDoctors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor" />
         <Function Name="usp_GetDoctorAppointments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor">
           <Parameter Name="doctor_id" Type="uniqueidentifier" Mode="In" />
@@ -135,7 +138,10 @@
             <Parameter Name="speciality_id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="usp_GetDoctorAppointments" ReturnType="Collection(HospiNetModel.usp_GetDoctorAppointments_Result)">
-            <Parameter Name="doctor_id" Mode="In" Type="Guid" />
+          <Parameter Name="doctor_id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="usp_ConfirmAppointment">
+            <Parameter Name="appointmentId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
@@ -283,6 +289,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_ConfirmAppointment" FunctionName="HospiNetModel.Store.usp_ConfirmAppointment" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -30,17 +30,18 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         private void InitializeComponent()
         {
             this.dataGridView_Appointments = new System.Windows.Forms.DataGridView();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button_Confirm = new System.Windows.Forms.Button();
-            this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
-            this.label_loading = new System.Windows.Forms.Label();
             this.HospitalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RoomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateTimeStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateTimeEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Confirmed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button_Confirm = new System.Windows.Forms.Button();
+            this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
+            this.label_loading = new System.Windows.Forms.Label();
+            this.label_ConfirmedSuccess = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Appointments)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,60 +64,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.dataGridView_Appointments.Size = new System.Drawing.Size(695, 623);
             this.dataGridView_Appointments.TabIndex = 0;
             this.dataGridView_Appointments.Visible = false;
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(1, 2);
-            this.monthCalendar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthCalendar1.Location = new System.Drawing.Point(9, 45);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.ShowWeekNumbers = true;
-            this.monthCalendar1.TabIndex = 2;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.button_Confirm);
-            this.panel1.Controls.Add(this.checkBox_ConfirmedUnconfirmedAppointment);
-            this.panel1.Controls.Add(this.monthCalendar1);
-            this.panel1.Location = new System.Drawing.Point(9, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(267, 622);
-            this.panel1.TabIndex = 3;
-            // 
-            // button_Confirm
-            // 
-            this.button_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Confirm.Location = new System.Drawing.Point(52, 500);
-            this.button_Confirm.Name = "button_Confirm";
-            this.button_Confirm.Size = new System.Drawing.Size(142, 66);
-            this.button_Confirm.TabIndex = 4;
-            this.button_Confirm.Text = "Confirm Appointment";
-            this.button_Confirm.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_ConfirmedUnconfirmedAppointment
-            // 
-            this.checkBox_ConfirmedUnconfirmedAppointment.AutoSize = true;
-            this.checkBox_ConfirmedUnconfirmedAppointment.Location = new System.Drawing.Point(39, 356);
-            this.checkBox_ConfirmedUnconfirmedAppointment.Name = "checkBox_ConfirmedUnconfirmedAppointment";
-            this.checkBox_ConfirmedUnconfirmedAppointment.Size = new System.Drawing.Size(190, 17);
-            this.checkBox_ConfirmedUnconfirmedAppointment.TabIndex = 3;
-            this.checkBox_ConfirmedUnconfirmedAppointment.Text = "Only show confirmed appointments";
-            this.checkBox_ConfirmedUnconfirmedAppointment.UseVisualStyleBackColor = true;
-            // 
-            // label_loading
-            // 
-            this.label_loading.AutoSize = true;
-            this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_loading.Location = new System.Drawing.Point(575, 307);
-            this.label_loading.Name = "label_loading";
-            this.label_loading.Size = new System.Drawing.Size(159, 37);
-            this.label_loading.TabIndex = 6;
-            this.label_loading.Text = "Loading...";
+            this.dataGridView_Appointments.SelectionChanged += new System.EventHandler(this.dataGridView_Appointments_SelectionChanged);
             // 
             // HospitalName
             // 
@@ -157,6 +105,75 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.Confirmed.ReadOnly = true;
             this.Confirmed.Width = 60;
             // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(1, 2);
+            this.monthCalendar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthCalendar1.Location = new System.Drawing.Point(9, 45);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.ShowWeekNumbers = true;
+            this.monthCalendar1.TabIndex = 2;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.label_ConfirmedSuccess);
+            this.panel1.Controls.Add(this.button_Confirm);
+            this.panel1.Controls.Add(this.checkBox_ConfirmedUnconfirmedAppointment);
+            this.panel1.Controls.Add(this.monthCalendar1);
+            this.panel1.Location = new System.Drawing.Point(9, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(267, 622);
+            this.panel1.TabIndex = 3;
+            // 
+            // button_Confirm
+            // 
+            this.button_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Confirm.Location = new System.Drawing.Point(51, 454);
+            this.button_Confirm.Name = "button_Confirm";
+            this.button_Confirm.Size = new System.Drawing.Size(142, 66);
+            this.button_Confirm.TabIndex = 4;
+            this.button_Confirm.Text = "Confirm Appointment";
+            this.button_Confirm.UseVisualStyleBackColor = true;
+            this.button_Confirm.Click += new System.EventHandler(this.button_Confirm_Click);
+            // 
+            // checkBox_ConfirmedUnconfirmedAppointment
+            // 
+            this.checkBox_ConfirmedUnconfirmedAppointment.AutoSize = true;
+            this.checkBox_ConfirmedUnconfirmedAppointment.Location = new System.Drawing.Point(39, 356);
+            this.checkBox_ConfirmedUnconfirmedAppointment.Name = "checkBox_ConfirmedUnconfirmedAppointment";
+            this.checkBox_ConfirmedUnconfirmedAppointment.Size = new System.Drawing.Size(190, 17);
+            this.checkBox_ConfirmedUnconfirmedAppointment.TabIndex = 3;
+            this.checkBox_ConfirmedUnconfirmedAppointment.Text = "Only show confirmed appointments";
+            this.checkBox_ConfirmedUnconfirmedAppointment.UseVisualStyleBackColor = true;
+            this.checkBox_ConfirmedUnconfirmedAppointment.CheckedChanged += new System.EventHandler(this.checkBox_ConfirmedUnconfirmedAppointment_CheckedChanged);
+            // 
+            // label_loading
+            // 
+            this.label_loading.AutoSize = true;
+            this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loading.Location = new System.Drawing.Point(575, 307);
+            this.label_loading.Name = "label_loading";
+            this.label_loading.Size = new System.Drawing.Size(159, 37);
+            this.label_loading.TabIndex = 6;
+            this.label_loading.Text = "Loading...";
+            // 
+            // label_ConfirmedSuccess
+            // 
+            this.label_ConfirmedSuccess.AutoSize = true;
+            this.label_ConfirmedSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_ConfirmedSuccess.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label_ConfirmedSuccess.Location = new System.Drawing.Point(23, 523);
+            this.label_ConfirmedSuccess.Name = "label_ConfirmedSuccess";
+            this.label_ConfirmedSuccess.Size = new System.Drawing.Size(206, 24);
+            this.label_ConfirmedSuccess.TabIndex = 5;
+            this.label_ConfirmedSuccess.Text = "Appointment confirmed";
+            this.label_ConfirmedSuccess.Visible = false;
+            // 
             // ManageAppointmentsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,5 +206,6 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         private System.Windows.Forms.DataGridViewTextBoxColumn DateTimeStart;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateTimeEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Confirmed;
+        private System.Windows.Forms.Label label_ConfirmedSuccess;
     }
 }

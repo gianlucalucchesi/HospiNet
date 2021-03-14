@@ -62,6 +62,14 @@ namespace DataAccessLayer
             }
         }
 
+        public void ConfirmAppointment(int appointmentid)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_ConfirmAppointment(appointmentid);
+            }
+        }
+
         //public int? AddApointment(Models.ModAppointment oAppointment)
         //{
         //    using (var oDatabase = new HospiNetEntities())

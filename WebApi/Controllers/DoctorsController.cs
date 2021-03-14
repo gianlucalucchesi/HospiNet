@@ -80,5 +80,22 @@ namespace WebApi.Controllers
                 return Conflict();
             }
         }
+
+        [HttpGet]
+        [Route("api/doctors/ConfirmAppointment")]
+        public IHttpActionResult ConfirmAppointment(int appointmentId)
+        {
+            BusinessLogic.BlDoctors oData = new BusinessLogic.BlDoctors();
+
+            try
+            {
+                oData.ConfirmAppointment(appointmentId);
+                return Ok(appointmentId);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

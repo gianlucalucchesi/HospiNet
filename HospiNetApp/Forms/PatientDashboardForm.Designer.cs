@@ -36,10 +36,10 @@ namespace HospiNetApp.Forms
             this.button_patientDashboard_ManageAppointments = new System.Windows.Forms.Button();
             this.button_patientDashboard_NewAppointment = new System.Windows.Forms.Button();
             this.PatientDashboardControlPanel = new System.Windows.Forms.Panel();
+            this.label_hello = new System.Windows.Forms.Label();
             this.button_close = new System.Windows.Forms.Button();
             this.label_patient_dashboard = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label_hello = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -133,6 +133,16 @@ namespace HospiNetApp.Forms
             this.PatientDashboardControlPanel.Size = new System.Drawing.Size(980, 647);
             this.PatientDashboardControlPanel.TabIndex = 6;
             // 
+            // label_hello
+            // 
+            this.label_hello.AutoSize = true;
+            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_hello.Location = new System.Drawing.Point(427, 275);
+            this.label_hello.Name = "label_hello";
+            this.label_hello.Size = new System.Drawing.Size(93, 37);
+            this.label_hello.TabIndex = 8;
+            this.label_hello.Text = "hello.";
+            // 
             // button_close
             // 
             this.button_close.BackColor = System.Drawing.Color.DarkRed;
@@ -168,16 +178,9 @@ namespace HospiNetApp.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(980, 100);
             this.panel1.TabIndex = 7;
-            // 
-            // label_hello
-            // 
-            this.label_hello.AutoSize = true;
-            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_hello.Location = new System.Drawing.Point(427, 275);
-            this.label_hello.Name = "label_hello";
-            this.label_hello.Size = new System.Drawing.Size(93, 37);
-            this.label_hello.TabIndex = 8;
-            this.label_hello.Text = "hello.";
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // PatientDashboardForm
             // 

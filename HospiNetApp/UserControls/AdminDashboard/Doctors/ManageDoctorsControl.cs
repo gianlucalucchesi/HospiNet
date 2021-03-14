@@ -46,8 +46,9 @@ namespace HospiNetApp.UserControls.AdminDashboard.Doctors
                                 specialities += speciality.Name + ", ";
                             }
 
+                            // Remove last space and comma from foreach loop
                             if (specialities != "")
-                                specialities = specialities.Remove(specialities.Length - 2); // To remove last space and comma from foreach loop
+                                specialities = specialities.Remove(specialities.Length - 2); 
 
                             dataGridView_ManageDoctors.Rows.Insert(i, doctor.Id, doctor.FirstName, doctor.LastName, specialities);
                             i++;

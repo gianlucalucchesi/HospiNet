@@ -21,7 +21,9 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
         private void textBox_RoomName_TextChanged(object sender, EventArgs e)
         {
-            comboBox_Hospitals.Enabled = true;
+            comboBox_Hospitals.Enabled = true; 
+            label_Success.Visible = false;
+            label_Failed.Visible = false;
         }
 
         private async Task<List<Models.ModHospital>> GetAllHospitals()
@@ -81,6 +83,11 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                 using (var client = new HttpClient())
                 {
                     var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                        label_Success.Visible = true;
+                    else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+                        label_Failed.Visible = true;
                 }
             }
             catch (OperationCanceledException exc)
@@ -88,6 +95,10 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
                 Console.WriteLine(exc.Message);
                 throw;
             }
+
+            // Clear form
+            textBox_RoomName.Text = "";
+            comboBox_Hospitals.SelectedIndex = -1;
         }
     }
 }

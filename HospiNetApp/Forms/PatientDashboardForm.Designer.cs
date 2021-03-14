@@ -39,9 +39,11 @@ namespace HospiNetApp.Forms
             this.button_close = new System.Windows.Forms.Button();
             this.label_patient_dashboard = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_hello = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.PatientDashboardControlPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,6 +127,7 @@ namespace HospiNetApp.Forms
             this.PatientDashboardControlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PatientDashboardControlPanel.Controls.Add(this.label_hello);
             this.PatientDashboardControlPanel.Location = new System.Drawing.Point(200, 97);
             this.PatientDashboardControlPanel.Name = "PatientDashboardControlPanel";
             this.PatientDashboardControlPanel.Size = new System.Drawing.Size(980, 647);
@@ -166,6 +169,16 @@ namespace HospiNetApp.Forms
             this.panel1.Size = new System.Drawing.Size(980, 100);
             this.panel1.TabIndex = 7;
             // 
+            // label_hello
+            // 
+            this.label_hello.AutoSize = true;
+            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_hello.Location = new System.Drawing.Point(427, 275);
+            this.label_hello.Name = "label_hello";
+            this.label_hello.Size = new System.Drawing.Size(93, 37);
+            this.label_hello.TabIndex = 8;
+            this.label_hello.Text = "hello.";
+            // 
             // PatientDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,6 +196,8 @@ namespace HospiNetApp.Forms
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.PatientDashboardControlPanel.ResumeLayout(false);
+            this.PatientDashboardControlPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -201,5 +216,6 @@ namespace HospiNetApp.Forms
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Label label_patient_dashboard;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label_hello;
     }
 }

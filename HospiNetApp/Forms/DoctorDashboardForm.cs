@@ -13,10 +13,13 @@ namespace HospiNetApp.Forms
     public partial class DoctorDashboardForm : Form
     {
         private Guid? DoctorId;
-        public DoctorDashboardForm(Guid? DoctorId)
+        private string LastName;
+
+        public DoctorDashboardForm(Guid? DoctorId, string LastName)
         {
             InitializeComponent();
             this.DoctorId = DoctorId;
+            label_hello.Text = "Hello Dr. " + LastName + ".";
         }
 
         private void button_close_Click(object sender, EventArgs e)
@@ -42,6 +45,11 @@ namespace HospiNetApp.Forms
         {
             var oControl = new UserControls.DoctorDashboard.ManageAttendancesControl(this.DoctorId);
             UserControls.MainControl.showControl(oControl, DoctorDashboardControlPanel);
+        }
+
+        private void DoctorDashboardForm_Load(object sender, EventArgs e)
+        {
+            label_hello.Text = "Hello Dr. " + LastName + ".";
         }
     }
 }

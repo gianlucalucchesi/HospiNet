@@ -36,12 +36,14 @@ namespace HospiNetApp.Forms
             this.button_ManageAppointments = new System.Windows.Forms.Button();
             this.button_doctorDashboard_ManageAttendances = new System.Windows.Forms.Button();
             this.DoctorDashboardControlPanel = new System.Windows.Forms.Panel();
+            this.label_hello = new System.Windows.Forms.Label();
             this.label_doctor_dashboard = new System.Windows.Forms.Label();
             this.button_close = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.DoctorDashboardControlPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,10 +127,21 @@ namespace HospiNetApp.Forms
             this.DoctorDashboardControlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DoctorDashboardControlPanel.Controls.Add(this.label_hello);
             this.DoctorDashboardControlPanel.Location = new System.Drawing.Point(200, 97);
             this.DoctorDashboardControlPanel.Name = "DoctorDashboardControlPanel";
             this.DoctorDashboardControlPanel.Size = new System.Drawing.Size(980, 647);
             this.DoctorDashboardControlPanel.TabIndex = 2;
+            // 
+            // label_hello
+            // 
+            this.label_hello.AutoSize = true;
+            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_hello.Location = new System.Drawing.Point(354, 318);
+            this.label_hello.Name = "label_hello";
+            this.label_hello.Size = new System.Drawing.Size(319, 37);
+            this.label_hello.TabIndex = 5;
+            this.label_hello.Text = "hello Dr. [LastName].";
             // 
             // label_doctor_dashboard
             // 
@@ -184,6 +197,8 @@ namespace HospiNetApp.Forms
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.DoctorDashboardControlPanel.ResumeLayout(false);
+            this.DoctorDashboardControlPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -202,5 +217,6 @@ namespace HospiNetApp.Forms
         private System.Windows.Forms.Label label_doctor_dashboard;
         private System.Windows.Forms.Button button_close;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label_hello;
     }
 }

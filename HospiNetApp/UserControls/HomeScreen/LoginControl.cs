@@ -52,7 +52,7 @@ namespace HospiNetApp.UserControls
 
                 if ( this.DoctorId != null)
                 {
-                    Forms.DoctorDashboardForm oDoctorDashboardForm = new Forms.DoctorDashboardForm(this.DoctorId);
+                    Forms.DoctorDashboardForm oDoctorDashboardForm = new Forms.DoctorDashboardForm(this.DoctorId, lastName);
                     oDoctorDashboardForm.Show();
                     this.HomeScreenForm.Hide();
                 } else

@@ -43,7 +43,9 @@ namespace HospiNetApp
             this.button_ManageDoctors = new System.Windows.Forms.Button();
             this.button_ManagePatients = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_hello = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
+            this.AdminDashboardControlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -100,6 +102,7 @@ namespace HospiNetApp
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AdminDashboardControlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AdminDashboardControlPanel.Controls.Add(this.label_hello);
             this.AdminDashboardControlPanel.Location = new System.Drawing.Point(200, 97);
             this.AdminDashboardControlPanel.Margin = new System.Windows.Forms.Padding(6);
             this.AdminDashboardControlPanel.Name = "AdminDashboardControlPanel";
@@ -215,6 +218,16 @@ namespace HospiNetApp
             this.panel1.Size = new System.Drawing.Size(200, 744);
             this.panel1.TabIndex = 0;
             // 
+            // label_hello
+            // 
+            this.label_hello.AutoSize = true;
+            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_hello.Location = new System.Drawing.Point(441, 294);
+            this.label_hello.Name = "label_hello";
+            this.label_hello.Size = new System.Drawing.Size(93, 37);
+            this.label_hello.TabIndex = 0;
+            this.label_hello.Text = "hello.";
+            // 
             // AdminDashboardForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -230,6 +243,8 @@ namespace HospiNetApp
             this.Text = "HospiNet";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.AdminDashboardControlPanel.ResumeLayout(false);
+            this.AdminDashboardControlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -252,5 +267,6 @@ namespace HospiNetApp
         private System.Windows.Forms.Button button_ManageDoctors;
         private System.Windows.Forms.Button button_ManagePatients;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label_hello;
     }
 }

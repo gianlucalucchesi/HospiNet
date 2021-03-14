@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModAppointment.cs" />
+    <Compile Include="ModAppointmentVw.cs" />
     <Compile Include="ModDoctor.cs" />
     <Compile Include="ModDoctorSpeciality.cs" />
     <Compile Include="ModHospital.cs" />

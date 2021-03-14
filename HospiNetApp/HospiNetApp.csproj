@@ -77,7 +77,7 @@
       <DependentUpon>PatientDashboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Utilities\WindowDragging.cs" />
-    <Compile Include="Models\ModAppointment.cs" />
+    <Compile Include="Models\ModAppointmentVw.cs" />
     <Compile Include="Models\ModDoctor.cs" />
     <Compile Include="Models\ModHospital.cs" />
     <Compile Include="Models\ModPatient.cs" />
@@ -145,11 +145,17 @@
     <Compile Include="UserControls\AdminDashboard\Patients\UpdatePatientControl.Designer.cs">
       <DependentUpon>UpdatePatientControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DoctorDashboard\ShowAppointmentsControl.cs">
+    <Compile Include="UserControls\DoctorDashboard\ManageAppointmentsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\DoctorDashboard\ShowAppointmentsControl.Designer.cs">
-      <DependentUpon>ShowAppointmentsControl.cs</DependentUpon>
+    <Compile Include="UserControls\DoctorDashboard\ManageAppointmentsControl.Designer.cs">
+      <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DoctorDashboard\ManageAttendancesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DoctorDashboard\ManageAttendancesControl.Designer.cs">
+      <DependentUpon>ManageAttendancesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\HomeScreen\LoginControl.cs">
       <SubType>UserControl</SubType>
@@ -222,8 +228,11 @@
     <EmbeddedResource Include="UserControls\AdminDashboard\Patients\UpdatePatientControl.resx">
       <DependentUpon>UpdatePatientControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\DoctorDashboard\ShowAppointmentsControl.resx">
-      <DependentUpon>ShowAppointmentsControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\DoctorDashboard\ManageAppointmentsControl.resx">
+      <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DoctorDashboard\ManageAttendancesControl.resx">
+      <DependentUpon>ManageAttendancesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeScreen\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>

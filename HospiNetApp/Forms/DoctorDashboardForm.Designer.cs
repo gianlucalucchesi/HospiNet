@@ -33,7 +33,7 @@ namespace HospiNetApp.Forms
             this.label_appName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button_doctorDashboard_ShowAppointments = new System.Windows.Forms.Button();
+            this.button_ManageAppointments = new System.Windows.Forms.Button();
             this.button_doctorDashboard_ManageAttendances = new System.Windows.Forms.Button();
             this.DoctorDashboardControlPanel = new System.Windows.Forms.Panel();
             this.label_doctor_dashboard = new System.Windows.Forms.Label();
@@ -56,7 +56,6 @@ namespace HospiNetApp.Forms
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 745);
             this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // label_appName
             // 
@@ -69,25 +68,23 @@ namespace HospiNetApp.Forms
             this.label_appName.Size = new System.Drawing.Size(96, 24);
             this.label_appName.TabIndex = 3;
             this.label_appName.Text = "HospiNet";
-            this.label_appName.Click += new System.EventHandler(this.label_appName_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::HospiNetApp.Properties.Resources.doctor_removebg;
             this.pictureBox1.Location = new System.Drawing.Point(4, 28);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(184, 169);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.button_doctorDashboard_ShowAppointments, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.button_ManageAppointments, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.button_doctorDashboard_ManageAttendances, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 204);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -98,19 +95,18 @@ namespace HospiNetApp.Forms
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(190, 540);
             this.tableLayoutPanel1.TabIndex = 4;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
-            // button_doctorDashboard_ShowAppointments
+            // button_ManageAppointments
             // 
-            this.button_doctorDashboard_ShowAppointments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
-            this.button_doctorDashboard_ShowAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_doctorDashboard_ShowAppointments.Location = new System.Drawing.Point(3, 273);
-            this.button_doctorDashboard_ShowAppointments.Name = "button_doctorDashboard_ShowAppointments";
-            this.button_doctorDashboard_ShowAppointments.Size = new System.Drawing.Size(184, 264);
-            this.button_doctorDashboard_ShowAppointments.TabIndex = 1;
-            this.button_doctorDashboard_ShowAppointments.Text = "Show Appointments";
-            this.button_doctorDashboard_ShowAppointments.UseVisualStyleBackColor = false;
-            this.button_doctorDashboard_ShowAppointments.Click += new System.EventHandler(this.button_doctorDashboard_ShowAppointments_Click);
+            this.button_ManageAppointments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
+            this.button_ManageAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_ManageAppointments.Location = new System.Drawing.Point(3, 273);
+            this.button_ManageAppointments.Name = "button_ManageAppointments";
+            this.button_ManageAppointments.Size = new System.Drawing.Size(184, 264);
+            this.button_ManageAppointments.TabIndex = 1;
+            this.button_ManageAppointments.Text = "Manage Appointments";
+            this.button_ManageAppointments.UseVisualStyleBackColor = false;
+            this.button_ManageAppointments.Click += new System.EventHandler(this.button_doctorDashboard_ShowAppointments_Click);
             // 
             // button_doctorDashboard_ManageAttendances
             // 
@@ -133,7 +129,6 @@ namespace HospiNetApp.Forms
             this.DoctorDashboardControlPanel.Name = "DoctorDashboardControlPanel";
             this.DoctorDashboardControlPanel.Size = new System.Drawing.Size(980, 647);
             this.DoctorDashboardControlPanel.TabIndex = 2;
-            this.DoctorDashboardControlPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DoctorDashboardControlPanel_Paint);
             // 
             // label_doctor_dashboard
             // 
@@ -145,7 +140,6 @@ namespace HospiNetApp.Forms
             this.label_doctor_dashboard.Size = new System.Drawing.Size(262, 33);
             this.label_doctor_dashboard.TabIndex = 2;
             this.label_doctor_dashboard.Text = "Doctor dashboard";
-            this.label_doctor_dashboard.Click += new System.EventHandler(this.label_doctor_dashboard_Click);
             // 
             // button_close
             // 
@@ -153,7 +147,7 @@ namespace HospiNetApp.Forms
             this.button_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_close.ForeColor = System.Drawing.SystemColors.Info;
             this.button_close.Location = new System.Drawing.Point(874, 17);
-            this.button_close.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button_close.Margin = new System.Windows.Forms.Padding(6);
             this.button_close.Name = "button_close";
             this.button_close.Size = new System.Drawing.Size(92, 63);
             this.button_close.TabIndex = 3;
@@ -171,7 +165,6 @@ namespace HospiNetApp.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(982, 100);
             this.panel1.TabIndex = 4;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // DoctorDashboardForm
             // 
@@ -183,7 +176,7 @@ namespace HospiNetApp.Forms
             this.Controls.Add(this.DoctorDashboardControlPanel);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DoctorDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DoctorDashboardForm";
@@ -204,7 +197,7 @@ namespace HospiNetApp.Forms
         private System.Windows.Forms.Label label_appName;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button_doctorDashboard_ShowAppointments;
+        private System.Windows.Forms.Button button_ManageAppointments;
         private System.Windows.Forms.Button button_doctorDashboard_ManageAttendances;
         private System.Windows.Forms.Label label_doctor_dashboard;
         private System.Windows.Forms.Button button_close;

@@ -1,7 +1,7 @@
 ﻿
 namespace HospiNetApp.UserControls.DoctorDashboard
 {
-    partial class ShowAppointmentsControl
+    partial class ManageAppointmentsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,9 +32,9 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.dataGridView_Appointments = new System.Windows.Forms.DataGridView();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label_loading = new System.Windows.Forms.Label();
-            this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
             this.button_Confirm = new System.Windows.Forms.Button();
+            this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
+            this.label_loading = new System.Windows.Forms.Label();
             this.HospitalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RoomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,15 +88,15 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.panel1.Size = new System.Drawing.Size(267, 622);
             this.panel1.TabIndex = 3;
             // 
-            // label_loading
+            // button_Confirm
             // 
-            this.label_loading.AutoSize = true;
-            this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_loading.Location = new System.Drawing.Point(575, 307);
-            this.label_loading.Name = "label_loading";
-            this.label_loading.Size = new System.Drawing.Size(159, 37);
-            this.label_loading.TabIndex = 6;
-            this.label_loading.Text = "Loading...";
+            this.button_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Confirm.Location = new System.Drawing.Point(52, 500);
+            this.button_Confirm.Name = "button_Confirm";
+            this.button_Confirm.Size = new System.Drawing.Size(142, 66);
+            this.button_Confirm.TabIndex = 4;
+            this.button_Confirm.Text = "Confirm Appointment";
+            this.button_Confirm.UseVisualStyleBackColor = true;
             // 
             // checkBox_ConfirmedUnconfirmedAppointment
             // 
@@ -108,15 +108,15 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.checkBox_ConfirmedUnconfirmedAppointment.Text = "Only show confirmed appointments";
             this.checkBox_ConfirmedUnconfirmedAppointment.UseVisualStyleBackColor = true;
             // 
-            // button_Confirm
+            // label_loading
             // 
-            this.button_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Confirm.Location = new System.Drawing.Point(52, 500);
-            this.button_Confirm.Name = "button_Confirm";
-            this.button_Confirm.Size = new System.Drawing.Size(142, 66);
-            this.button_Confirm.TabIndex = 4;
-            this.button_Confirm.Text = "Confirm Appointment";
-            this.button_Confirm.UseVisualStyleBackColor = true;
+            this.label_loading.AutoSize = true;
+            this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loading.Location = new System.Drawing.Point(575, 307);
+            this.label_loading.Name = "label_loading";
+            this.label_loading.Size = new System.Drawing.Size(159, 37);
+            this.label_loading.TabIndex = 6;
+            this.label_loading.Text = "Loading...";
             // 
             // HospitalName
             // 
@@ -136,7 +136,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.PatientName.HeaderText = "Patient";
             this.PatientName.Name = "PatientName";
             this.PatientName.ReadOnly = true;
-            this.PatientName.Width = 140;
+            this.PatientName.Width = 142;
             // 
             // DateTimeStart
             // 
@@ -157,7 +157,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.Confirmed.ReadOnly = true;
             this.Confirmed.Width = 60;
             // 
-            // ShowAppointmentsControl
+            // ManageAppointmentsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -165,7 +165,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.Controls.Add(this.label_loading);
             this.Controls.Add(this.dataGridView_Appointments);
             this.Controls.Add(this.panel1);
-            this.Name = "ShowAppointmentsControl";
+            this.Name = "ManageAppointmentsControl";
             this.Size = new System.Drawing.Size(980, 647);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Appointments)).EndInit();
             this.panel1.ResumeLayout(false);

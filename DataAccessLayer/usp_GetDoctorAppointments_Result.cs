@@ -11,7 +11,7 @@ namespace DataAccessLayer
 {
     using System;
     
-    public partial class usp_GetAppointments_Result
+    public partial class usp_GetDoctorAppointments_Result
     {
         public int Id { get; set; }
         public string HospitalName { get; set; }

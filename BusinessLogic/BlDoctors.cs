@@ -104,16 +104,16 @@ namespace BusinessLogic
             return lstDoctorsToReturn;
         }
 
-        public List<Models.ModAppointment> GetAppointments(Guid DoctorId)
+        public List<Models.ModAppointmentVw> GetAppointments(Guid DoctorId)
         {
-            List<Models.ModAppointment> lstAppointments = new List<Models.ModAppointment>();
+            List<Models.ModAppointmentVw> lstAppointments = new List<Models.ModAppointmentVw>();
             DataAccessLayer.EFDoctors oData = new DataAccessLayer.EFDoctors();
 
             var contentReceived = oData.GetAppointments(DoctorId);
 
             foreach (var appointment in contentReceived)
             {
-                Models.ModAppointment oAppointment = new Models.ModAppointment();
+                Models.ModAppointmentVw oAppointment = new Models.ModAppointmentVw();
 
                 oAppointment.Id = appointment.Id;
                 oAppointment.HospitalName = appointment.HospitalName;

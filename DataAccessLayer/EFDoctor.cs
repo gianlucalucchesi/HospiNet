@@ -22,14 +22,6 @@ namespace DataAccessLayer
             return oDatabase.usp_SelectAllSpecialities().ToList();
         }
 
-        public List<usp_GetAppointments_Result> GetAppointments(Guid doctorId)
-        {
-            using (var oDatabase = new HospiNetEntities())
-            {
-                return oDatabase.usp_GetAppointments(doctorId).ToList();
-            }
-        }
-
         public List<usp_GetDoctorSpecialities_Result> GetDoctorSpecialities(Guid doctorId)
         {
             using (var oDatabase = new HospiNetEntities())
@@ -59,6 +51,14 @@ namespace DataAccessLayer
             using (var oDatabase = new HospiNetEntities())
             {
                 oDatabase.usp_AddDoctorSpeciality(doctorId, specialityId);
+            }
+        }
+
+        public List<usp_GetDoctorAppointments_Result> GetAppointments(Guid doctorId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetDoctorAppointments(doctorId).ToList();
             }
         }
 

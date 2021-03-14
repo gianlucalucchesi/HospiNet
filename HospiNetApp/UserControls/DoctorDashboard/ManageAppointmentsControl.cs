@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace HospiNetApp.UserControls.DoctorDashboard
 {
-    public partial class ShowAppointmentsControl : UserControl
+    public partial class ManageAppointmentsControl : UserControl
     {
         private Guid? DoctorId;
-        public ShowAppointmentsControl(Guid? DoctorId)
+        public ManageAppointmentsControl(Guid? DoctorId)
         {
             InitializeComponent();
             this.DoctorId = DoctorId;
@@ -39,7 +39,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                     if (response.IsSuccessStatusCode)
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
-                        List<Models.ModAppointment> lstContent = JsonConvert.DeserializeObject<List<Models.ModAppointment>>(content);
+                        List<Models.ModAppointmentVw> lstContent = JsonConvert.DeserializeObject<List<Models.ModAppointmentVw>>(content);
 
                         int i = 0;
 

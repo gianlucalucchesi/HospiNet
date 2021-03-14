@@ -32,56 +32,16 @@ namespace HospiNetApp.Forms
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var showAppointments = new UserControls.DoctorDashboard.ShowAppointmentsControl(this.DoctorId);
-            UserControls.MainControl.showControl(showAppointments, DoctorDashboardControlPanel);
-        }
-
         private void button_doctorDashboard_ShowAppointments_Click(object sender, EventArgs e)
         {
-            var oControl = new UserControls.DoctorDashboard.ShowAppointmentsControl(this.DoctorId);
+            var oControl = new UserControls.DoctorDashboard.ManageAppointmentsControl(this.DoctorId);
             UserControls.MainControl.showControl(oControl, DoctorDashboardControlPanel);
-        }
-
-        private void label_appName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void button_doctorDashboard_ManageAttendances_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label_doctor_dashboard_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DoctorDashboardControlPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
+            var oControl = new UserControls.DoctorDashboard.ManageAttendancesControl(this.DoctorId);
+            UserControls.MainControl.showControl(oControl, DoctorDashboardControlPanel);
         }
     }
 }

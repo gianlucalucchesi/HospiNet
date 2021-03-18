@@ -77,6 +77,7 @@
       <DependentUpon>PatientDashboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Utilities\WindowDragging.cs" />
+    <Compile Include="Models\ModAppointment.cs" />
     <Compile Include="Models\ModAppointmentVw.cs" />
     <Compile Include="Models\ModDoctor.cs" />
     <Compile Include="Models\ModHospital.cs" />

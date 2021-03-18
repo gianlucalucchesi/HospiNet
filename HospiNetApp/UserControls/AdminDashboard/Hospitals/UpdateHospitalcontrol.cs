@@ -40,7 +40,7 @@ namespace HospiNetApp.UserControls.AdminDashboard.Hospitals
 
             var content = JsonConvert.SerializeObject(this.updatedHospital);
 
-            const string apiRequest = "https://localhost:44310/api/hospital/Update";
+            const string apiRequest = "https://localhost:44310/api/hospitals/Update";
 
             using (var client = new HttpClient())
             {

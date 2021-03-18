@@ -15,6 +15,9 @@ namespace HospiNetApp.UserControls.PatientDashboard
 {
     public partial class NewAppointmentControl : UserControl
     {
+        Models.ModAppointment NewAppointment;
+        Models.ModPatient Patient;
+
         public NewAppointmentControl()
         {
             InitializeComponent();
@@ -101,6 +104,60 @@ namespace HospiNetApp.UserControls.PatientDashboard
             }
 
             comboBox_Doctors.Enabled = true;
+        }
+
+        private async void button_AddAppointment_Click(object sender, EventArgs e)
+        {
+            NewAppointment = new Models.ModAppointment() { Id = null, Confirmed = false };
+            NewAppointment.Patient = new Models.ModPatient();
+            Double.TryParse(comboBox_AppointmentHour.SelectedItem.ToString(), out double hours);
+            Double.TryParse(comboBox_AppointmentMinutes.SelectedItem.ToString(), out double minutes);
+
+            NewAppointment.Patient.FirstName = textBox_patientFirstName.Text;
+            NewAppointment.Patient.LastName = textBox_patientLastName.Text;
+            NewAppointment.Patient.Birthday = dateTimePicker_patientBirthday.Value;
+            NewAppointment.DateTimeStart = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(hours).AddMinutes(minutes);
+            NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
+            NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
+
+            int appointmentId = await PostAppointment(NewAppointment);
+
+            if (appointmentId != -1)
+            {
+                label_SuccessFailed.Text = "Appointment created: " + appointmentId.ToString();
+            }
+            else
+            {
+                label_SuccessFailed.ForeColor = Color.DarkRed;
+                label_SuccessFailed.Text = "Conflict";
+            }
+
+        }
+
+        private async Task<int> PostAppointment(Models.ModAppointment newAppointment)
+        {
+            int appointmentId = -1;
+            const string apiRequest = "https://localhost:44310/api/hospitals/AddAppointment";
+
+            string content = JsonConvert.SerializeObject(newAppointment);
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                        Int32.TryParse(response.Content.ReadAsStringAsync().Result, out appointmentId);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+            return appointmentId;
         }
     }
 }

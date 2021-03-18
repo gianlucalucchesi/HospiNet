@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -93,7 +94,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("api/hospital/Update")]
+        [Route("api/hospitals/Update")]
         public IHttpActionResult UpdateHospital([FromBody] Models.ModHospital oHospital)
         {
             if (!ModelState.IsValid)
@@ -106,6 +107,24 @@ namespace WebApi.Controllers
                 return Ok(oHospital);
             else
                 return NotFound();
+        }
+
+        [HttpPost]
+        [Route("api/hospitals/AddAppointment")]
+        public IHttpActionResult AddAppointment([FromBody] Models.ModAppointment newAppointment)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid model");
+
+            int appointmentId = -1;
+
+            BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
+            //int appointmentId = oData.AddAppointment(newAppointment)
+
+            if (appointmentId != -1)
+                return Created("database", appointmentId);
+            else
+                return Conflict();
         }
     }
 }

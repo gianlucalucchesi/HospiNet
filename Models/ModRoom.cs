@@ -8,7 +8,7 @@ namespace Models
 {
     public class ModRoom
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public String RoomName { get; set; }
         public String HospitalName { get; set; }
     }

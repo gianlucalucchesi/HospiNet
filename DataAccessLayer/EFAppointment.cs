@@ -14,5 +14,13 @@ namespace DataAccessLayer
             HospiNetEntities oDatabase = new HospiNetEntities();
             return oDatabase.usp_AddAppointment(hospitalId, roomId, patientId, DoctorId, dateTimeStart, dateTimeEnd).SingleOrDefault();
         }
+
+        public Guid? GetAvailableRoom(Guid? hospitalId, DateTime? dateTimeStart, DateTime? dateTimeEnd)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetAvailableRoom(hospitalId, dateTimeStart, dateTimeEnd).SingleOrDefault();
+            }
+        }
     }
 }

@@ -46,6 +46,11 @@
           <Parameter Name="hospital_Id" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="usp_GetAllRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
+        <Function Name="usp_GetAvailableRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
+          <Parameter Name="hospitalId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="dateTimeStart" Type="datetime" Mode="In" />
+          <Parameter Name="dateTimeEnd" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="usp_GetHospitals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital" />
         <Function Name="usp_UpdateHospital" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="hospital">
           <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
@@ -141,7 +146,12 @@
           <Parameter Name="doctor_id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="usp_ConfirmAppointment">
-            <Parameter Name="appointmentId" Mode="In" Type="Int32" />
+          <Parameter Name="appointmentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAvailableRoom" ReturnType="Collection(Guid)">
+            <Parameter Name="hospitalId" Mode="In" Type="Guid" />
+            <Parameter Name="dateTimeStart" Mode="In" Type="DateTime" />
+            <Parameter Name="dateTimeEnd" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
@@ -290,6 +300,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_ConfirmAppointment" FunctionName="HospiNetModel.Store.usp_ConfirmAppointment" />
+          <FunctionImportMapping FunctionImportName="usp_GetAvailableRoom" FunctionName="HospiNetModel.Store.usp_GetAvailableRoom" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

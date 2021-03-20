@@ -31,6 +31,8 @@ namespace HospiNetApp.UserControls.PatientDashboard
             {
                 comboBox_Hospitals.Items.Add(hospital.Name);
             }
+
+            GetAvailabilities(15.00);
         }
 
         private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)
@@ -108,7 +110,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async void button_AddAppointment_Click(object sender, EventArgs e)
         {
-            NewAppointment = new Models.ModAppointment() { Id = null, Confirmed = false };
+            NewAppointment = new Models.ModAppointment() 
+            { 
+                Id = null, 
+                Confirmed = false 
+            };
             NewAppointment.Patient = new Models.ModPatient();
             Double.TryParse(comboBox_AppointmentHour.SelectedItem.ToString(), out double hours);
             Double.TryParse(comboBox_AppointmentMinutes.SelectedItem.ToString(), out double minutes);
@@ -116,8 +122,8 @@ namespace HospiNetApp.UserControls.PatientDashboard
             NewAppointment.Patient.FirstName = textBox_patientFirstName.Text;
             NewAppointment.Patient.LastName = textBox_patientLastName.Text;
             NewAppointment.Patient.Birthday = dateTimePicker_patientBirthday.Value;
-            NewAppointment.DateTimeStart = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(hours).AddMinutes(minutes);
-            NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
+            //NewAppointment.DateTimeStart = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(hours).AddMinutes(minutes);
+            //NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
             NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
 
             int appointmentId = await PostAppointment(NewAppointment);
@@ -131,7 +137,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 label_SuccessFailed.ForeColor = Color.DarkRed;
                 label_SuccessFailed.Text = "Conflict";
             }
-
         }
 
         private async Task<int> PostAppointment(Models.ModAppointment newAppointment)
@@ -158,6 +163,42 @@ namespace HospiNetApp.UserControls.PatientDashboard
             }
 
             return appointmentId;
+        }
+
+        private void GetAvailabilities(List<DateTime> notAvailble, double duration)
+        {
+            DateTime dt = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(8.00);
+
+            Console.WriteLine(dt.Hour.ToString());
+            Console.WriteLine(dt.Minute.ToString());
+
+            while (dt.Hour != 18) //Day finished at 18h00
+            {
+                if (dt.Minute == 0)
+                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString() + "0");
+                else
+                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString());
+
+                dt = dt.AddMinutes(duration);
+            }
+        }
+
+        private void GetAvailabilities(double duration)
+        {
+            DateTime dt = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(8.00);
+
+            Console.WriteLine(dt.Hour.ToString());
+            Console.WriteLine(dt.Minute.ToString());
+
+            while (dt.Hour != 18) //Day finished at 18h00
+            {
+               if (dt.Minute == 0)
+                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString()+"0");
+                else
+                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString());
+
+                dt = dt.AddMinutes(duration);
+            }
         }
     }
 }

@@ -257,5 +257,22 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_ConfirmAppointment", appointmentIdParameter);
         }
+    
+        public virtual ObjectResult<Nullable<System.Guid>> usp_GetAvailableRoom(Nullable<System.Guid> hospitalId, Nullable<System.DateTime> dateTimeStart, Nullable<System.DateTime> dateTimeEnd)
+        {
+            var hospitalIdParameter = hospitalId.HasValue ?
+                new ObjectParameter("hospitalId", hospitalId) :
+                new ObjectParameter("hospitalId", typeof(System.Guid));
+    
+            var dateTimeStartParameter = dateTimeStart.HasValue ?
+                new ObjectParameter("dateTimeStart", dateTimeStart) :
+                new ObjectParameter("dateTimeStart", typeof(System.DateTime));
+    
+            var dateTimeEndParameter = dateTimeEnd.HasValue ?
+                new ObjectParameter("dateTimeEnd", dateTimeEnd) :
+                new ObjectParameter("dateTimeEnd", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("usp_GetAvailableRoom", hospitalIdParameter, dateTimeStartParameter, dateTimeEndParameter);
+        }
     }
 }

@@ -146,5 +146,14 @@ namespace BusinessLogic
             DataAccessLayer.EFDoctors oData = new DataAccessLayer.EFDoctors();
             oData.ConfirmAppointment(appointmentId);
         }
+
+        public void AddAttendance(DateTime fromDateTime, DateTime toDateTime, string hospitalName, Guid? doctorId)
+        {
+            BlHospitals blHospitals = new BlHospitals();
+            DataAccessLayer.EFDoctors oDatabase = new DataAccessLayer.EFDoctors();
+
+            Models.ModHospital oHospital = blHospitals.GetAllHospitals().SingleOrDefault(x => x.Name == hospitalName);
+            oDatabase.AddAttendence(doctorId, oHospital.Id, fromDateTime, toDateTime);
+        }
     }
 }

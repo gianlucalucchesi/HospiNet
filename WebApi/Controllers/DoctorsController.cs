@@ -8,6 +8,14 @@ using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
+    public class attendanceDTO
+    {
+        public Guid doctorId { get; set; }
+        public string hospitalName { get; set; }
+        public DateTime fromDateTime { get; set; }
+        public DateTime toDateTime { get; set; }
+    }
+
     public class DoctorsController : ApiController
     {
         [HttpGet]
@@ -95,6 +103,23 @@ namespace WebApi.Controllers
             catch (Exception)
             {
                 return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Route("api/doctors/AddAttendance")]
+        public IHttpActionResult AddAttendance(attendanceDTO attendance)
+        {
+            BusinessLogic.BlDoctors oData = new BusinessLogic.BlDoctors();
+
+            try
+            {
+                oData.AddAttendance(attendance.fromDateTime, attendance.toDateTime, attendance.hospitalName, attendance.doctorId);
+                return Ok(attendance);
+            }
+            catch (Exception)
+            {
+                return Conflict();
             }
         }
     }

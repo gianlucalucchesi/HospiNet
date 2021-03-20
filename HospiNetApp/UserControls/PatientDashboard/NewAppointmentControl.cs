@@ -16,7 +16,8 @@ namespace HospiNetApp.UserControls.PatientDashboard
     public partial class NewAppointmentControl : UserControl
     {
         Models.ModAppointment NewAppointment;
-        Models.ModPatient Patient;
+        List<Models.ModHospital> lstAvailableHospitals;
+        Dictionary<string, DateTime> AppointmentTimeSlot = new Dictionary<string, DateTime>();
 
         public NewAppointmentControl()
         {
@@ -31,8 +32,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             {
                 comboBox_Hospitals.Items.Add(hospital.Name);
             }
-
-            GetAvailabilities(15.00);
         }
 
         private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)
@@ -116,14 +115,15 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 Confirmed = false 
             };
             NewAppointment.Patient = new Models.ModPatient();
-            Double.TryParse(comboBox_AppointmentHour.SelectedItem.ToString(), out double hours);
-            Double.TryParse(comboBox_AppointmentMinutes.SelectedItem.ToString(), out double minutes);
+            //Double.TryParse(comboBox_AppointmentHour.SelectedItem.ToString(), out double hours);
+            //Double.TryParse(comboBox_AppointmentMinutes.SelectedItem.ToString(), out double minutes);
 
             NewAppointment.Patient.FirstName = textBox_patientFirstName.Text;
             NewAppointment.Patient.LastName = textBox_patientLastName.Text;
             NewAppointment.Patient.Birthday = dateTimePicker_patientBirthday.Value;
             //NewAppointment.DateTimeStart = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(hours).AddMinutes(minutes);
             //NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
+            NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()];
             NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
 
             int appointmentId = await PostAppointment(NewAppointment);
@@ -141,7 +141,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async Task<int> PostAppointment(Models.ModAppointment newAppointment)
         {
-            int appointmentId = -1;
+            int appointmentId = -99;
             const string apiRequest = "https://localhost:44310/api/appointments/add";
 
             string content = JsonConvert.SerializeObject(newAppointment);
@@ -165,40 +165,123 @@ namespace HospiNetApp.UserControls.PatientDashboard
             return appointmentId;
         }
 
-        private void GetAvailabilities(List<DateTime> notAvailble, double duration)
+        private void ShowAvailabilities(double duration)
         {
             DateTime dt = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(8.00);
+            comboBox_Availabilities.Items.Clear();
+            button_AddAppointment.Enabled = false;
 
-            Console.WriteLine(dt.Hour.ToString());
-            Console.WriteLine(dt.Minute.ToString());
-
-            while (dt.Hour != 18) //Day finished at 18h00
+            while (dt.Hour != 18) //Consultations end at 18h00
             {
                 if (dt.Minute == 0)
+                {
                     comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString() + "0");
+                    AppointmentTimeSlot.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString() + "0", dt);
+                }
                 else
+                {
                     comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString());
+                    AppointmentTimeSlot.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString(), dt);
+                }
 
                 dt = dt.AddMinutes(duration);
             }
+
+            if (comboBox_Availabilities.Items.Count == 0)
+                comboBox_Availabilities.Items.Add("No availabilities");
+            else
+                button_AddAppointment.Enabled = true;
+                
+
+            comboBox_Availabilities.SelectedIndex = 0;
         }
 
-        private void GetAvailabilities(double duration)
+        private void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DateTime dt = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(8.00);
+            comboBox_Hospitals.Enabled = true;
+            //comboBox_Hospitals.Items.Clear();
+        }
 
-            Console.WriteLine(dt.Hour.ToString());
-            Console.WriteLine(dt.Minute.ToString());
+        private void comboBox_Hospitals_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBox_Specialities.SelectedItem.ToString() != ""
+                    && comboBox_Doctors.SelectedItem.ToString() != ""
+                    && comboBox_Hospitals.SelectedItem.ToString() != "")
+                comboBox_Availabilities.Enabled = true;
+        }
 
-            while (dt.Hour != 18) //Day finished at 18h00
+        private async Task<List<Models.ModAppointmentVw>> GetExistingAppointments()
+        {
+            const string apiRequest = "https://localhost:44310/api/doctors/GetAppointments";
+            List<Models.ModAppointmentVw> lstContent = new List<Models.ModAppointmentVw>();
+
+            string[] doctorName= comboBox_Doctors.SelectedItem.ToString().Split(' ');
+
+            Guid? DoctorId = await GetDoctorId(doctorName[0], doctorName[1]);
+
+            try
             {
-               if (dt.Minute == 0)
-                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString()+"0");
-                else
-                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString());
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{apiRequest}/?DoctorId={DoctorId}");
 
-                dt = dt.AddMinutes(duration);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        lstContent = JsonConvert.DeserializeObject<List<Models.ModAppointmentVw>>(content);
+                    }
+                }
             }
+            catch (HttpRequestException exc)
+            {
+                Console.WriteLine(exc.Message);
+                throw;
+            }
+
+            return lstContent;
+        }
+
+        private async Task<List<DateTime>> GetUnavailableTimeSlots()
+        {
+            List<DateTime> UnavailableTimeSlots = new List<DateTime>();
+            var lstAppointments = await GetExistingAppointments();
+
+            foreach (var appointment in lstAppointments)
+            {
+                UnavailableTimeSlots.Add(appointment.DateTimeStart);
+            }
+
+            return UnavailableTimeSlots;
+        }
+
+        private async Task<Guid?> GetDoctorId(string Firstname, string LastName)
+        {
+            Guid? UserId = null;
+            const string apiRequest = "https://localhost:44310/api/hospitals/UserExists";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{apiRequest}/?FirstName={Firstname}&LastName={LastName}&Type=Doctor");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        if (content != "null")
+                        {
+                            UserId = JsonConvert.DeserializeObject<Guid>(content);
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+            return UserId;
         }
     }
 }

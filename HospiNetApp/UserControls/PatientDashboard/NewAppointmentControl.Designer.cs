@@ -44,10 +44,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.dateTimePicker_patientBirthday = new System.Windows.Forms.DateTimePicker();
             this.textBox_patientFirstName = new System.Windows.Forms.TextBox();
             this.textBox_patientLastName = new System.Windows.Forms.TextBox();
-            this.comboBox_AppointmentHour = new System.Windows.Forms.ComboBox();
-            this.comboBox_AppointmentMinutes = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.button_AddAppointment = new System.Windows.Forms.Button();
             this.label_SuccessFailed = new System.Windows.Forms.Label();
             this.comboBox_Availabilities = new System.Windows.Forms.ComboBox();
@@ -78,8 +74,8 @@ namespace HospiNetApp.UserControls.PatientDashboard
             "Radiology",
             "Surgery",
             "Urology"});
-            this.comboBox_Specialities.Location = new System.Drawing.Point(194, 111);
-            this.comboBox_Specialities.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Specialities.Location = new System.Drawing.Point(559, 132);
+            this.comboBox_Specialities.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Specialities.Name = "comboBox_Specialities";
             this.comboBox_Specialities.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Specialities.TabIndex = 0;
@@ -90,27 +86,30 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Doctors.Enabled = false;
             this.comboBox_Doctors.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Doctors.FormattingEnabled = true;
-            this.comboBox_Doctors.Location = new System.Drawing.Point(194, 174);
-            this.comboBox_Doctors.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Doctors.Location = new System.Drawing.Point(559, 195);
+            this.comboBox_Doctors.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Doctors.Name = "comboBox_Doctors";
             this.comboBox_Doctors.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Doctors.TabIndex = 1;
+            this.comboBox_Doctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_Doctors_SelectedIndexChanged);
             // 
             // comboBox_Hospitals
             // 
+            this.comboBox_Hospitals.Enabled = false;
             this.comboBox_Hospitals.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Hospitals.FormattingEnabled = true;
-            this.comboBox_Hospitals.Location = new System.Drawing.Point(194, 231);
-            this.comboBox_Hospitals.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Hospitals.Location = new System.Drawing.Point(559, 252);
+            this.comboBox_Hospitals.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Hospitals.Name = "comboBox_Hospitals";
             this.comboBox_Hospitals.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Hospitals.TabIndex = 2;
+            this.comboBox_Hospitals.SelectedIndexChanged += new System.EventHandler(this.comboBox_Hospitals_SelectedIndexChanged_1);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(84, 111);
+            this.label1.Location = new System.Drawing.Point(449, 132);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 24);
@@ -121,7 +120,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(84, 170);
+            this.label2.Location = new System.Drawing.Point(449, 191);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 24);
@@ -132,7 +131,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(84, 231);
+            this.label3.Location = new System.Drawing.Point(449, 252);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 24);
@@ -141,7 +140,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             // monthCalendar_AppointmentDate
             // 
-            this.monthCalendar_AppointmentDate.Location = new System.Drawing.Point(665, 99);
+            this.monthCalendar_AppointmentDate.Location = new System.Drawing.Point(88, 103);
             this.monthCalendar_AppointmentDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.monthCalendar_AppointmentDate.Name = "monthCalendar_AppointmentDate";
             this.monthCalendar_AppointmentDate.TabIndex = 6;
@@ -205,7 +204,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.dateTimePicker_patientBirthday.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_patientBirthday.Location = new System.Drawing.Point(194, 527);
-            this.dateTimePicker_patientBirthday.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker_patientBirthday.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker_patientBirthday.Name = "dateTimePicker_patientBirthday";
             this.dateTimePicker_patientBirthday.Size = new System.Drawing.Size(290, 28);
             this.dateTimePicker_patientBirthday.TabIndex = 15;
@@ -214,7 +213,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.textBox_patientFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_patientFirstName.Location = new System.Drawing.Point(194, 405);
-            this.textBox_patientFirstName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_patientFirstName.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_patientFirstName.Name = "textBox_patientFirstName";
             this.textBox_patientFirstName.Size = new System.Drawing.Size(290, 28);
             this.textBox_patientFirstName.TabIndex = 16;
@@ -223,83 +222,16 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.textBox_patientLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_patientLastName.Location = new System.Drawing.Point(194, 465);
-            this.textBox_patientLastName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_patientLastName.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_patientLastName.Name = "textBox_patientLastName";
             this.textBox_patientLastName.Size = new System.Drawing.Size(290, 28);
             this.textBox_patientLastName.TabIndex = 17;
             // 
-            // comboBox_AppointmentHour
-            // 
-            this.comboBox_AppointmentHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_AppointmentHour.FormattingEnabled = true;
-            this.comboBox_AppointmentHour.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19"});
-            this.comboBox_AppointmentHour.Location = new System.Drawing.Point(692, 291);
-            this.comboBox_AppointmentHour.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comboBox_AppointmentHour.Name = "comboBox_AppointmentHour";
-            this.comboBox_AppointmentHour.Size = new System.Drawing.Size(62, 30);
-            this.comboBox_AppointmentHour.TabIndex = 18;
-            // 
-            // comboBox_AppointmentMinutes
-            // 
-            this.comboBox_AppointmentMinutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_AppointmentMinutes.FormattingEnabled = true;
-            this.comboBox_AppointmentMinutes.Items.AddRange(new object[] {
-            "00",
-            "05",
-            "10",
-            "15",
-            "20",
-            "25",
-            "30",
-            "35",
-            "40",
-            "45",
-            "50",
-            "55"});
-            this.comboBox_AppointmentMinutes.Location = new System.Drawing.Point(791, 291);
-            this.comboBox_AppointmentMinutes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comboBox_AppointmentMinutes.Name = "comboBox_AppointmentMinutes";
-            this.comboBox_AppointmentMinutes.Size = new System.Drawing.Size(62, 30);
-            this.comboBox_AppointmentMinutes.TabIndex = 19;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(689, 267);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 24);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Hour:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(787, 267);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 24);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Minutes:";
-            // 
             // button_AddAppointment
             // 
+            this.button_AddAppointment.Enabled = false;
             this.button_AddAppointment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_AddAppointment.Location = new System.Drawing.Point(693, 442);
+            this.button_AddAppointment.Location = new System.Drawing.Point(684, 433);
             this.button_AddAppointment.Name = "button_AddAppointment";
             this.button_AddAppointment.Size = new System.Drawing.Size(140, 70);
             this.button_AddAppointment.TabIndex = 22;
@@ -311,7 +243,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.label_SuccessFailed.AutoSize = true;
             this.label_SuccessFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_SuccessFailed.Location = new System.Drawing.Point(669, 531);
+            this.label_SuccessFailed.Location = new System.Drawing.Point(665, 517);
             this.label_SuccessFailed.Name = "label_SuccessFailed";
             this.label_SuccessFailed.Size = new System.Drawing.Size(184, 24);
             this.label_SuccessFailed.TabIndex = 23;
@@ -320,11 +252,13 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             // comboBox_Availabilities
             // 
+            this.comboBox_Availabilities.Enabled = false;
             this.comboBox_Availabilities.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Availabilities.FormattingEnabled = true;
-            this.comboBox_Availabilities.Location = new System.Drawing.Point(513, 307);
+            this.comboBox_Availabilities.IntegralHeight = false;
+            this.comboBox_Availabilities.Location = new System.Drawing.Point(88, 273);
             this.comboBox_Availabilities.Name = "comboBox_Availabilities";
-            this.comboBox_Availabilities.Size = new System.Drawing.Size(121, 32);
+            this.comboBox_Availabilities.Size = new System.Drawing.Size(227, 32);
             this.comboBox_Availabilities.TabIndex = 24;
             // 
             // NewAppointmentControl
@@ -334,10 +268,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.Controls.Add(this.comboBox_Availabilities);
             this.Controls.Add(this.label_SuccessFailed);
             this.Controls.Add(this.button_AddAppointment);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox_AppointmentMinutes);
-            this.Controls.Add(this.comboBox_AppointmentHour);
             this.Controls.Add(this.textBox_patientLastName);
             this.Controls.Add(this.textBox_patientFirstName);
             this.Controls.Add(this.dateTimePicker_patientBirthday);
@@ -353,7 +283,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.Controls.Add(this.comboBox_Hospitals);
             this.Controls.Add(this.comboBox_Doctors);
             this.Controls.Add(this.comboBox_Specialities);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewAppointmentControl";
             this.Size = new System.Drawing.Size(980, 638);
             this.Load += new System.EventHandler(this.NewAppointment_Load);
@@ -379,10 +309,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private System.Windows.Forms.DateTimePicker dateTimePicker_patientBirthday;
         private System.Windows.Forms.TextBox textBox_patientFirstName;
         private System.Windows.Forms.TextBox textBox_patientLastName;
-        private System.Windows.Forms.ComboBox comboBox_AppointmentHour;
-        private System.Windows.Forms.ComboBox comboBox_AppointmentMinutes;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button_AddAppointment;
         private System.Windows.Forms.Label label_SuccessFailed;
         private System.Windows.Forms.ComboBox comboBox_Availabilities;

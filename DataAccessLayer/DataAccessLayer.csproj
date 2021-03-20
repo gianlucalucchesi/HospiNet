@@ -85,6 +85,9 @@
     <Compile Include="usp_GetDoctorAppointments_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetDoctorAvailabilities_Result.cs">
+      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetDoctorsBasedOnSpeciality_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>

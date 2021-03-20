@@ -41,5 +41,10 @@ namespace BusinessLogic
 
             return oDatabase.AddAppointment(oHospital.Id, oRoom.Id, appointment.Patient.Id, oDoctor.Id, appointment.DateTimeStart, appointment.DateTimeEnd);
         }
+
+        //public List<Models.ModDoctor> GetAvailableDoctors(DateTime date)
+        //{
+
+        //}
     }
 }

@@ -274,5 +274,43 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("usp_GetAvailableRoom", hospitalIdParameter, dateTimeStartParameter, dateTimeEndParameter);
         }
+    
+        public virtual int usp_AddDoctorAvailability(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> dateTimeStart, Nullable<System.DateTime> dateTimeEnd)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("doctorId", doctorId) :
+                new ObjectParameter("doctorId", typeof(System.Guid));
+    
+            var hospitalIdParameter = hospitalId.HasValue ?
+                new ObjectParameter("hospitalId", hospitalId) :
+                new ObjectParameter("hospitalId", typeof(System.Guid));
+    
+            var dateTimeStartParameter = dateTimeStart.HasValue ?
+                new ObjectParameter("dateTimeStart", dateTimeStart) :
+                new ObjectParameter("dateTimeStart", typeof(System.DateTime));
+    
+            var dateTimeEndParameter = dateTimeEnd.HasValue ?
+                new ObjectParameter("dateTimeEnd", dateTimeEnd) :
+                new ObjectParameter("dateTimeEnd", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctorAvailability", doctorIdParameter, hospitalIdParameter, dateTimeStartParameter, dateTimeEndParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetDoctorAvailabilities_Result> usp_GetDoctorAvailabilities(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> date)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("doctorId", doctorId) :
+                new ObjectParameter("doctorId", typeof(System.Guid));
+    
+            var hospitalIdParameter = hospitalId.HasValue ?
+                new ObjectParameter("hospitalId", hospitalId) :
+                new ObjectParameter("hospitalId", typeof(System.Guid));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter, hospitalIdParameter, dateParameter);
+        }
     }
 }

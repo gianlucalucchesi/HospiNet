@@ -70,12 +70,12 @@ namespace DataAccessLayer
             }
         }
 
-        //public int? AddApointment(Models.ModAppointment oAppointment)
-        //{
-        //    using (var oDatabase = new HospiNetEntities())
-        //    {
-        //        //return oDatabase.usp_AddAppointment(oAppointment);
-        //    }
-        //}
+        public void AddAttendence(Guid? doctorId, Guid? hospitalId, DateTime fromDateTime, DateTime toDateTime)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                oDatabase.usp_AddDoctorAvailability(doctorId, hospitalId, fromDateTime, toDateTime);
+            }
+        }
     }
 }

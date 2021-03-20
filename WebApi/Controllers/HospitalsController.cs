@@ -108,23 +108,5 @@ namespace WebApi.Controllers
             else
                 return NotFound();
         }
-
-        [HttpPost]
-        [Route("api/hospitals/AddAppointment")]
-        public IHttpActionResult AddAppointment([FromBody] Models.ModAppointment newAppointment)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Not a valid model");
-
-            int appointmentId = -1;
-
-            BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
-            //int appointmentId = oData.AddAppointment(newAppointment)
-
-            if (appointmentId != -1)
-                return Created("database", appointmentId);
-            else
-                return Conflict();
-        }
     }
 }

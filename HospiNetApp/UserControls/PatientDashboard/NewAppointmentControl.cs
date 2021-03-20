@@ -137,7 +137,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private async Task<int> PostAppointment(Models.ModAppointment newAppointment)
         {
             int appointmentId = -1;
-            const string apiRequest = "https://localhost:44310/api/hospitals/AddAppointment";
+            const string apiRequest = "https://localhost:44310/api/appointments/add";
 
             string content = JsonConvert.SerializeObject(newAppointment);
 

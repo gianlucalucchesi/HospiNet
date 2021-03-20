@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EFAppointment.cs" />
     <Compile Include="EFDoctor.cs" />
     <Compile Include="EFHospital.cs" />
     <Compile Include="EFPatient.cs" />

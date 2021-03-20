@@ -12,7 +12,6 @@ namespace HospiNetApp.Models
         public string HospitalName { get; set; }
         public string RoomName { get; set; }
         public ModPatient Patient { get; set; }
-
         public string DoctorName { get; set; }
         public DateTime DateTimeStart { get; set; }
         public DateTime? DateTimeEnd { get; set; }

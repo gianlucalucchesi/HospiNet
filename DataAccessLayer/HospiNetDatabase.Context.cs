@@ -320,5 +320,26 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter, hospitalIdParameter, dateParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> usp_GetAppointmentDuration(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> dateTimeStart, Nullable<System.Guid> specialityId)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("doctorId", doctorId) :
+                new ObjectParameter("doctorId", typeof(System.Guid));
+    
+            var hospitalIdParameter = hospitalId.HasValue ?
+                new ObjectParameter("hospitalId", hospitalId) :
+                new ObjectParameter("hospitalId", typeof(System.Guid));
+    
+            var dateTimeStartParameter = dateTimeStart.HasValue ?
+                new ObjectParameter("dateTimeStart", dateTimeStart) :
+                new ObjectParameter("dateTimeStart", typeof(System.DateTime));
+    
+            var specialityIdParameter = specialityId.HasValue ?
+                new ObjectParameter("specialityId", specialityId) :
+                new ObjectParameter("specialityId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GetAppointmentDuration", doctorIdParameter, hospitalIdParameter, dateTimeStartParameter, specialityIdParameter);
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace BusinessLogic
 
             Models.ModDoctor oDoctor = blDoctors.GetAllDoctors().SingleOrDefault(x => x.FirstName + " " + x.LastName == appointment.DoctorName);
             Models.ModHospital oHospital = blHospitals.GetAllHospitals().SingleOrDefault(x => x.Name == appointment.HospitalName);
+            Models.ModSpeciality oSpeciality = blDoctors.GetAllSpecialities().SingleOrDefault(x => x.Name == appointment.SpecialityName);
 
             appointment.Patient.Id = blHospitals.UserExists(appointment.Patient.FirstName, appointment.Patient.LastName, "Patient");
 
@@ -26,8 +27,8 @@ namespace BusinessLogic
                 appointment.Patient.Id = blHospitals.UserExists(appointment.Patient.FirstName, appointment.Patient.LastName, "Patient");
             }
 
-            //TODO: Assign correct datetime
-            appointment.DateTimeEnd = appointment.DateTimeStart.AddMinutes(15.00);
+            double appointmentDuration = (double)GetAppointmentDuration(oDoctor.Id, oHospital.Id, appointment.DateTimeStart, oSpeciality.Id);
+            appointment.DateTimeEnd = appointment.DateTimeStart.AddMinutes(appointmentDuration);
 
             //Assign available room
             //TO CHANGE: get timeslots when rooms available
@@ -40,6 +41,12 @@ namespace BusinessLogic
                 return -1;
 
             return oDatabase.AddAppointment(oHospital.Id, oRoom.Id, appointment.Patient.Id, oDoctor.Id, appointment.DateTimeStart, appointment.DateTimeEnd);
+        }
+
+        private int? GetAppointmentDuration(Guid? doctorId, Guid? hospitalId, DateTime dateTimeStart, Guid? specialityId)
+        {
+            DataAccessLayer.EFDoctors oDatabase = new DataAccessLayer.EFDoctors();
+            return oDatabase.GetAppointmentDuration(doctorId, hospitalId, dateTimeStart, specialityId);
         }
 
         //public List<Models.ModDoctor> GetAvailableDoctors(DateTime date)

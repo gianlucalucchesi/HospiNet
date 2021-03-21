@@ -13,6 +13,7 @@ namespace Models
         public string RoomName { get; set; }
         public ModPatient Patient { get; set; }
         public string DoctorName { get; set; }
+        public string SpecialityName { get; set; }
         public DateTime DateTimeStart { get; set; }
         public DateTime? DateTimeEnd { get; set; }
         public bool Confirmed { get; set; }

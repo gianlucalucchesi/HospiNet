@@ -149,10 +149,22 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         {
             if (CheckData())
             {
-                Double.TryParse(comboBox_FromHour.SelectedItem.ToString(), out double fromHour);
-                Double.TryParse(comboBox_FromMinutes.SelectedItem.ToString(), out double fromMinutes);
-                Double.TryParse(comboBox_ToHour.SelectedItem.ToString(), out double toHour);
-                Double.TryParse(comboBox_ToMinutes.SelectedItem.ToString(), out double toMinutes);
+                double fromHour, fromMinutes, toHour, toMinutes;
+
+                if (checkBox_AllDay.Checked)
+                {
+                    fromHour = 8.00;
+                    fromMinutes = 0.00;
+                    toHour = 18.00;
+                    toMinutes = 0.00;
+                } 
+                else
+                {
+                    Double.TryParse(comboBox_FromHour.SelectedItem.ToString(), out fromHour);
+                    Double.TryParse(comboBox_FromMinutes.SelectedItem.ToString(), out fromMinutes);
+                    Double.TryParse(comboBox_ToHour.SelectedItem.ToString(), out toHour);
+                    Double.TryParse(comboBox_ToMinutes.SelectedItem.ToString(), out toMinutes);
+                }
 
                 DateTime timeStart = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(fromHour).AddMinutes(fromMinutes);
                 DateTime timeEnd = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(toHour).AddMinutes(toMinutes);

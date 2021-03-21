@@ -121,6 +121,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             NewAppointment.Patient.Birthday = dateTimePicker_patientBirthday.Value;
             NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()];
             NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
+            NewAppointment.SpecialityName = comboBox_Specialities.SelectedItem.ToString();
 
             int appointmentId = await PostAppointment(NewAppointment);
 
@@ -265,9 +266,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
                         if (content != "null")
-                        {
                             UserId = JsonConvert.DeserializeObject<Guid>(content);
-                        }
                     }
                 }
             }

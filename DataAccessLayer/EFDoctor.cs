@@ -77,5 +77,13 @@ namespace DataAccessLayer
                 return oDatabase.usp_AddDoctorAvailability(doctorId, hospitalId, specialityId, duration, fromDateTime, toDateTime);
             }
         }
+
+        public int? GetAppointmentDuration(Guid? doctorId, Guid? hospitalId, DateTime dateTimeStart, Guid? specialityId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetAppointmentDuration(doctorId, hospitalId, dateTimeStart, specialityId).SingleOrDefault();
+            }
+        }
     }
 }

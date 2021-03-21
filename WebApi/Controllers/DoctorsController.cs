@@ -116,18 +116,23 @@ namespace WebApi.Controllers
 
             try
             {
-                oData.AddAttendance(
+                var result = 
+                    oData.AddAttendance(
                     attendance.fromDateTime, 
                     attendance.toDateTime, 
                     attendance.hospitalName, 
                     attendance.doctorId, 
                     attendance.specialityId, 
                     attendance.duration);
-                return Ok(attendance);
+
+                if (result == 1)
+                    return Created("database", attendance);
+                else
+                    return Conflict();
             }
             catch (Exception)
             {
-                return Conflict();
+                throw;
             }
         }
 

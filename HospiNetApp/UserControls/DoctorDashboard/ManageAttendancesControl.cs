@@ -191,6 +191,11 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                             if (response.StatusCode == System.Net.HttpStatusCode.Created)
                             {
                                 label_Success.Visible = true;
+                            } 
+                            else if(response.StatusCode == System.Net.HttpStatusCode.Conflict)
+                            {
+                                label_Failed.Text = "Conflict";
+                                label_Failed.Visible = true;
                             }
                         }
                     }

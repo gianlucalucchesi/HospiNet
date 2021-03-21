@@ -15,6 +15,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
     public partial class ManageAttendancesControl : UserControl
     {
         private Guid? DoctorId;
+        private List<Models.ModSpeciality> lstSpecialities;
 
         public ManageAttendancesControl(Guid? DoctorId)
         {
@@ -24,7 +25,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
         private void checkBox_AllDay_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox_AlLDay.Checked)
+            if (checkBox_AllDay.Checked)
             {
                 comboBox_FromHour.Enabled = false;
                 comboBox_FromMinutes.Enabled = false;
@@ -129,6 +130,8 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
         private async void ManageAttendancesControl_Load(object sender, EventArgs e)
         {
+            lstSpecialities = await GetDoctorSpecialities();
+            ShowSpecialities(lstSpecialities);
             var hospitals = await GetAllHospitals();
 
             foreach (var hospital in hospitals)
@@ -142,34 +145,122 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             label_Failed.Visible = false;
         }
 
-        private void button_Confirm_Click(object sender, EventArgs e)
+        private async void button_Confirm_Click(object sender, EventArgs e)
         {
-            Double.TryParse(comboBox_FromHour.SelectedItem.ToString(), out double fromHour);
-            Double.TryParse(comboBox_FromMinutes.SelectedItem.ToString(), out double fromMinutes);
-            Double.TryParse(comboBox_ToHour.SelectedItem.ToString(), out double toHour);
-            Double.TryParse(comboBox_ToMinutes.SelectedItem.ToString(), out double toMinutes);
-
-            DateTime timeStart = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(fromHour).AddMinutes(fromMinutes);
-            DateTime timeEnd = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(toHour).AddMinutes(toMinutes);
-
-            if (timeStart > timeEnd)
+            if (CheckData())
             {
-                label_Failed.Visible = true;
-            }
+                Double.TryParse(comboBox_FromHour.SelectedItem.ToString(), out double fromHour);
+                Double.TryParse(comboBox_FromMinutes.SelectedItem.ToString(), out double fromMinutes);
+                Double.TryParse(comboBox_ToHour.SelectedItem.ToString(), out double toHour);
+                Double.TryParse(comboBox_ToMinutes.SelectedItem.ToString(), out double toMinutes);
+
+                DateTime timeStart = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(fromHour).AddMinutes(fromMinutes);
+                DateTime timeEnd = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(toHour).AddMinutes(toMinutes);
+                Models.ModSpeciality speciality = lstSpecialities.SingleOrDefault(x => x.Name == comboBox_Specialities.Text);
+
+                if (timeStart > timeEnd)
+                {
+                    label_Success.Visible = false;
+                    label_Failed.Text = "Start time cannot be after end time";
+                    label_Failed.Visible = true;
+                }
+                else
+                {
+                    label_Failed.Visible = false;
+
+                    var attendance = new
+                    {
+                        doctorId = this.DoctorId,
+                        hospitalName = comboBox_Hospitals.Text,
+                        specialityId = speciality.Id,
+                        duration = comboBox_Duration.Text,
+                        fromDateTime = timeStart,
+                        toDateTime = timeEnd
+                    };
+
+                    var content = JsonConvert.SerializeObject(attendance);
+
+                    const string apiRequest = "https://localhost:44310/api/doctors/AddAttendance";
+
+                    try
+                    {
+                        using (var client = new HttpClient())
+                        {
+                            var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+
+                            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                            {
+                                label_Success.Visible = true;
+                            }
+                        }
+                    }
+                    catch (HttpRequestException exc)
+                    {
+                        Console.WriteLine(exc.Message);
+                        throw;
+                    }
+                }
+            } 
             else
             {
-                var attendance = new
-                {
-                    doctorId = this.DoctorId,
-                    hospitalName = comboBox_Hospitals.Text,
-                    timestart = timeStart,
-                    timeEnd = timeEnd
-                };
-
-                //TODO API call Post Attendance
-
-                label_Success.Visible = true;
+                label_Failed.Text = "Please fill in all fields";
+                label_Failed.Visible = true;
             }
+        }
+
+        private async Task<List<Models.ModSpeciality>> GetDoctorSpecialities()
+        {
+            List<Models.ModSpeciality> lstContent = new List<Models.ModSpeciality>();
+            const string apiRequest = "https://localhost:44310/api/doctors/GetDoctorSpecialities";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{apiRequest}/?doctorId={DoctorId}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        lstContent = JsonConvert.DeserializeObject<List<Models.ModSpeciality>>(content);
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+            return lstContent;
+        }
+
+        private void ShowSpecialities(List<Models.ModSpeciality> lstSpecialities)
+        {
+            foreach (var speciality in lstSpecialities)
+            {
+                comboBox_Specialities.Items.Add(speciality.Name);
+            }
+        }
+
+        private bool CheckData()
+        {
+            if ((comboBox_FromHour.Text == "" || comboBox_FromHour == null) && !checkBox_AllDay.Checked)
+                return false;
+            else if ((comboBox_FromMinutes.Text == "" || comboBox_FromMinutes == null) && !checkBox_AllDay.Checked)
+                return false;
+            else if ((comboBox_ToHour.Text == "" || comboBox_ToHour == null) && !checkBox_AllDay.Checked)
+                return false;
+            else if ((comboBox_ToMinutes.Text == "" || comboBox_ToMinutes == null) && !checkBox_AllDay.Checked)
+                return false;
+            else if (comboBox_Hospitals.Text == "" || comboBox_Hospitals == null)
+                return false;
+            else if (comboBox_Specialities.Text == "" || comboBox_Specialities == null)
+                return false;
+            else if (comboBox_Duration.Text == "" || comboBox_Specialities == null)
+                return false;
+            else
+                return true;
         }
     }
 }

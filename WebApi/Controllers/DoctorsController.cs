@@ -10,8 +10,10 @@ namespace WebApi.Controllers
 {
     public class attendanceDTO
     {
-        public Guid doctorId { get; set; }
+        public Guid? doctorId { get; set; }
         public string hospitalName { get; set; }
+        public Guid? specialityId { get; set; }
+        public int duration { get; set; }
         public DateTime fromDateTime { get; set; }
         public DateTime toDateTime { get; set; }
     }
@@ -114,12 +116,39 @@ namespace WebApi.Controllers
 
             try
             {
-                oData.AddAttendance(attendance.fromDateTime, attendance.toDateTime, attendance.hospitalName, attendance.doctorId);
+                oData.AddAttendance(
+                    attendance.fromDateTime, 
+                    attendance.toDateTime, 
+                    attendance.hospitalName, 
+                    attendance.doctorId, 
+                    attendance.specialityId, 
+                    attendance.duration);
                 return Ok(attendance);
             }
             catch (Exception)
             {
                 return Conflict();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/doctors/GetDoctorSpecialities")]
+        public IHttpActionResult GetDoctorSpecialities(Guid doctorId)
+        {
+            BusinessLogic.BlDoctors blDoctors = new BusinessLogic.BlDoctors();
+
+            try
+            {
+                var lstSpecialities = blDoctors.GetDoctorSpecialities(doctorId);
+
+                if (lstSpecialities != null)
+                    return Ok(lstSpecialities);
+                else
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

@@ -147,13 +147,13 @@ namespace BusinessLogic
             oData.ConfirmAppointment(appointmentId);
         }
 
-        public void AddAttendance(DateTime fromDateTime, DateTime toDateTime, string hospitalName, Guid? doctorId)
+        public void AddAttendance(DateTime fromDateTime, DateTime toDateTime, string hospitalName, Guid? doctorId, Guid? specialityId, int duration)
         {
             BlHospitals blHospitals = new BlHospitals();
             DataAccessLayer.EFDoctors oDatabase = new DataAccessLayer.EFDoctors();
 
             Models.ModHospital oHospital = blHospitals.GetAllHospitals().SingleOrDefault(x => x.Name == hospitalName);
-            oDatabase.AddAttendence(doctorId, oHospital.Id, fromDateTime, toDateTime);
+            oDatabase.AddAttendence(doctorId, oHospital.Id, specialityId, duration, fromDateTime, toDateTime);
         }
     }
 }

@@ -118,8 +118,8 @@ namespace DataAccessLayer
         public virtual ObjectResult<usp_GetDoctorSpecialities_Result> usp_GetDoctorSpecialities(Nullable<System.Guid> doctorId)
         {
             var doctorIdParameter = doctorId.HasValue ?
-                new ObjectParameter("DoctorId", doctorId) :
-                new ObjectParameter("DoctorId", typeof(System.Guid));
+                new ObjectParameter("doctorId", doctorId) :
+                new ObjectParameter("doctorId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorSpecialities_Result>("usp_GetDoctorSpecialities", doctorIdParameter);
         }
@@ -275,7 +275,7 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("usp_GetAvailableRoom", hospitalIdParameter, dateTimeStartParameter, dateTimeEndParameter);
         }
     
-        public virtual int usp_AddDoctorAvailability(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> dateTimeStart, Nullable<System.DateTime> dateTimeEnd)
+        public virtual int usp_AddDoctorAvailability(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.Guid> specialityId, Nullable<int> consultationTime, Nullable<System.DateTime> dateTimeStart, Nullable<System.DateTime> dateTimeEnd)
         {
             var doctorIdParameter = doctorId.HasValue ?
                 new ObjectParameter("doctorId", doctorId) :
@@ -285,6 +285,14 @@ namespace DataAccessLayer
                 new ObjectParameter("hospitalId", hospitalId) :
                 new ObjectParameter("hospitalId", typeof(System.Guid));
     
+            var specialityIdParameter = specialityId.HasValue ?
+                new ObjectParameter("specialityId", specialityId) :
+                new ObjectParameter("specialityId", typeof(System.Guid));
+    
+            var consultationTimeParameter = consultationTime.HasValue ?
+                new ObjectParameter("consultationTime", consultationTime) :
+                new ObjectParameter("consultationTime", typeof(int));
+    
             var dateTimeStartParameter = dateTimeStart.HasValue ?
                 new ObjectParameter("dateTimeStart", dateTimeStart) :
                 new ObjectParameter("dateTimeStart", typeof(System.DateTime));
@@ -293,7 +301,7 @@ namespace DataAccessLayer
                 new ObjectParameter("dateTimeEnd", dateTimeEnd) :
                 new ObjectParameter("dateTimeEnd", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctorAvailability", doctorIdParameter, hospitalIdParameter, dateTimeStartParameter, dateTimeEndParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctorAvailability", doctorIdParameter, hospitalIdParameter, specialityIdParameter, consultationTimeParameter, dateTimeStartParameter, dateTimeEndParameter);
         }
     
         public virtual ObjectResult<usp_GetDoctorAvailabilities_Result> usp_GetDoctorAvailabilities(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> date)

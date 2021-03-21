@@ -114,15 +114,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 Id = null, 
                 Confirmed = false 
             };
-            NewAppointment.Patient = new Models.ModPatient();
-            //Double.TryParse(comboBox_AppointmentHour.SelectedItem.ToString(), out double hours);
-            //Double.TryParse(comboBox_AppointmentMinutes.SelectedItem.ToString(), out double minutes);
 
+            NewAppointment.Patient = new Models.ModPatient();
             NewAppointment.Patient.FirstName = textBox_patientFirstName.Text;
             NewAppointment.Patient.LastName = textBox_patientLastName.Text;
             NewAppointment.Patient.Birthday = dateTimePicker_patientBirthday.Value;
-            //NewAppointment.DateTimeStart = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(hours).AddMinutes(minutes);
-            //NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
             NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()];
             NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
 

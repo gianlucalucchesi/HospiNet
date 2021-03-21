@@ -70,11 +70,11 @@ namespace DataAccessLayer
             }
         }
 
-        public void AddAttendence(Guid? doctorId, Guid? hospitalId, DateTime fromDateTime, DateTime toDateTime)
+        public void AddAttendence(Guid? doctorId, Guid? hospitalId, Guid? specialityId, int duration, DateTime fromDateTime, DateTime toDateTime)
         {
             using (var oDatabase = new HospiNetEntities())
             {
-                oDatabase.usp_AddDoctorAvailability(doctorId, hospitalId, fromDateTime, toDateTime);
+                oDatabase.usp_AddDoctorAvailability(doctorId, hospitalId, specialityId, duration, fromDateTime, toDateTime);
             }
         }
     }

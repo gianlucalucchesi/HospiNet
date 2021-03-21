@@ -161,6 +161,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                 if (timeStart > timeEnd)
                 {
                     label_Success.Visible = false;
+                    label_Failed.Location = new Point(356, 499);
                     label_Failed.Text = "Start time cannot be after end time";
                     label_Failed.Visible = true;
                 }
@@ -194,6 +195,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                             } 
                             else if(response.StatusCode == System.Net.HttpStatusCode.Conflict)
                             {
+                                label_Failed.Location = new Point(460, 500);
                                 label_Failed.Text = "Conflict";
                                 label_Failed.Visible = true;
                             }
@@ -208,6 +210,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             } 
             else
             {
+                label_Failed.Location = new Point(356, 499);
                 label_Failed.Text = "Please fill in all fields";
                 label_Failed.Visible = true;
             }

@@ -13,6 +13,9 @@ namespace DataAccessLayer
     
     public partial class usp_GetDoctorAvailabilities_Result
     {
+        public System.Guid Hospital_Id { get; set; }
+        public System.Guid Speciality_Id { get; set; }
+        public int ConsultationTime { get; set; }
         public System.DateTime DateTimeStart { get; set; }
         public System.DateTime DateTimeEnd { get; set; }
     }

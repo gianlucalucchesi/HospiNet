@@ -36,8 +36,6 @@
         </Function>
         <Function Name="usp_GetDoctorAvailabilities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor">
           <Parameter Name="doctorId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="hospitalId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="date" Type="date" Mode="In" />
         </Function>
         <Function Name="usp_GetDoctorsBasedOnSpeciality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="doctor">
           <Parameter Name="SpecialityId" Type="uniqueidentifier" Mode="In" />
@@ -180,16 +178,14 @@
             <Parameter Name="dateTimeStart" Mode="In" Type="DateTime" />
             <Parameter Name="dateTimeEnd" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="usp_GetDoctorAvailabilities" ReturnType="Collection(HospiNetModel.usp_GetDoctorAvailabilities_Result)">
-            <Parameter Name="doctorId" Mode="In" Type="Guid" />
-            <Parameter Name="hospitalId" Mode="In" Type="Guid" />
-            <Parameter Name="date" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="usp_GetAppointmentDuration" ReturnType="Collection(Int32)">
             <Parameter Name="doctorId" Mode="In" Type="Guid" />
             <Parameter Name="hospitalId" Mode="In" Type="Guid" />
             <Parameter Name="dateTimeStart" Mode="In" Type="DateTime" />
             <Parameter Name="specialityId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetDoctorAvailabilities" ReturnType="Collection(HospiNetModel.usp_GetDoctorAvailabilities_Result)">
+            <Parameter Name="doctorId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_SelectAllSpecialities_Result">
@@ -242,6 +238,9 @@
           <Property Type="Guid" Name="DoctorId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="usp_GetDoctorAvailabilities_Result">
+          <Property Type="Guid" Name="Hospital_Id" Nullable="false" />
+          <Property Type="Guid" Name="Speciality_Id" Nullable="false" />
+          <Property Type="Int32" Name="ConsultationTime" Nullable="false" />
           <Property Type="DateTime" Name="DateTimeStart" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="DateTimeEnd" Nullable="false" Precision="23" />
         </ComplexType>
@@ -344,15 +343,18 @@
           <FunctionImportMapping FunctionImportName="usp_ConfirmAppointment" FunctionName="HospiNetModel.Store.usp_ConfirmAppointment" />
           <FunctionImportMapping FunctionImportName="usp_GetAvailableRoom" FunctionName="HospiNetModel.Store.usp_GetAvailableRoom" />
           <FunctionImportMapping FunctionImportName="usp_AddDoctorAvailability" FunctionName="HospiNetModel.Store.usp_AddDoctorAvailability" />
+          <FunctionImportMapping FunctionImportName="usp_GetAppointmentDuration" FunctionName="HospiNetModel.Store.usp_GetAppointmentDuration" />
           <FunctionImportMapping FunctionImportName="usp_GetDoctorAvailabilities" FunctionName="HospiNetModel.Store.usp_GetDoctorAvailabilities">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HospiNetModel.usp_GetDoctorAvailabilities_Result">
+                <ScalarProperty Name="Hospital_Id" ColumnName="Hospital_Id" />
+                <ScalarProperty Name="Speciality_Id" ColumnName="Speciality_Id" />
+                <ScalarProperty Name="ConsultationTime" ColumnName="ConsultationTime" />
                 <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
                 <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_GetAppointmentDuration" FunctionName="HospiNetModel.Store.usp_GetAppointmentDuration" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

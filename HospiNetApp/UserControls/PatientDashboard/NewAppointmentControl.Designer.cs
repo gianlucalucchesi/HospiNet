@@ -243,6 +243,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.label_SuccessFailed.AutoSize = true;
             this.label_SuccessFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_SuccessFailed.ForeColor = System.Drawing.Color.ForestGreen;
             this.label_SuccessFailed.Location = new System.Drawing.Point(665, 517);
             this.label_SuccessFailed.Name = "label_SuccessFailed";
             this.label_SuccessFailed.Size = new System.Drawing.Size(184, 24);

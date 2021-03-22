@@ -26,12 +26,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async void NewAppointment_Load(object sender, EventArgs e)
         {
-            var hospitals = await GetAllHospitals();
-
-            foreach (var hospital in hospitals)
-            {
-                comboBox_Hospitals.Items.Add(hospital.Name);
-            }
         }
 
         private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)
@@ -49,33 +43,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
                         lstContent = JsonConvert.DeserializeObject<List<Models.ModDoctor>>(content);
-                    }
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-
-            return lstContent;
-        }
-
-        private async Task<List<Models.ModHospital>> GetAllHospitals()
-        {
-            List<Models.ModHospital> lstContent = new List<Models.ModHospital>();
-            const string apiRequest = "https://localhost:44310/api/hospitals/GetAllHospitals";
-
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    var response = await client.GetAsync($"{apiRequest}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var content = response.Content.ReadAsStringAsync().Result;
-                        lstContent = JsonConvert.DeserializeObject<List<Models.ModHospital>>(content);
                     }
                 }
             }
@@ -193,10 +160,21 @@ namespace HospiNetApp.UserControls.PatientDashboard
             comboBox_Availabilities.SelectedIndex = 0;
         }
 
-        private void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboBox_Hospitals.Items.Clear();
+            lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
+
+            foreach (var hospital in lstAvailableHospitals)
+            {
+                if (!comboBox_Hospitals.Items.Contains(hospital.Name))
+                    comboBox_Hospitals.Items.Add(hospital.Name);
+            }
+
+            if (lstAvailableHospitals.Count == 0)
+                comboBox_Hospitals.Items.Add("No available hospitals");
+
             comboBox_Hospitals.Enabled = true;
-            //comboBox_Hospitals.Items.Clear();
         }
 
         private void comboBox_Hospitals_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -207,66 +185,35 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Availabilities.Enabled = true;
         }
 
-        private async Task<List<Models.ModAppointmentVw>> GetExistingAppointments()
+        //private List<DateTime> GetAvailableTimes(string doctorName, string hospitalName, string specialityName)
+        //{
+        //    var info = new
+        //    {
+        //        doctorName = doctorName,
+        //        hospitalName = hospitalName,
+        //        specialityName = specialityName
+        //    };
+
+
+        //}
+
+        private async Task<List<Models.ModHospital>> GetAvailableHospitals(string doctorName, string specialityName)
         {
-            const string apiRequest = "https://localhost:44310/api/doctors/GetAppointments";
-            List<Models.ModAppointmentVw> lstContent = new List<Models.ModAppointmentVw>();
+            List<Models.ModHospital> lst = new List<Models.ModHospital>();
 
-            string[] doctorName= comboBox_Doctors.SelectedItem.ToString().Split(' ');
-
-            Guid? DoctorId = await GetDoctorId(doctorName[0], doctorName[1]);
+            const string apiRequest = "https://localhost:44310/api/appointments/GetAvailableHospitals";
 
             try
             {
                 using (var client = new HttpClient())
                 {
-                    var response = await client.GetAsync($"{apiRequest}/?DoctorId={DoctorId}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var content = response.Content.ReadAsStringAsync().Result;
-                        lstContent = JsonConvert.DeserializeObject<List<Models.ModAppointmentVw>>(content);
-                    }
-                }
-            }
-            catch (HttpRequestException exc)
-            {
-                Console.WriteLine(exc.Message);
-                throw;
-            }
-
-            return lstContent;
-        }
-
-        private async Task<List<DateTime>> GetUnavailableTimeSlots()
-        {
-            List<DateTime> UnavailableTimeSlots = new List<DateTime>();
-            var lstAppointments = await GetExistingAppointments();
-
-            foreach (var appointment in lstAppointments)
-            {
-                UnavailableTimeSlots.Add(appointment.DateTimeStart);
-            }
-
-            return UnavailableTimeSlots;
-        }
-
-        private async Task<Guid?> GetDoctorId(string Firstname, string LastName)
-        {
-            Guid? UserId = null;
-            const string apiRequest = "https://localhost:44310/api/hospitals/UserExists";
-
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    var response = await client.GetAsync($"{apiRequest}/?FirstName={Firstname}&LastName={LastName}&Type=Doctor");
+                    var response = await client.GetAsync($"{apiRequest}/?doctorName={doctorName}&specialityName={specialityName}");
 
                     if (response.IsSuccessStatusCode)
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
                         if (content != "null")
-                            UserId = JsonConvert.DeserializeObject<Guid>(content);
+                            lst = JsonConvert.DeserializeObject<List<Models.ModHospital>>(content);
                     }
                 }
             }
@@ -276,7 +223,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 throw;
             }
 
-            return UserId;
+            return lst;
         }
     }
 }

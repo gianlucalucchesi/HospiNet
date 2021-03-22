@@ -85,5 +85,13 @@ namespace DataAccessLayer
                 return oDatabase.usp_GetAppointmentDuration(doctorId, hospitalId, dateTimeStart, specialityId).SingleOrDefault();
             }
         }
+
+        public List<usp_GetDoctorAvailabilities_Result> GetAttendances(Guid? doctorId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetDoctorAvailabilities(doctorId).ToList();
+            }
+        }
     }
 }

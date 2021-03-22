@@ -304,23 +304,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctorAvailability", doctorIdParameter, hospitalIdParameter, specialityIdParameter, consultationTimeParameter, dateTimeStartParameter, dateTimeEndParameter);
         }
     
-        public virtual ObjectResult<usp_GetDoctorAvailabilities_Result> usp_GetDoctorAvailabilities(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> date)
-        {
-            var doctorIdParameter = doctorId.HasValue ?
-                new ObjectParameter("doctorId", doctorId) :
-                new ObjectParameter("doctorId", typeof(System.Guid));
-    
-            var hospitalIdParameter = hospitalId.HasValue ?
-                new ObjectParameter("hospitalId", hospitalId) :
-                new ObjectParameter("hospitalId", typeof(System.Guid));
-    
-            var dateParameter = date.HasValue ?
-                new ObjectParameter("date", date) :
-                new ObjectParameter("date", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter, hospitalIdParameter, dateParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> usp_GetAppointmentDuration(Nullable<System.Guid> doctorId, Nullable<System.Guid> hospitalId, Nullable<System.DateTime> dateTimeStart, Nullable<System.Guid> specialityId)
         {
             var doctorIdParameter = doctorId.HasValue ?
@@ -340,6 +323,15 @@ namespace DataAccessLayer
                 new ObjectParameter("specialityId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GetAppointmentDuration", doctorIdParameter, hospitalIdParameter, dateTimeStartParameter, specialityIdParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetDoctorAvailabilities_Result> usp_GetDoctorAvailabilities(Nullable<System.Guid> doctorId)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("doctorId", doctorId) :
+                new ObjectParameter("doctorId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter);
         }
     }
 }

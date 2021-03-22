@@ -49,9 +49,43 @@ namespace BusinessLogic
             return oDatabase.GetAppointmentDuration(doctorId, hospitalId, dateTimeStart, specialityId);
         }
 
-        //public List<Models.ModDoctor> GetAvailableDoctors(DateTime date)
-        //{
+        public List<Models.ModHospital> GetAvailableHospitals(string doctorName, string specialityName)
+        {
+            List<Models.ModHospital> lstHospitalsFull = new List<Models.ModHospital>();
 
-        //}
+            DataAccessLayer.EFDoctors efDoctors = new DataAccessLayer.EFDoctors();
+            string[] name = doctorName.Split(' ');
+
+            var doctorReceived = efDoctors.GetAllDoctors().SingleOrDefault(x => x.FirstName + " " + x.LastName == doctorName);
+
+            Models.ModDoctor oDoctor = new Models.ModDoctor();
+            oDoctor.FirstName = doctorReceived.FirstName;
+            oDoctor.LastName = doctorReceived.LastName;
+            oDoctor.Id = doctorReceived.Id;
+
+            var attendancesReceived = efDoctors.GetAttendances(oDoctor.Id);
+
+            var specialityReceived = efDoctors.GetAllSpecialities().SingleOrDefault(x => x.Name == specialityName);
+            Models.ModSpeciality oSpeciality = new Models.ModSpeciality();
+            oSpeciality.Id = specialityReceived.Id;
+            oSpeciality.Name = specialityReceived.Name;
+
+            BlHospitals blHospitals = new BlHospitals();
+            var lstAllHospitals = blHospitals.GetAllHospitals();
+
+            foreach (var hospital in attendancesReceived)
+            {
+                if (hospital.Speciality_Id == oSpeciality.Id)
+                {
+                    Models.ModHospital oHospital = new Models.ModHospital();
+                    oHospital.Id = hospital.Hospital_Id;
+                    oHospital.Name = lstAllHospitals.SingleOrDefault(x => x.Id == hospital.Hospital_Id).Name;
+
+                    lstHospitalsFull.Add(oHospital);
+                }
+            }
+
+            return lstHospitalsFull;
+        }
     }
 }

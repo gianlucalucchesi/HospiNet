@@ -147,7 +147,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
         private async void button_Confirm_Click(object sender, EventArgs e)
         {
-            if (CheckData())
+            if (DataCheck())
             {
                 double fromHour, fromMinutes, toHour, toMinutes;
 
@@ -263,7 +263,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             }
         }
 
-        private bool CheckData()
+        private bool DataCheck()
         {
             if ((comboBox_FromHour.Text == "" || comboBox_FromHour == null) && !checkBox_AllDay.Checked)
                 return false;

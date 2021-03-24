@@ -185,18 +185,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Availabilities.Enabled = true;
         }
 
-        //private List<DateTime> GetAvailableTimes(string doctorName, string hospitalName, string specialityName)
-        //{
-        //    var info = new
-        //    {
-        //        doctorName = doctorName,
-        //        hospitalName = hospitalName,
-        //        specialityName = specialityName
-        //    };
-
-
-        //}
-
         private async Task<List<Models.ModHospital>> GetAvailableHospitals(string doctorName, string specialityName)
         {
             List<Models.ModHospital> lst = new List<Models.ModHospital>();

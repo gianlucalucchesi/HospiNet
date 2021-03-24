@@ -87,5 +87,35 @@ namespace BusinessLogic
 
             return lstHospitalsFull;
         }
+
+        public List<Models.ModAppointmentVw> GetExistingDayAppointments(DateTime day) 
+        {
+            List<Models.ModAppointmentVw> lstAppointmentsVw = new List<Models.ModAppointmentVw();
+            DataAccessLayer.EFAppointment efAppointment = new DataAccessLayer.EFAppointment();
+            var dayAppointments = efAppointment.GetDayAppointments(day);
+
+            foreach (var appointment in dayAppointments)
+            {
+                Models.ModAppointmentVw oAppointmentVw = new Models.ModAppointmentVw();
+                oAppointmentVw.Id = appointment.Id;
+                oAppointmentVw.HospitalName = appointment.HospitalName;
+                oAppointmentVw.RoomName = appointment.RoomName;
+                oAppointmentVw.DoctorId = appointment.DoctorId;
+                oAppointmentVw.FirstName = appointment.FirstName;
+                oAppointmentVw.LastName = appointment.LastName;
+                oAppointmentVw.DateTimeStart = appointment.DateTimeStart;
+                oAppointmentVw.DateTimeEnd = appointment.DateTimeEnd;
+                oAppointmentVw.Confirmed = appointment.Confirmed;
+
+                lstAppointmentsVw.Add(oAppointmentVw);
+            }
+
+            return lstAppointmentsVw;
+        }
+
+        public List<DateTime> GetAvailableTimes(List<Models.ModAppointmentVw> lstAppointments, D)
+        {
+            var doctor
+        }
     }
 }

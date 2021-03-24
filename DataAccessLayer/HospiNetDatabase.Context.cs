@@ -333,5 +333,14 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter);
         }
+    
+        public virtual ObjectResult<usp_GetDayAppointments_Result> usp_GetDayAppointments(Nullable<System.DateTime> day)
+        {
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("day", day) :
+                new ObjectParameter("day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDayAppointments_Result>("usp_GetDayAppointments", dayParameter);
+        }
     }
 }

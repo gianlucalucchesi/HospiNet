@@ -22,5 +22,13 @@ namespace DataAccessLayer
                 return oDatabase.usp_GetAvailableRoom(hospitalId, dateTimeStart, dateTimeEnd).SingleOrDefault();
             }
         }
+
+        public List<usp_GetDayAppointments_Result> GetDayAppointments(DateTime day)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetDayAppointments(day).ToList();
+            }
+        }
     }
 }

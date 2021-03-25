@@ -16,7 +16,6 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public System.Guid DoctorId { get; set; }
         public string SpecialityName { get; set; }
-        public int ConsultationTime { get; set; }
         public string HospitalName { get; set; }
         public string RoomName { get; set; }
         public string FirstName { get; set; }

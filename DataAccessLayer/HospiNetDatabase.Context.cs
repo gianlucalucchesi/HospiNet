@@ -244,15 +244,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_AddDoctorSpeciality", doctor_idParameter, speciality_idParameter);
         }
     
-        public virtual ObjectResult<usp_GetDoctorAppointments_Result> usp_GetDoctorAppointments(Nullable<System.Guid> doctor_id)
-        {
-            var doctor_idParameter = doctor_id.HasValue ?
-                new ObjectParameter("doctor_id", doctor_id) :
-                new ObjectParameter("doctor_id", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAppointments_Result>("usp_GetDoctorAppointments", doctor_idParameter);
-        }
-    
         public virtual int usp_ConfirmAppointment(Nullable<int> appointmentId)
         {
             var appointmentIdParameter = appointmentId.HasValue ?
@@ -336,6 +327,15 @@ namespace DataAccessLayer
                 new ObjectParameter("doctorId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetDoctorAppointments_Result> usp_GetDoctorAppointments(Nullable<System.Guid> doctor_id)
+        {
+            var doctor_idParameter = doctor_id.HasValue ?
+                new ObjectParameter("doctor_id", doctor_id) :
+                new ObjectParameter("doctor_id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAppointments_Result>("usp_GetDoctorAppointments", doctor_idParameter);
         }
     
         public virtual ObjectResult<usp_GetDayAppointments_Result> usp_GetDayAppointments(Nullable<System.DateTime> day)

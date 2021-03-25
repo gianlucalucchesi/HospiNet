@@ -14,6 +14,8 @@ namespace DataAccessLayer
     public partial class usp_GetDoctorAppointments_Result
     {
         public int Id { get; set; }
+        public System.Guid DoctorId { get; set; }
+        public string SpecialityName { get; set; }
         public string HospitalName { get; set; }
         public string RoomName { get; set; }
         public string FirstName { get; set; }
@@ -21,6 +23,5 @@ namespace DataAccessLayer
         public System.DateTime DateTimeStart { get; set; }
         public System.DateTime DateTimeEnd { get; set; }
         public bool Confirmed { get; set; }
-        public System.Guid DoctorId { get; set; }
     }
 }

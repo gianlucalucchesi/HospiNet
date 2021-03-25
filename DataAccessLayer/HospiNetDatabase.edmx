@@ -164,9 +164,6 @@
             <Parameter Name="doctor_id" Mode="In" Type="Guid" />
             <Parameter Name="speciality_id" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="usp_GetDoctorAppointments" ReturnType="Collection(HospiNetModel.usp_GetDoctorAppointments_Result)">
-          <Parameter Name="doctor_id" Mode="In" Type="Guid" />
-          </FunctionImport>
           <FunctionImport Name="usp_ConfirmAppointment">
           <Parameter Name="appointmentId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -191,6 +188,9 @@
           </FunctionImport>
           <FunctionImport Name="usp_GetDoctorAvailabilities" ReturnType="Collection(HospiNetModel.usp_GetDoctorAvailabilities_Result)">
           <Parameter Name="doctorId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetDoctorAppointments" ReturnType="Collection(HospiNetModel.usp_GetDoctorAppointments_Result)">
+            <Parameter Name="doctor_id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="usp_GetDayAppointments" ReturnType="Collection(HospiNetModel.usp_GetDayAppointments_Result)">
             <Parameter Name="day" Mode="In" Type="DateTime" />
@@ -234,17 +234,6 @@
           <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="HospitalName" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="usp_GetDoctorAppointments_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="HospitalName" Nullable="false" />
-          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="DateTimeStart" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="DateTimeEnd" Nullable="false" Precision="23" />
-          <Property Type="Boolean" Name="Confirmed" Nullable="false" />
-          <Property Type="Guid" Name="DoctorId" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="usp_GetDoctorAvailabilities_Result">
           <Property Type="Guid" Name="Hospital_Id" Nullable="false" />
           <Property Type="Guid" Name="Speciality_Id" Nullable="false" />
@@ -252,11 +241,22 @@
           <Property Type="DateTime" Name="DateTimeStart" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="DateTimeEnd" Nullable="false" Precision="23" />
         </ComplexType>
+        <ComplexType Name="usp_GetDoctorAppointments_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="DoctorId" Nullable="false" />
+          <Property Type="String" Name="SpecialityName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="HospitalName" Nullable="false" />
+          <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DateTimeStart" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DateTimeEnd" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Confirmed" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="usp_GetDayAppointments_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="DoctorId" Nullable="false" />
           <Property Type="String" Name="SpecialityName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="ConsultationTime" Nullable="false" />
           <Property Type="String" Name="HospitalName" Nullable="false" />
           <Property Type="String" Name="RoomName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
@@ -346,21 +346,6 @@
           <FunctionImportMapping FunctionImportName="usp_UpdateHospital" FunctionName="HospiNetModel.Store.usp_UpdateHospital" />
           <FunctionImportMapping FunctionImportName="usp_AddDoctor" FunctionName="HospiNetModel.Store.usp_AddDoctor" />
           <FunctionImportMapping FunctionImportName="usp_AddDoctorSpeciality" FunctionName="HospiNetModel.Store.usp_AddDoctorSpeciality" />
-          <FunctionImportMapping FunctionImportName="usp_GetDoctorAppointments" FunctionName="HospiNetModel.Store.usp_GetDoctorAppointments">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HospiNetModel.usp_GetDoctorAppointments_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
-                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
-                <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
-                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
-                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_ConfirmAppointment" FunctionName="HospiNetModel.Store.usp_ConfirmAppointment" />
           <FunctionImportMapping FunctionImportName="usp_GetAvailableRoom" FunctionName="HospiNetModel.Store.usp_GetAvailableRoom" />
           <FunctionImportMapping FunctionImportName="usp_AddDoctorAvailability" FunctionName="HospiNetModel.Store.usp_AddDoctorAvailability" />
@@ -376,13 +361,28 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetDoctorAppointments" FunctionName="HospiNetModel.Store.usp_GetDoctorAppointments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HospiNetModel.usp_GetDoctorAppointments_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
+                <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_GetDayAppointments" FunctionName="HospiNetModel.Store.usp_GetDayAppointments">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HospiNetModel.usp_GetDayAppointments_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
                 <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
-                <ScalarProperty Name="ConsultationTime" ColumnName="ConsultationTime" />
                 <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
                 <ScalarProperty Name="RoomName" ColumnName="RoomName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

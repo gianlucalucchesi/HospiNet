@@ -124,12 +124,15 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             {
                 if(appointment.DateTimeStart.ToShortDateString() == monthCalendar1.SelectionRange.Start.ToShortDateString())
                 {
-                    dataGridView_Appointments[0, i].Value = appointment.HospitalName;
-                    dataGridView_Appointments[1, i].Value = appointment.RoomName;
-                    dataGridView_Appointments[2, i].Value = appointment.FirstName + " " + appointment.LastName;
-                    dataGridView_Appointments[3, i].Value = appointment.DateTimeStart;
-                    dataGridView_Appointments[4, i].Value = appointment.DateTimeEnd;
-                    dataGridView_Appointments[5, i].Value = appointment.Confirmed;
+                    dataGridView_Appointments.Rows.Insert(
+                        i,
+                        appointment.Id,
+                        appointment.HospitalName, 
+                        appointment.RoomName, 
+                        appointment.FirstName + " " + appointment.LastName, 
+                        appointment.DateTimeStart,
+                        appointment.DateTimeEnd,
+                        appointment.Confirmed);
                 }
                 i++;
             }

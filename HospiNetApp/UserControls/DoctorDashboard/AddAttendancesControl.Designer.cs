@@ -1,7 +1,7 @@
 ﻿
 namespace HospiNetApp.UserControls.DoctorDashboard
 {
-    partial class ManageAttendancesControl
+    partial class AddAttendancesControl
     {
         /// <summary> 
         /// Required designer variable.

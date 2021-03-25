@@ -47,7 +47,7 @@ namespace HospiNetApp.Forms
 
         private void button_doctorDashboard_ManageAttendances_Click(object sender, EventArgs e)
         {
-            var oControl = new UserControls.DoctorDashboard.ManageAttendancesControl(this.DoctorId);
+            var oControl = new UserControls.DoctorDashboard.AddAttendancesControl(this.DoctorId);
             UserControls.MainControl.showControl(oControl, DoctorDashboardControlPanel);
         }
 

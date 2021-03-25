@@ -17,15 +17,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
     {
         Models.ModAppointment NewAppointment;
         List<Models.ModHospital> lstAvailableHospitals;
-        Dictionary<string, DateTime> AppointmentTimeSlot = new Dictionary<string, DateTime>();
+        Dictionary<string, DateTime[]> AppointmentTimeSlot = new Dictionary<string, DateTime[]>();
 
         public NewAppointmentControl()
         {
             InitializeComponent();
-        }
-
-        private async void NewAppointment_Load(object sender, EventArgs e)
-        {
         }
 
         private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)
@@ -86,7 +82,9 @@ namespace HospiNetApp.UserControls.PatientDashboard
             NewAppointment.Patient.FirstName = textBox_patientFirstName.Text;
             NewAppointment.Patient.LastName = textBox_patientLastName.Text;
             NewAppointment.Patient.Birthday = dateTimePicker_patientBirthday.Value;
-            NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()];
+            NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
+            NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()][0];
+            NewAppointment.DateTimeEnd = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()][1];
             NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
             NewAppointment.SpecialityName = comboBox_Specialities.SelectedItem.ToString();
 
@@ -95,6 +93,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             if (appointmentId != -1)
             {
                 label_SuccessFailed.Text = "Appointment created: " + appointmentId.ToString();
+                label_SuccessFailed.Visible = true;
             }
             else
             {
@@ -129,37 +128,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             return appointmentId;
         }
 
-        private void ShowAvailabilities(double duration)
-        {
-            DateTime dt = monthCalendar_AppointmentDate.SelectionRange.Start.AddHours(8.00);
-            comboBox_Availabilities.Items.Clear();
-            button_AddAppointment.Enabled = false;
-
-            while (dt.Hour != 18) //Consultations end at 18h00
-            {
-                if (dt.Minute == 0)
-                {
-                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString() + "0");
-                    AppointmentTimeSlot.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString() + "0", dt);
-                }
-                else
-                {
-                    comboBox_Availabilities.Items.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString());
-                    AppointmentTimeSlot.Add(dt.Hour.ToString() + ":" + dt.Minute.ToString(), dt);
-                }
-
-                dt = dt.AddMinutes(duration);
-            }
-
-            if (comboBox_Availabilities.Items.Count == 0)
-                comboBox_Availabilities.Items.Add("No availabilities");
-            else
-                button_AddAppointment.Enabled = true;
-                
-
-            comboBox_Availabilities.SelectedIndex = 0;
-        }
-
         private async void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_Hospitals.Items.Clear();
@@ -177,12 +145,20 @@ namespace HospiNetApp.UserControls.PatientDashboard
             comboBox_Hospitals.Enabled = true;
         }
 
-        private void comboBox_Hospitals_SelectedIndexChanged_1(object sender, EventArgs e)
+        private async void comboBox_Hospitals_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (comboBox_Specialities.SelectedItem.ToString() != ""
                     && comboBox_Doctors.SelectedItem.ToString() != ""
                     && comboBox_Hospitals.SelectedItem.ToString() != "")
-                comboBox_Availabilities.Enabled = true;
+            {
+                var timeslots = await GetAvailableTimeSlots(
+                    comboBox_Doctors.SelectedItem.ToString(),
+                    comboBox_Specialities.SelectedItem.ToString(),
+                    comboBox_Hospitals.SelectedItem.ToString(),
+                    monthCalendar_AppointmentDate.SelectionRange.Start);
+
+                ShowAvailableTimeSlots(timeslots);
+            }
         }
 
         private async Task<List<Models.ModHospital>> GetAvailableHospitals(string doctorName, string specialityName)
@@ -212,6 +188,71 @@ namespace HospiNetApp.UserControls.PatientDashboard
             }
 
             return lst;
+        }
+
+        private async Task<List<DateTime[]>> GetAvailableTimeSlots(string doctorName, string specialityName, string hospitalName, DateTime day)
+        {
+            List<DateTime[]> lst = new List<DateTime[]>();
+
+            const string apiRequest = "https://localhost:44310/api/appointments/GetAvailableTimeSlots";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = 
+                        await client.GetAsync($"{apiRequest}/?doctorName={doctorName}&specialityName={specialityName}&hospitalName={hospitalName}&day={day.ToShortDateString()}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        if (content != "null")
+                            lst = JsonConvert.DeserializeObject<List<DateTime[]>>(content);
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+            return lst;
+        }
+
+        private void ShowAvailableTimeSlots(List<DateTime[]> timeSlots)
+        {
+            comboBox_Availabilities.Enabled = false;
+            comboBox_Availabilities.Items.Clear();
+            AppointmentTimeSlot.Clear();
+
+            foreach (var timeSlot in timeSlots)
+            {
+                AppointmentTimeSlot.Add(timeSlot[0].ToShortTimeString() + " - " + timeSlot[1].ToShortTimeString(), timeSlot);
+            }
+
+            foreach (var timeSlot in AppointmentTimeSlot)
+            {
+                comboBox_Availabilities.Items.Add(timeSlot.Key);
+            }
+
+            comboBox_Availabilities.Enabled = true;
+        }
+
+        private async void monthCalendar_AppointmentDate_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            if (comboBox_Specialities.SelectedItem.ToString() != ""
+                && comboBox_Doctors.SelectedItem.ToString() != ""
+                && comboBox_Hospitals.SelectedItem.ToString() != "")
+            {
+                var timeslots = await GetAvailableTimeSlots(
+                    comboBox_Doctors.SelectedItem.ToString(),
+                    comboBox_Specialities.SelectedItem.ToString(),
+                    comboBox_Hospitals.SelectedItem.ToString(),
+                    monthCalendar_AppointmentDate.SelectionRange.Start);
+
+                ShowAvailableTimeSlots(timeslots);
+            }
         }
     }
 }

@@ -73,6 +73,12 @@ namespace BusinessLogic
             oData.AddRoom(roomName, hospital.Id);
         }
 
+        public Guid? GetAvailableRoom(Guid? HospitalId, DateTime AppointmentStart, DateTime AppointmentEnd)
+        {
+            DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();
+            return oData.GetAvailableRoom(HospitalId, AppointmentStart, AppointmentEnd);
+        }
+
         public void AddHospital(Models.ModHospital oHospital)
         {
             DataAccessLayer.EFHospital oData = new DataAccessLayer.EFHospital();

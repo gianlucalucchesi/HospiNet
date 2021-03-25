@@ -12,12 +12,12 @@ using System.Windows.Forms;
 
 namespace HospiNetApp.UserControls.DoctorDashboard
 {
-    public partial class ManageAttendancesControl : UserControl
+    public partial class AddAttendancesControl : UserControl
     {
         private Guid? DoctorId;
         private List<Models.ModSpeciality> lstSpecialities;
 
-        public ManageAttendancesControl(Guid? DoctorId)
+        public AddAttendancesControl(Guid? DoctorId)
         {
             InitializeComponent();
             this.DoctorId = DoctorId;

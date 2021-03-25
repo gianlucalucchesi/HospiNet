@@ -152,11 +152,11 @@
     <Compile Include="UserControls\DoctorDashboard\ManageAppointmentsControl.Designer.cs">
       <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DoctorDashboard\ManageAttendancesControl.cs">
+    <Compile Include="UserControls\DoctorDashboard\AddAttendancesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\DoctorDashboard\ManageAttendancesControl.Designer.cs">
-      <DependentUpon>ManageAttendancesControl.cs</DependentUpon>
+    <Compile Include="UserControls\DoctorDashboard\AddAttendancesControl.Designer.cs">
+      <DependentUpon>AddAttendancesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\HomeScreen\LoginControl.cs">
       <SubType>UserControl</SubType>
@@ -232,8 +232,8 @@
     <EmbeddedResource Include="UserControls\DoctorDashboard\ManageAppointmentsControl.resx">
       <DependentUpon>ManageAppointmentsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\DoctorDashboard\ManageAttendancesControl.resx">
-      <DependentUpon>ManageAttendancesControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\DoctorDashboard\AddAttendancesControl.resx">
+      <DependentUpon>AddAttendancesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeScreen\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>

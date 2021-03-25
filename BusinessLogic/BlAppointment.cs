@@ -31,16 +31,13 @@ namespace BusinessLogic
             appointment.DateTimeEnd = appointment.DateTimeStart.AddMinutes(appointmentDuration);
 
             //Assign available room
-            //TO CHANGE: get timeslots when rooms available
             Models.ModRoom oRoom = new Models.ModRoom()
-            { 
-                Id = oDatabase.GetAvailableRoom(oHospital.Id, appointment.DateTimeStart, appointment.DateTimeEnd) 
+            {
+                Id = oDatabase.GetAvailableRoom(oHospital.Id, appointment.DateTimeStart, appointment.DateTimeEnd)
             };
 
-            if (oRoom.Id == null)
-                return -1;
-
-            return oDatabase.AddAppointment(oHospital.Id, oRoom.Id, appointment.Patient.Id, oDoctor.Id, appointment.DateTimeStart, appointment.DateTimeEnd);
+            return oDatabase.AddAppointment(oHospital.Id, oRoom.Id, appointment.Patient.Id, oDoctor.Id, 
+                oSpeciality.Id, appointment.DateTimeStart, appointment.DateTimeEnd);
         }
 
         private int? GetAppointmentDuration(Guid? doctorId, Guid? hospitalId, DateTime dateTimeStart, Guid? specialityId)
@@ -90,7 +87,7 @@ namespace BusinessLogic
 
         public List<Models.ModAppointmentVw> GetExistingDayAppointments(DateTime day) 
         {
-            List<Models.ModAppointmentVw> lstAppointmentsVw = new List<Models.ModAppointmentVw();
+            List<Models.ModAppointmentVw> lstAppointmentsVw = new List<Models.ModAppointmentVw>();
             DataAccessLayer.EFAppointment efAppointment = new DataAccessLayer.EFAppointment();
             var dayAppointments = efAppointment.GetDayAppointments(day);
 
@@ -106,6 +103,7 @@ namespace BusinessLogic
                 oAppointmentVw.DateTimeStart = appointment.DateTimeStart;
                 oAppointmentVw.DateTimeEnd = appointment.DateTimeEnd;
                 oAppointmentVw.Confirmed = appointment.Confirmed;
+                oAppointmentVw.SpecialityName = appointment.SpecialityName;
 
                 lstAppointmentsVw.Add(oAppointmentVw);
             }
@@ -113,9 +111,86 @@ namespace BusinessLogic
             return lstAppointmentsVw;
         }
 
-        public List<DateTime> GetAvailableTimes(List<Models.ModAppointmentVw> lstAppointments, D)
+        public Guid? GetAvailableRoom(DateTime[] timeSlot, Guid? hospitalId)
         {
-            var doctor
+            BlHospitals blHospitals = new BlHospitals();
+            return blHospitals.GetAvailableRoom(hospitalId, timeSlot[0], timeSlot[1]);
+        }
+
+        public List<DateTime[]> GetAvailableTimes(DateTime day, string doctorName, string hospitalName, string specialityName)
+        {
+            var lstExistingAppointments = GetExistingDayAppointments(day);
+            List<DateTime[]> lstExistingAppointmentsDateTime = new List<DateTime[]>();
+
+            BlDoctors blDoctors = new BlDoctors();
+            BlHospitals blHospitals = new BlHospitals();
+            Models.ModDoctor oDoctor = blDoctors.GetAllDoctors().SingleOrDefault(x => x.FirstName + " " + x.LastName == doctorName);
+            Models.ModSpeciality oSpeciality = blDoctors.GetAllSpecialities().SingleOrDefault(x => x.Name == specialityName);
+            Models.ModHospital oHospital = blHospitals.GetAllHospitals().SingleOrDefault(x => x.Name == hospitalName);
+
+            int? appointmentDuration = GetAppointmentDuration(oDoctor.Id, oHospital.Id, day, oSpeciality.Id);
+
+            List<DateTime[]> lstDoctorDayAttendances = blDoctors.GetAttendances(oDoctor.Id).Where(x => x[0].Date == day && x[1].Date == day).ToList();
+            List<DateTime[]> lstAllTimeSlots = new List<DateTime[]>();
+
+            foreach (var attendance in lstDoctorDayAttendances)
+            {
+                while (attendance[0] < attendance[1])
+                {
+                    DateTime[] arrTimeSlot =
+{
+                        attendance[0],
+                        attendance[0].AddMinutes((double)appointmentDuration)
+                    };
+
+                    lstAllTimeSlots.Add(arrTimeSlot);
+                    attendance[0] = attendance[0].AddMinutes((double)appointmentDuration);
+                }
+            }
+
+            foreach (var exitingAppointment in lstExistingAppointments)
+            {
+                if (exitingAppointment.HospitalName == oHospital.Name
+                    && exitingAppointment.DoctorId == oDoctor.Id
+                    && exitingAppointment.SpecialityName == specialityName)
+                {
+                    DateTime[] arrExistingAppoitmentDateTime =
+                    {
+                        exitingAppointment.DateTimeStart,
+                        exitingAppointment.DateTimeEnd
+                    };
+
+                    lstExistingAppointmentsDateTime.Add(arrExistingAppoitmentDateTime);
+                }
+            }
+
+            List<DateTime[]> lstAvailableTimeSlots = new List<DateTime[]>();
+
+            foreach (var timeSlot in lstAllTimeSlots)
+            {
+                bool available = true;
+
+                foreach (var Existingappointment in lstExistingAppointmentsDateTime)
+                {
+                    if ((Existingappointment[0] >= timeSlot[0] && Existingappointment[0] <= timeSlot[1]) ||
+                        (Existingappointment[1] >= timeSlot[0] && Existingappointment[1] <= timeSlot[1]))
+                    {
+                        available = false;                                                                   
+                    } 
+                }
+
+                if (GetAvailableRoom(timeSlot, oHospital.Id) == null)
+                {
+                    available = false;
+                }
+
+                if (available)
+                {
+                    lstAvailableTimeSlots.Add(timeSlot);
+                }
+            }
+
+            return lstAvailableTimeSlots;
         }
     }
 }

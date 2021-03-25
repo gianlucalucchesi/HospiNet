@@ -39,6 +39,14 @@ namespace DataAccessLayer
             }
         }
 
+        public Guid? GetAvailableRoom(Guid? hospitalId, DateTime? AppointmentStart, DateTime? AppointmentEnd)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetAvailableRoom(hospitalId, AppointmentStart, AppointmentEnd).FirstOrDefault();
+            }
+        }
+
         public void AddRoom(string roomName, Guid HospitalId)
         {
             using (var oDatabase = new HospiNetEntities())

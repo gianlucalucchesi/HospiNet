@@ -81,7 +81,7 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllPatients_Result>("usp_GetAllPatients");
         }
     
-        public virtual ObjectResult<Nullable<int>> usp_AddAppointment(Nullable<System.Guid> hospital_Id, Nullable<System.Guid> room_Id, Nullable<System.Guid> patient_Id, Nullable<System.Guid> doctor_id, Nullable<System.DateTime> dateTimeStart, Nullable<System.DateTime> dateTimeEnd)
+        public virtual ObjectResult<Nullable<int>> usp_AddAppointment(Nullable<System.Guid> hospital_Id, Nullable<System.Guid> room_Id, Nullable<System.Guid> patient_Id, Nullable<System.Guid> doctor_Id, Nullable<System.Guid> speciality_Id, Nullable<System.DateTime> dateTimeStart, Nullable<System.DateTime> dateTimeEnd)
         {
             var hospital_IdParameter = hospital_Id.HasValue ?
                 new ObjectParameter("Hospital_Id", hospital_Id) :
@@ -95,9 +95,13 @@ namespace DataAccessLayer
                 new ObjectParameter("Patient_Id", patient_Id) :
                 new ObjectParameter("Patient_Id", typeof(System.Guid));
     
-            var doctor_idParameter = doctor_id.HasValue ?
-                new ObjectParameter("Doctor_id", doctor_id) :
-                new ObjectParameter("Doctor_id", typeof(System.Guid));
+            var doctor_IdParameter = doctor_Id.HasValue ?
+                new ObjectParameter("Doctor_Id", doctor_Id) :
+                new ObjectParameter("Doctor_Id", typeof(System.Guid));
+    
+            var speciality_IdParameter = speciality_Id.HasValue ?
+                new ObjectParameter("Speciality_Id", speciality_Id) :
+                new ObjectParameter("Speciality_Id", typeof(System.Guid));
     
             var dateTimeStartParameter = dateTimeStart.HasValue ?
                 new ObjectParameter("DateTimeStart", dateTimeStart) :
@@ -107,7 +111,7 @@ namespace DataAccessLayer
                 new ObjectParameter("DateTimeEnd", dateTimeEnd) :
                 new ObjectParameter("DateTimeEnd", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_AddAppointment", hospital_IdParameter, room_IdParameter, patient_IdParameter, doctor_idParameter, dateTimeStartParameter, dateTimeEndParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_AddAppointment", hospital_IdParameter, room_IdParameter, patient_IdParameter, doctor_IdParameter, speciality_IdParameter, dateTimeStartParameter, dateTimeEndParameter);
         }
     
         public virtual ObjectResult<usp_GetAllDoctors_Result> usp_GetAllDoctors()

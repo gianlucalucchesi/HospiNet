@@ -118,7 +118,7 @@ namespace HospiNetApp.Forms
             this.button_doctorDashboard_ManageAttendances.Name = "button_doctorDashboard_ManageAttendances";
             this.button_doctorDashboard_ManageAttendances.Size = new System.Drawing.Size(184, 264);
             this.button_doctorDashboard_ManageAttendances.TabIndex = 0;
-            this.button_doctorDashboard_ManageAttendances.Text = "Manage Attendances";
+            this.button_doctorDashboard_ManageAttendances.Text = "Add Attendances";
             this.button_doctorDashboard_ManageAttendances.UseVisualStyleBackColor = false;
             this.button_doctorDashboard_ManageAttendances.Click += new System.EventHandler(this.button_doctorDashboard_ManageAttendances_Click);
             // 

@@ -155,5 +155,26 @@ namespace BusinessLogic
             Models.ModHospital oHospital = blHospitals.GetAllHospitals().SingleOrDefault(x => x.Name == hospitalName);
             return oDatabase.AddAttendence(doctorId, oHospital.Id, specialityId, duration, fromDateTime, toDateTime);
         }
+
+        public List<DateTime[]> GetAttendances(Guid? DoctorId)
+        {
+            List<DateTime[]> lstDateTime = new List<DateTime[]>();
+
+            DataAccessLayer.EFDoctors efDoctors = new DataAccessLayer.EFDoctors();
+            var rawData = efDoctors.GetAttendances(DoctorId);
+
+            foreach (var attendance in rawData)
+            {
+                DateTime[] arrAttendanceDateTime =
+                    {
+                        attendance.DateTimeStart,
+                        attendance.DateTimeEnd
+                    };
+
+                lstDateTime.Add(arrAttendanceDateTime);
+            }
+
+            return lstDateTime;
+        }
     }
 }

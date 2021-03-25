@@ -9,10 +9,10 @@ namespace DataAccessLayer
     public class EFAppointment
     {
         public int? AddAppointment(Guid? hospitalId, Guid? roomId, Guid? patientId, 
-            Guid? DoctorId, DateTime? dateTimeStart, DateTime? dateTimeEnd)
+            Guid? DoctorId, Guid? SpecialityId, DateTime? dateTimeStart, DateTime? dateTimeEnd)
         {
             HospiNetEntities oDatabase = new HospiNetEntities();
-            return oDatabase.usp_AddAppointment(hospitalId, roomId, patientId, DoctorId, dateTimeStart, dateTimeEnd).SingleOrDefault();
+            return oDatabase.usp_AddAppointment(hospitalId, roomId, patientId, DoctorId, SpecialityId, dateTimeStart, dateTimeEnd).SingleOrDefault();
         }
 
         public Guid? GetAvailableRoom(Guid? hospitalId, DateTime? dateTimeStart, DateTime? dateTimeEnd)

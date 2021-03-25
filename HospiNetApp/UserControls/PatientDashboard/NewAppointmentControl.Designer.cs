@@ -144,6 +144,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.monthCalendar_AppointmentDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.monthCalendar_AppointmentDate.Name = "monthCalendar_AppointmentDate";
             this.monthCalendar_AppointmentDate.TabIndex = 6;
+            this.monthCalendar_AppointmentDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_AppointmentDate_DateChanged);
             // 
             // label4
             // 
@@ -229,7 +230,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             // button_AddAppointment
             // 
-            this.button_AddAppointment.Enabled = false;
             this.button_AddAppointment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_AddAppointment.Location = new System.Drawing.Point(684, 433);
             this.button_AddAppointment.Name = "button_AddAppointment";
@@ -287,7 +287,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewAppointmentControl";
             this.Size = new System.Drawing.Size(980, 638);
-            this.Load += new System.EventHandler(this.NewAppointment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

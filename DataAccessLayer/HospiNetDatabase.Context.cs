@@ -329,6 +329,15 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDoctorAvailabilities_Result>("usp_GetDoctorAvailabilities", doctorIdParameter);
         }
     
+        public virtual int usp_CancelAppointment(Nullable<int> appointmentId)
+        {
+            var appointmentIdParameter = appointmentId.HasValue ?
+                new ObjectParameter("appointmentId", appointmentId) :
+                new ObjectParameter("appointmentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CancelAppointment", appointmentIdParameter);
+        }
+    
         public virtual ObjectResult<usp_GetDoctorAppointments_Result> usp_GetDoctorAppointments(Nullable<System.Guid> doctor_id)
         {
             var doctor_idParameter = doctor_id.HasValue ?
@@ -354,15 +363,6 @@ namespace DataAccessLayer
                 new ObjectParameter("appointmentId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAppointment_Result>("usp_GetAppointment", appointmentIdParameter);
-        }
-    
-        public virtual int usp_CancelAppointment(Nullable<int> appointmentId)
-        {
-            var appointmentIdParameter = appointmentId.HasValue ?
-                new ObjectParameter("appointmentId", appointmentId) :
-                new ObjectParameter("appointmentId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CancelAppointment", appointmentIdParameter);
         }
     }
 }

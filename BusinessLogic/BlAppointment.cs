@@ -100,6 +100,7 @@ namespace BusinessLogic
                 oAppointmentVw.DoctorId = appointment.DoctorId;
                 oAppointmentVw.FirstName = appointment.FirstName;
                 oAppointmentVw.LastName = appointment.LastName;
+                oAppointmentVw.Birthday = appointment.Birthday;
                 oAppointmentVw.DateTimeStart = appointment.DateTimeStart;
                 oAppointmentVw.DateTimeEnd = appointment.DateTimeEnd;
                 oAppointmentVw.Confirmed = appointment.Confirmed;

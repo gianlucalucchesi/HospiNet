@@ -111,6 +111,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Hospitals.Name = "comboBox_Hospitals";
             this.comboBox_Hospitals.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Hospitals.TabIndex = 24;
+            this.comboBox_Hospitals.SelectedIndexChanged += new System.EventHandler(this.comboBox_Hospitals_SelectedIndexChanged);
             // 
             // comboBox_Doctors
             // 
@@ -122,6 +123,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Doctors.Name = "comboBox_Doctors";
             this.comboBox_Doctors.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Doctors.TabIndex = 23;
+            this.comboBox_Doctors.SelectedIndexChanged += new System.EventHandler(this.comboBox_Doctors_SelectedIndexChanged);
             // 
             // comboBox_Specialities
             // 
@@ -154,6 +156,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Specialities.Name = "comboBox_Specialities";
             this.comboBox_Specialities.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Specialities.TabIndex = 22;
+            this.comboBox_Specialities.SelectedIndexChanged += new System.EventHandler(this.comboBox_Specialities_SelectedIndexChanged);
             // 
             // label11
             // 

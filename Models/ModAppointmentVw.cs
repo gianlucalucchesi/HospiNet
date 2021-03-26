@@ -13,6 +13,8 @@ namespace Models
         public string RoomName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime Birthday { get; set; }
+
         public System.DateTime DateTimeStart { get; set; }
         public System.DateTime DateTimeEnd { get; set; }
         public bool Confirmed { get; set; }

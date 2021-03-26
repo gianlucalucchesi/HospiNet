@@ -119,6 +119,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             dataGridView_Appointments.Rows.Clear();
             dataGridView_Appointments.Visible = false;
             label_loading.Visible = true;
+            label1.Visible = false;
 
             foreach (var appointment in lstAppointments)
             {
@@ -136,6 +137,9 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                 }
                 i++;
             }
+
+            if (dataGridView_Appointments.Rows.Count == 0)
+                label1.Visible = true;
 
             label_loading.Visible = false;
             dataGridView_Appointments.Visible = true;

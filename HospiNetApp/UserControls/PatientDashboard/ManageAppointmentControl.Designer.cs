@@ -29,10 +29,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBox_AppointmentMinutes = new System.Windows.Forms.ComboBox();
-            this.comboBox_AppointmentHour = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.monthCalendar_AppointmentDate = new System.Windows.Forms.MonthCalendar();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,77 +41,13 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.textBox_ReservationCode = new System.Windows.Forms.TextBox();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button_update = new System.Windows.Forms.Button();
+            this.pictureBox_search = new System.Windows.Forms.PictureBox();
+            this.comboBox_Availabilities = new System.Windows.Forms.ComboBox();
+            this.label_SuccessFailed = new System.Windows.Forms.Label();
+            this.label_Confirmed = new System.Windows.Forms.Label();
+            this.label_NotFound = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_search)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(768, 350);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 24);
-            this.label10.TabIndex = 40;
-            this.label10.Text = "Minutes:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(670, 350);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 24);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "Hour:";
-            // 
-            // comboBox_AppointmentMinutes
-            // 
-            this.comboBox_AppointmentMinutes.Enabled = false;
-            this.comboBox_AppointmentMinutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_AppointmentMinutes.FormattingEnabled = true;
-            this.comboBox_AppointmentMinutes.Items.AddRange(new object[] {
-            "00",
-            "05",
-            "10",
-            "15",
-            "20",
-            "25",
-            "30",
-            "35",
-            "40",
-            "45",
-            "50",
-            "55"});
-            this.comboBox_AppointmentMinutes.Location = new System.Drawing.Point(772, 374);
-            this.comboBox_AppointmentMinutes.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox_AppointmentMinutes.Name = "comboBox_AppointmentMinutes";
-            this.comboBox_AppointmentMinutes.Size = new System.Drawing.Size(62, 30);
-            this.comboBox_AppointmentMinutes.TabIndex = 38;
-            // 
-            // comboBox_AppointmentHour
-            // 
-            this.comboBox_AppointmentHour.Enabled = false;
-            this.comboBox_AppointmentHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_AppointmentHour.FormattingEnabled = true;
-            this.comboBox_AppointmentHour.Items.AddRange(new object[] {
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19"});
-            this.comboBox_AppointmentHour.Location = new System.Drawing.Point(673, 374);
-            this.comboBox_AppointmentHour.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox_AppointmentHour.Name = "comboBox_AppointmentHour";
-            this.comboBox_AppointmentHour.Size = new System.Drawing.Size(62, 30);
-            this.comboBox_AppointmentHour.TabIndex = 37;
             // 
             // label5
             // 
@@ -140,7 +72,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(100, 371);
+            this.label3.Location = new System.Drawing.Point(112, 371);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 24);
@@ -151,7 +83,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(100, 310);
+            this.label2.Location = new System.Drawing.Point(124, 314);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 24);
@@ -222,7 +154,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Specialities.Name = "comboBox_Specialities";
             this.comboBox_Specialities.Size = new System.Drawing.Size(290, 30);
             this.comboBox_Specialities.TabIndex = 22;
-            this.comboBox_Specialities.Visible = false;
             // 
             // label11
             // 
@@ -245,6 +176,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             // 
             // button_cancel
             // 
+            this.button_cancel.Enabled = false;
             this.button_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.Location = new System.Drawing.Point(532, 477);
             this.button_cancel.Name = "button_cancel";
@@ -252,9 +184,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.button_cancel.TabIndex = 44;
             this.button_cancel.Text = "CANCEL APPOINTMENT";
             this.button_cancel.UseVisualStyleBackColor = true;
+            this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // button_update
             // 
+            this.button_update.Enabled = false;
             this.button_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_update.Location = new System.Drawing.Point(331, 477);
             this.button_update.Name = "button_update";
@@ -263,18 +197,78 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.button_update.Text = "UPDATE APPOINTMENT";
             this.button_update.UseVisualStyleBackColor = true;
             // 
+            // pictureBox_search
+            // 
+            this.pictureBox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_search.Image = global::HospiNetApp.Properties.Resources.archive;
+            this.pictureBox_search.Location = new System.Drawing.Point(506, 186);
+            this.pictureBox_search.Name = "pictureBox_search";
+            this.pictureBox_search.Size = new System.Drawing.Size(43, 38);
+            this.pictureBox_search.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox_search.TabIndex = 45;
+            this.pictureBox_search.TabStop = false;
+            this.pictureBox_search.Click += new System.EventHandler(this.pictureBox_search_ClickAsync);
+            // 
+            // comboBox_Availabilities
+            // 
+            this.comboBox_Availabilities.Enabled = false;
+            this.comboBox_Availabilities.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_Availabilities.FormattingEnabled = true;
+            this.comboBox_Availabilities.IntegralHeight = false;
+            this.comboBox_Availabilities.Location = new System.Drawing.Point(646, 352);
+            this.comboBox_Availabilities.Name = "comboBox_Availabilities";
+            this.comboBox_Availabilities.Size = new System.Drawing.Size(227, 32);
+            this.comboBox_Availabilities.TabIndex = 46;
+            // 
+            // label_SuccessFailed
+            // 
+            this.label_SuccessFailed.AutoSize = true;
+            this.label_SuccessFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_SuccessFailed.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label_SuccessFailed.Location = new System.Drawing.Point(421, 564);
+            this.label_SuccessFailed.Name = "label_SuccessFailed";
+            this.label_SuccessFailed.Size = new System.Drawing.Size(184, 24);
+            this.label_SuccessFailed.TabIndex = 47;
+            this.label_SuccessFailed.Text = "label_SuccessFailed";
+            this.label_SuccessFailed.Visible = false;
+            // 
+            // label_Confirmed
+            // 
+            this.label_Confirmed.AutoSize = true;
+            this.label_Confirmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Confirmed.ForeColor = System.Drawing.Color.DarkRed;
+            this.label_Confirmed.Location = new System.Drawing.Point(389, 564);
+            this.label_Confirmed.Name = "label_Confirmed";
+            this.label_Confirmed.Size = new System.Drawing.Size(272, 24);
+            this.label_Confirmed.TabIndex = 48;
+            this.label_Confirmed.Text = "Appointment already confirmed";
+            this.label_Confirmed.Visible = false;
+            // 
+            // label_NotFound
+            // 
+            this.label_NotFound.AutoSize = true;
+            this.label_NotFound.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_NotFound.ForeColor = System.Drawing.Color.DarkRed;
+            this.label_NotFound.Location = new System.Drawing.Point(473, 564);
+            this.label_NotFound.Name = "label_NotFound";
+            this.label_NotFound.Size = new System.Drawing.Size(92, 24);
+            this.label_NotFound.TabIndex = 49;
+            this.label_NotFound.Text = "Not found";
+            this.label_NotFound.Visible = false;
+            // 
             // ManageAppointmentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_SuccessFailed);
+            this.Controls.Add(this.label_NotFound);
+            this.Controls.Add(this.label_Confirmed);
+            this.Controls.Add(this.comboBox_Availabilities);
+            this.Controls.Add(this.pictureBox_search);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_update);
             this.Controls.Add(this.textBox_ReservationCode);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox_AppointmentMinutes);
-            this.Controls.Add(this.comboBox_AppointmentHour);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.monthCalendar_AppointmentDate);
             this.Controls.Add(this.label3);
@@ -285,17 +279,13 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.Controls.Add(this.comboBox_Specialities);
             this.Name = "ManageAppointmentControl";
             this.Size = new System.Drawing.Size(980, 638);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_search)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox_AppointmentMinutes;
-        private System.Windows.Forms.ComboBox comboBox_AppointmentHour;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MonthCalendar monthCalendar_AppointmentDate;
         private System.Windows.Forms.Label label3;
@@ -308,5 +298,10 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private System.Windows.Forms.TextBox textBox_ReservationCode;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Button button_update;
+        private System.Windows.Forms.PictureBox pictureBox_search;
+        private System.Windows.Forms.ComboBox comboBox_Availabilities;
+        private System.Windows.Forms.Label label_SuccessFailed;
+        private System.Windows.Forms.Label label_Confirmed;
+        private System.Windows.Forms.Label label_NotFound;
     }
 }

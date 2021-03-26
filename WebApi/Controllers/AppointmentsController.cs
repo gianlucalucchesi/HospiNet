@@ -49,5 +49,31 @@ namespace WebApi.Controllers
             else
                 return NotFound();
         }
+
+        [HttpGet]
+        [Route("api/appointments/GetAppointment")]
+        public IHttpActionResult GetAppointment(int id)
+        {
+            BusinessLogic.BlAppointment oData = new BusinessLogic.BlAppointment();
+            var appointment = oData.GetAppointment(id);
+
+            if (appointment.DoctorName != null)
+                return Ok(appointment);
+            else
+                return NotFound();
+        }
+
+        [HttpDelete]
+        [Route("api/appointments/CancelAppointment")]
+        public IHttpActionResult CancelAppointment(int id)
+        {
+            BusinessLogic.BlAppointment oData = new BusinessLogic.BlAppointment();
+            var result = oData.CancelAppointment(id);
+
+            if (result == 1)
+                return Ok(result);
+            else
+                return NotFound();
+        }
     }
 }

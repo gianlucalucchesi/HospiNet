@@ -30,5 +30,21 @@ namespace DataAccessLayer
                 return oDatabase.usp_GetDayAppointments(day).ToList();
             }
         }
+
+        public usp_GetAppointment_Result GetAppointment(int appointmentId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_GetAppointment(appointmentId).SingleOrDefault();
+            }
+        }
+
+        public int CancelAppointment(int appointmentId)
+        {
+            using (var oDatabase = new HospiNetEntities())
+            {
+                return oDatabase.usp_CancelAppointment(appointmentId);
+            }
+        }
     }
 }

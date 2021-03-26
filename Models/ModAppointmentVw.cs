@@ -17,6 +17,7 @@ namespace Models
         public System.DateTime DateTimeEnd { get; set; }
         public bool Confirmed { get; set; }
         public System.Guid DoctorId { get; set; }
+        public string DoctorName { get; set; }
         public string SpecialityName { get; set; }
     }
 }

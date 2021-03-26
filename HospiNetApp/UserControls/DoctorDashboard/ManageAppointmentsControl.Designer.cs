@@ -30,12 +30,6 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         private void InitializeComponent()
         {
             this.dataGridView_Appointments = new System.Windows.Forms.DataGridView();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label_ConfirmedSuccess = new System.Windows.Forms.Label();
-            this.button_Confirm = new System.Windows.Forms.Button();
-            this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
-            this.label_loading = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HospitalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RoomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +37,13 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.DateTimeStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateTimeEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Confirmed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label_ConfirmedSuccess = new System.Windows.Forms.Label();
+            this.button_Confirm = new System.Windows.Forms.Button();
+            this.checkBox_ConfirmedUnconfirmedAppointment = new System.Windows.Forms.CheckBox();
+            this.label_loading = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Appointments)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,10 +64,57 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.dataGridView_Appointments.Location = new System.Drawing.Point(282, 14);
             this.dataGridView_Appointments.Name = "dataGridView_Appointments";
             this.dataGridView_Appointments.ReadOnly = true;
+            this.dataGridView_Appointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Appointments.Size = new System.Drawing.Size(695, 623);
             this.dataGridView_Appointments.TabIndex = 0;
             this.dataGridView_Appointments.Visible = false;
             this.dataGridView_Appointments.SelectionChanged += new System.EventHandler(this.dataGridView_Appointments_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // HospitalName
+            // 
+            this.HospitalName.HeaderText = "Hospital";
+            this.HospitalName.Name = "HospitalName";
+            this.HospitalName.ReadOnly = true;
+            this.HospitalName.Width = 150;
+            // 
+            // RoomName
+            // 
+            this.RoomName.HeaderText = "Room";
+            this.RoomName.Name = "RoomName";
+            this.RoomName.ReadOnly = true;
+            // 
+            // PatientName
+            // 
+            this.PatientName.HeaderText = "Patient";
+            this.PatientName.Name = "PatientName";
+            this.PatientName.ReadOnly = true;
+            this.PatientName.Width = 142;
+            // 
+            // DateTimeStart
+            // 
+            this.DateTimeStart.HeaderText = "Start";
+            this.DateTimeStart.Name = "DateTimeStart";
+            this.DateTimeStart.ReadOnly = true;
+            // 
+            // DateTimeEnd
+            // 
+            this.DateTimeEnd.HeaderText = "End";
+            this.DateTimeEnd.Name = "DateTimeEnd";
+            this.DateTimeEnd.ReadOnly = true;
+            // 
+            // Confirmed
+            // 
+            this.Confirmed.HeaderText = "Confirmed";
+            this.Confirmed.Name = "Confirmed";
+            this.Confirmed.ReadOnly = true;
+            this.Confirmed.Width = 60;
             // 
             // monthCalendar1
             // 
@@ -137,57 +185,24 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label_loading.TabIndex = 6;
             this.label_loading.Text = "Loading...";
             // 
-            // Id
+            // label1
             // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // HospitalName
-            // 
-            this.HospitalName.HeaderText = "Hospital";
-            this.HospitalName.Name = "HospitalName";
-            this.HospitalName.ReadOnly = true;
-            this.HospitalName.Width = 150;
-            // 
-            // RoomName
-            // 
-            this.RoomName.HeaderText = "Room";
-            this.RoomName.Name = "RoomName";
-            this.RoomName.ReadOnly = true;
-            // 
-            // PatientName
-            // 
-            this.PatientName.HeaderText = "Patient";
-            this.PatientName.Name = "PatientName";
-            this.PatientName.ReadOnly = true;
-            this.PatientName.Width = 142;
-            // 
-            // DateTimeStart
-            // 
-            this.DateTimeStart.HeaderText = "Start";
-            this.DateTimeStart.Name = "DateTimeStart";
-            this.DateTimeStart.ReadOnly = true;
-            // 
-            // DateTimeEnd
-            // 
-            this.DateTimeEnd.HeaderText = "End";
-            this.DateTimeEnd.Name = "DateTimeEnd";
-            this.DateTimeEnd.ReadOnly = true;
-            // 
-            // Confirmed
-            // 
-            this.Confirmed.HeaderText = "Confirmed";
-            this.Confirmed.Name = "Confirmed";
-            this.Confirmed.ReadOnly = true;
-            this.Confirmed.Width = 60;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(438, 307);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(425, 37);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "No appointments on this day";
+            this.label1.Visible = false;
             // 
             // ManageAppointmentsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(248)))), ((int)(((byte)(249)))));
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label_loading);
             this.Controls.Add(this.dataGridView_Appointments);
             this.Controls.Add(this.panel1);
@@ -218,5 +233,6 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         private System.Windows.Forms.DataGridViewTextBoxColumn DateTimeStart;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateTimeEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Confirmed;
+        private System.Windows.Forms.Label label1;
     }
 }

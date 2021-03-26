@@ -346,5 +346,23 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDayAppointments_Result>("usp_GetDayAppointments", dayParameter);
         }
+    
+        public virtual ObjectResult<usp_GetAppointment_Result> usp_GetAppointment(Nullable<int> appointmentId)
+        {
+            var appointmentIdParameter = appointmentId.HasValue ?
+                new ObjectParameter("appointmentId", appointmentId) :
+                new ObjectParameter("appointmentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAppointment_Result>("usp_GetAppointment", appointmentIdParameter);
+        }
+    
+        public virtual int usp_CancelAppointment(Nullable<int> appointmentId)
+        {
+            var appointmentIdParameter = appointmentId.HasValue ?
+                new ObjectParameter("appointmentId", appointmentId) :
+                new ObjectParameter("appointmentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CancelAppointment", appointmentIdParameter);
+        }
     }
 }

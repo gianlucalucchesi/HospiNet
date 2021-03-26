@@ -264,7 +264,9 @@
       <Name>BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\archive.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\doctor-removebg.png" />
   </ItemGroup>

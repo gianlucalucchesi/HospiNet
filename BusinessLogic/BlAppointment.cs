@@ -180,17 +180,45 @@ namespace BusinessLogic
                 }
 
                 if (GetAvailableRoom(timeSlot, oHospital.Id) == null)
-                {
                     available = false;
-                }
 
                 if (available)
-                {
                     lstAvailableTimeSlots.Add(timeSlot);
-                }
             }
 
             return lstAvailableTimeSlots;
+        }
+
+        public Models.ModAppointmentVw GetAppointment(int id)
+        {
+            DataAccessLayer.EFAppointment efAppointment = new DataAccessLayer.EFAppointment();
+            BusinessLogic.BlDoctors blDoctor = new BusinessLogic.BlDoctors();
+            var result = efAppointment.GetAppointment(id);
+            Models.ModDoctor oDoctor = new Models.ModDoctor();
+            Models.ModAppointmentVw oAppointmentVw = new Models.ModAppointmentVw();
+
+            if (result != null)
+            {
+                oDoctor = blDoctor.GetAllDoctors().SingleOrDefault(x => x.Id == result.DoctorId);
+
+                oAppointmentVw.Confirmed = result.Confirmed;
+                oAppointmentVw.DateTimeEnd = result.DateTimeEnd;
+                oAppointmentVw.DateTimeStart = result.DateTimeStart;
+                oAppointmentVw.DoctorName = oDoctor.FirstName + " " + oDoctor.LastName;
+                oAppointmentVw.HospitalName = result.HospitalName;
+                oAppointmentVw.FirstName = result.FirstName;
+                oAppointmentVw.LastName = result.LastName;
+                oAppointmentVw.RoomName = result.RoomName;
+                oAppointmentVw.SpecialityName = result.SpecialityName;
+            }
+
+            return oAppointmentVw;
+        }
+
+        public int CancelAppointment(int appointmentId)
+        {
+            DataAccessLayer.EFAppointment efAppointment = new DataAccessLayer.EFAppointment();
+            return efAppointment.CancelAppointment(appointmentId);
         }
     }
 }

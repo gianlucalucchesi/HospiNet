@@ -224,6 +224,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         {
             comboBox_Availabilities.Enabled = false;
             comboBox_Availabilities.Items.Clear();
+            comboBox_Availabilities.Text = "";
             AppointmentTimeSlot.Clear();
 
             foreach (var timeSlot in timeSlots)
@@ -236,14 +237,15 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Availabilities.Items.Add(timeSlot.Key);
             }
 
+            if (comboBox_Availabilities.Items.Count == 0)
+                comboBox_Availabilities.Items.Add("No availabilities");
+
             comboBox_Availabilities.Enabled = true;
         }
 
         private async void monthCalendar_AppointmentDate_DateChanged(object sender, DateRangeEventArgs e)
         {
-            if (comboBox_Specialities.SelectedItem.ToString() != ""
-                && comboBox_Doctors.SelectedItem.ToString() != ""
-                && comboBox_Hospitals.SelectedItem.ToString() != "")
+            if (comboBox_Hospitals.Enabled && comboBox_Hospitals.SelectedItem.ToString() != "")
             {
                 var timeslots = await GetAvailableTimeSlots(
                     comboBox_Doctors.SelectedItem.ToString(),

@@ -168,56 +168,64 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
                 DateTime timeStart = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(fromHour).AddMinutes(fromMinutes);
                 DateTime timeEnd = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(toHour).AddMinutes(toMinutes);
-                Models.ModSpeciality speciality = lstSpecialities.SingleOrDefault(x => x.Name == comboBox_Specialities.Text);
 
-                if (timeStart > timeEnd)
+                // Multiple day selection
+                while (timeStart < monthCalendar_AttendanceDay.SelectionRange.End)
                 {
-                    label_Success.Visible = false;
-                    label_Failed.Location = new Point(356, 499);
-                    label_Failed.Text = "Start time cannot be after end time";
-                    label_Failed.Visible = true;
-                }
-                else
-                {
-                    label_Failed.Visible = false;
+                    Models.ModSpeciality speciality = lstSpecialities.SingleOrDefault(x => x.Name == comboBox_Specialities.Text);
 
-                    var attendance = new
+                    if (timeStart > timeEnd)
                     {
-                        doctorId = this.DoctorId,
-                        hospitalName = comboBox_Hospitals.Text,
-                        specialityId = speciality.Id,
-                        duration = comboBox_Duration.Text,
-                        fromDateTime = timeStart,
-                        toDateTime = timeEnd
-                    };
-
-                    var content = JsonConvert.SerializeObject(attendance);
-
-                    const string apiRequest = "https://localhost:44310/api/doctors/AddAttendance";
-
-                    try
+                        label_Success.Visible = false;
+                        label_Failed.Location = new Point(356, 499);
+                        label_Failed.Text = "Start time cannot be after end time";
+                        label_Failed.Visible = true;
+                    }
+                    else
                     {
-                        using (var client = new HttpClient())
+                        label_Failed.Visible = false;
+
+                        var attendance = new
                         {
-                            var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+                            doctorId = this.DoctorId,
+                            hospitalName = comboBox_Hospitals.Text,
+                            specialityId = speciality.Id,
+                            duration = comboBox_Duration.Text,
+                            fromDateTime = timeStart,
+                            toDateTime = timeEnd
+                        };
 
-                            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                        var content = JsonConvert.SerializeObject(attendance);
+
+                        const string apiRequest = "https://localhost:44310/api/doctors/AddAttendance";
+
+                        try
+                        {
+                            using (var client = new HttpClient())
                             {
-                                label_Success.Visible = true;
-                            } 
-                            else if(response.StatusCode == System.Net.HttpStatusCode.Conflict)
-                            {
-                                label_Failed.Location = new Point(460, 500);
-                                label_Failed.Text = "Conflict";
-                                label_Failed.Visible = true;
+                                var response = await client.PostAsync(new Uri(apiRequest), new StringContent(content, Encoding.Default, "application/json"));
+
+                                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                                {
+                                    label_Success.Visible = true;
+                                }
+                                else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+                                {
+                                    label_Failed.Location = new Point(460, 500);
+                                    label_Failed.Text = "Conflict";
+                                    label_Failed.Visible = true;
+                                }
                             }
                         }
+                        catch (HttpRequestException exc)
+                        {
+                            Console.WriteLine(exc.Message);
+                            throw;
+                        }
                     }
-                    catch (HttpRequestException exc)
-                    {
-                        Console.WriteLine(exc.Message);
-                        throw;
-                    }
+
+                    timeStart = timeStart.AddDays(1.00);
+                    timeEnd = timeEnd.AddDays(1.00);
                 }
             } 
             else

@@ -50,11 +50,13 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox_Duration = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // monthCalendar_AttendanceDay
             // 
-            this.monthCalendar_AttendanceDay.Location = new System.Drawing.Point(107, 203);
+            this.monthCalendar_AttendanceDay.CalendarDimensions = new System.Drawing.Size(1, 2);
+            this.monthCalendar_AttendanceDay.Location = new System.Drawing.Point(72, 176);
             this.monthCalendar_AttendanceDay.Name = "monthCalendar_AttendanceDay";
             this.monthCalendar_AttendanceDay.TabIndex = 0;
             // 
@@ -62,7 +64,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             // 
             this.checkBox_AllDay.AutoSize = true;
             this.checkBox_AllDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_AllDay.Location = new System.Drawing.Point(178, 367);
+            this.checkBox_AllDay.Location = new System.Drawing.Point(145, 501);
             this.checkBox_AllDay.Name = "checkBox_AllDay";
             this.checkBox_AllDay.Size = new System.Drawing.Size(85, 28);
             this.checkBox_AllDay.TabIndex = 1;
@@ -329,10 +331,21 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label9.TabIndex = 40;
             this.label9.Text = "min.";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label10.Location = new System.Drawing.Point(69, 485);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(108, 13);
+            this.label10.TabIndex = 41;
+            this.label10.Text = "Drag for multiple days";
+            // 
             // AddAttendancesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox_Duration);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox_Specialities);
@@ -385,5 +398,6 @@ namespace HospiNetApp.UserControls.DoctorDashboard
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox_Duration;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

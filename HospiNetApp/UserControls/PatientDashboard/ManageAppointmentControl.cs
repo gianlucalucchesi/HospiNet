@@ -18,6 +18,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         Models.ModAppointment NewAppointment;
         List<Models.ModHospital> lstAvailableHospitals;
         Dictionary<string, DateTime[]> AppointmentTimeSlot = new Dictionary<string, DateTime[]>();
+        Guid? DoctorId;
 
         public ManageAppointmentControl()
         {
@@ -36,7 +37,8 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async Task<Models.ModAppointment> GetAppointment()
         {
-            Models.ModAppointment appointment = new Models.ModAppointment();
+            Models.ModAppointmentVw appointmentReceived = new Models.ModAppointmentVw();
+            Models.ModAppointment appointmentToReturn = new Models.ModAppointment();
             const string apiRequest = "https://localhost:44310/api/appointments/GetAppointment";
 
             try
@@ -48,7 +50,20 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
-                        appointment = JsonConvert.DeserializeObject<Models.ModAppointment>(content);
+                        appointmentReceived = JsonConvert.DeserializeObject<Models.ModAppointmentVw>(content);
+
+                        appointmentToReturn.Patient = new Models.ModPatient();
+                        appointmentToReturn.HospitalName = appointmentReceived.HospitalName;
+                        appointmentToReturn.RoomName = appointmentReceived.RoomName;
+                        appointmentToReturn.Confirmed = appointmentReceived.Confirmed;
+                        appointmentToReturn.DateTimeStart = appointmentReceived.DateTimeStart;
+                        appointmentToReturn.DateTimeEnd = appointmentReceived.DateTimeEnd;
+                        appointmentToReturn.Patient.FirstName = appointmentReceived.FirstName;
+                        appointmentToReturn.Patient.LastName = appointmentReceived.LastName;
+                        appointmentToReturn.Patient.Birthday = appointmentReceived.Birthday;
+                        appointmentToReturn.SpecialityName = appointmentReceived.SpecialityName;
+                        appointmentToReturn.DoctorName = appointmentReceived.DoctorName;
+
                         label_NotFound.Visible = false;
                     }
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -64,21 +79,20 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 throw;
             }
 
-            return appointment;
+            return appointmentToReturn;
         }
 
         private void ShowAppointment(Models.ModAppointment appointment)
         {
-            comboBox_Specialities.SelectedItem = appointment.SpecialityName;
+            monthCalendar_AppointmentDate.SetDate(this.OldAppointment.DateTimeStart.Date);
 
-            comboBox_Doctors.Items.Add(appointment.DoctorName);
+            comboBox_Specialities.SelectedItem = this.OldAppointment.SpecialityName;
+
+            comboBox_Doctors.Items.Add(this.OldAppointment.DoctorName);
             comboBox_Doctors.SelectedIndex = 0;
 
-            comboBox_Hospitals.Items.Add(appointment.HospitalName);
+            comboBox_Hospitals.Items.Add(this.OldAppointment.HospitalName);
             comboBox_Hospitals.SelectedIndex = 0;
-
-            monthCalendar_AppointmentDate.SetDate(appointment.DateTimeStart.Date);
-            comboBox_Availabilities.Text = appointment.DateTimeStart.ToShortTimeString() + " - " + appointment.DateTimeEnd.ToShortTimeString();
 
             if (!appointment.Confirmed)
             {
@@ -100,6 +114,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async void button_cancel_Click(object sender, EventArgs e)
         {
+            CancelAppointment(true);
+        }
+
+        private async void CancelAppointment(bool showVisualConfirmation)
+        {
             const string apiRequest = "https://localhost:44310/api/appointments/CancelAppointment";
 
             try
@@ -107,19 +126,22 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 using (var client = new HttpClient())
                 {
                     var response = await client.DeleteAsync($"{apiRequest}/?id={textBox_ReservationCode.Text}");
-                    
+
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var content = response.Content.ReadAsStringAsync().Result;
-                        label_NotFound.Visible = false;
-                        label_SuccessFailed.Text = "Appointment cancelled";
-                        label_SuccessFailed.Visible = true;
-                        comboBox_Doctors.Items.Clear();
-                        comboBox_Doctors.Text = "";
-                        comboBox_Hospitals.Items.Clear();
-                        comboBox_Hospitals.Text = "";
-                        comboBox_Specialities.Text = "";
-                        textBox_ReservationCode.Text = "";
+
+                        if (showVisualConfirmation)
+                        {
+                            label_SuccessFailed.Text = "Appointment cancelled";
+                            label_SuccessFailed.Visible = true;
+                            comboBox_Doctors.Items.Clear();
+                            comboBox_Doctors.Text = "";
+                            comboBox_Hospitals.Items.Clear();
+                            comboBox_Hospitals.Text = "";
+                            comboBox_Specialities.Text = "";
+                            textBox_ReservationCode.Text = "";
+                        }
                     }
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
@@ -165,6 +187,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private async void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_Hospitals.Items.Clear();
+            comboBox_Hospitals.Text = "";
             lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
 
             foreach (var hospital in lstAvailableHospitals)
@@ -275,40 +298,102 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Availabilities.Items.Add("No availabilities");
 
             comboBox_Availabilities.Enabled = true;
+            comboBox_Availabilities.Text = this.OldAppointment.DateTimeStart.ToShortTimeString() + " - " + this.OldAppointment.DateTimeEnd.ToShortTimeString();
         }
 
         private async void comboBox_Specialities_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO DELETE OLD APPOINTMENT FIRST 
+            // Reset combobox in case of speciality change
+            comboBox_Doctors.Enabled = false;
+            comboBox_Doctors.Items.Clear();
+            comboBox_Doctors.Text = "";
+            comboBox_Hospitals.Items.Clear();
+            comboBox_Hospitals.Text = "";
 
-            //NewAppointment = new Models.ModAppointment()
-            //{
-            //    Id = null,
-            //    Confirmed = false
-            //};
+            string speciality = comboBox_Specialities.SelectedItem.ToString();
 
-            //NewAppointment.Patient = new Models.ModPatient();
-            //NewAppointment.Patient.FirstName = this.OldAppointment.Patient.FirstName;
-            //NewAppointment.Patient.LastName = this.OldAppointment.Patient.LastName;
-            //NewAppointment.Patient.Birthday = this.OldAppointment.Patient.Birthday;
-            //NewAppointment.DoctorName = comboBox_Doctors.SelectedItem.ToString();
-            //NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()][0];
-            //NewAppointment.DateTimeEnd = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()][1];
-            //NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
-            //NewAppointment.SpecialityName = comboBox_Specialities.SelectedItem.ToString();
+            List<Models.ModDoctor> lstDoctor = await GetDoctorsBasedOnSpeciality(speciality);
 
-            //int appointmentId = await PostAppointment(NewAppointment);
+            foreach (var doctor in lstDoctor)
+            {
+                comboBox_Doctors.Items.Add(doctor.FirstName + " " + doctor.LastName);
+            }
 
-            //if (appointmentId != -1)
-            //{
-            //    label_SuccessFailed.Text = "Appointment updated: " + appointmentId.ToString();
-            //    label_SuccessFailed.Visible = true;
-            //}
-            //else
-            //{
-            //    label_SuccessFailed.ForeColor = Color.DarkRed;
-            //    label_SuccessFailed.Text = "Conflict";
-            //}
+            comboBox_Doctors.Enabled = true;
+        }
+
+        private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)
+        {
+            List<Models.ModDoctor> lstContent = new List<Models.ModDoctor>();
+            const string apiRequest = "https://localhost:44310/api/doctors/getDoctorBasedOnSpeciality";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{apiRequest}/?speciality={pSpeciality}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        lstContent = JsonConvert.DeserializeObject<List<Models.ModDoctor>>(content);
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+            return lstContent;
+        }
+
+        private async void button_update_Click(object sender, EventArgs e)
+        {
+            NewAppointment = new Models.ModAppointment()
+            {
+                Id = null,
+                Confirmed = false
+            };
+
+            NewAppointment.Patient = new Models.ModPatient();
+            NewAppointment.Patient.FirstName = this.OldAppointment.Patient.FirstName;
+            NewAppointment.Patient.LastName = this.OldAppointment.Patient.LastName;
+            NewAppointment.Patient.Birthday = this.OldAppointment.Patient.Birthday;
+            NewAppointment.DoctorName = comboBox_Doctors.Text;
+            NewAppointment.DateTimeStart = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()][0];
+            NewAppointment.DateTimeEnd = AppointmentTimeSlot[comboBox_Availabilities.SelectedItem.ToString()][1];
+            NewAppointment.HospitalName = comboBox_Hospitals.SelectedItem.ToString();
+            NewAppointment.SpecialityName = comboBox_Specialities.SelectedItem.ToString();
+
+            int appointmentId = await PostAppointment(NewAppointment);
+
+            if (appointmentId != -1)
+            {
+                label_SuccessFailed.Text = "Appointment updated: " + appointmentId.ToString();
+                CancelAppointment(false);
+                label_SuccessFailed.Visible = true;
+            }
+            else
+            {
+                label_SuccessFailed.ForeColor = Color.DarkRed;
+                label_SuccessFailed.Text = "Conflict";
+            }
+        }
+
+        private async void monthCalendar_AppointmentDate_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            if (comboBox_Hospitals.Enabled && comboBox_Hospitals.SelectedItem.ToString() != "")
+            {
+                var timeslots = await GetAvailableTimeSlots(
+                    comboBox_Doctors.SelectedItem.ToString(),
+                    comboBox_Specialities.SelectedItem.ToString(),
+                    comboBox_Hospitals.SelectedItem.ToString(),
+                    monthCalendar_AppointmentDate.SelectionRange.Start);
+
+                ShowAvailableTimeSlots(timeslots);
+            }
         }
     }
 }

@@ -67,6 +67,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.monthCalendar_AppointmentDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.monthCalendar_AppointmentDate.Name = "monthCalendar_AppointmentDate";
             this.monthCalendar_AppointmentDate.TabIndex = 28;
+            this.monthCalendar_AppointmentDate.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_AppointmentDate_DateChanged);
             // 
             // label3
             // 
@@ -199,6 +200,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.button_update.TabIndex = 43;
             this.button_update.Text = "UPDATE APPOINTMENT";
             this.button_update.UseVisualStyleBackColor = true;
+            this.button_update.Click += new System.EventHandler(this.button_update_Click);
             // 
             // pictureBox_search
             // 

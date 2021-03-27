@@ -221,7 +221,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(373, 24);
             this.label8.TabIndex = 31;
-            this.label8.Text = "ATTENDENCE REGISTRATION FORM";
+            this.label8.Text = "ATTENDANCE REGISTRATION FORM";
             // 
             // comboBox_Hospitals
             // 
@@ -329,7 +329,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label9.TabIndex = 40;
             this.label9.Text = "min.";
             // 
-            // ManageAttendancesControl
+            // AddAttendancesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -354,7 +354,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.Controls.Add(this.checkBox_AllDay);
             this.Controls.Add(this.monthCalendar_AttendanceDay);
             this.Controls.Add(this.label9);
-            this.Name = "ManageAttendancesControl";
+            this.Name = "AddAttendancesControl";
             this.Size = new System.Drawing.Size(980, 647);
             this.Load += new System.EventHandler(this.ManageAttendancesControl_Load);
             this.ResumeLayout(false);

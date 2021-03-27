@@ -127,6 +127,7 @@ namespace HospiNetApp.Forms
             this.PatientDashboardControlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PatientDashboardControlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PatientDashboardControlPanel.Controls.Add(this.label_hello);
             this.PatientDashboardControlPanel.Location = new System.Drawing.Point(200, 97);
             this.PatientDashboardControlPanel.Name = "PatientDashboardControlPanel";

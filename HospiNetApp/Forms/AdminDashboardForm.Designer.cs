@@ -35,6 +35,7 @@ namespace HospiNetApp
             this.button_close = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.AdminDashboardControlPanel = new System.Windows.Forms.Panel();
+            this.label_hello = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label_appName = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -43,7 +44,6 @@ namespace HospiNetApp
             this.button_ManageDoctors = new System.Windows.Forms.Button();
             this.button_ManagePatients = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label_hello = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.AdminDashboardControlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -104,10 +104,19 @@ namespace HospiNetApp
             this.AdminDashboardControlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AdminDashboardControlPanel.Controls.Add(this.label_hello);
             this.AdminDashboardControlPanel.Location = new System.Drawing.Point(200, 97);
-            this.AdminDashboardControlPanel.Margin = new System.Windows.Forms.Padding(6);
             this.AdminDashboardControlPanel.Name = "AdminDashboardControlPanel";
             this.AdminDashboardControlPanel.Size = new System.Drawing.Size(980, 647);
             this.AdminDashboardControlPanel.TabIndex = 2;
+            // 
+            // label_hello
+            // 
+            this.label_hello.AutoSize = true;
+            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_hello.Location = new System.Drawing.Point(441, 294);
+            this.label_hello.Name = "label_hello";
+            this.label_hello.Size = new System.Drawing.Size(93, 37);
+            this.label_hello.TabIndex = 0;
+            this.label_hello.Text = "hello.";
             // 
             // pictureBox1
             // 
@@ -217,16 +226,6 @@ namespace HospiNetApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 744);
             this.panel1.TabIndex = 0;
-            // 
-            // label_hello
-            // 
-            this.label_hello.AutoSize = true;
-            this.label_hello.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_hello.Location = new System.Drawing.Point(441, 294);
-            this.label_hello.Name = "label_hello";
-            this.label_hello.Size = new System.Drawing.Size(93, 37);
-            this.label_hello.TabIndex = 0;
-            this.label_hello.Text = "hello.";
             // 
             // AdminDashboardForm
             // 

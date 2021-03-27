@@ -127,6 +127,7 @@ namespace HospiNetApp.Forms
             this.DoctorDashboardControlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DoctorDashboardControlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DoctorDashboardControlPanel.Controls.Add(this.label_hello);
             this.DoctorDashboardControlPanel.Location = new System.Drawing.Point(200, 97);
             this.DoctorDashboardControlPanel.Name = "DoctorDashboardControlPanel";
@@ -176,7 +177,7 @@ namespace HospiNetApp.Forms
             this.panel1.Controls.Add(this.label_doctor_dashboard);
             this.panel1.Location = new System.Drawing.Point(200, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(982, 100);
+            this.panel1.Size = new System.Drawing.Size(980, 100);
             this.panel1.TabIndex = 4;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);

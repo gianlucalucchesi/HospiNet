@@ -18,7 +18,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
         Models.ModAppointment NewAppointment;
         List<Models.ModHospital> lstAvailableHospitals;
         Dictionary<string, DateTime[]> AppointmentTimeSlot = new Dictionary<string, DateTime[]>();
-        Guid? DoctorId;
 
         public ManageAppointmentControl()
         {
@@ -88,6 +87,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private void ShowAppointment(Models.ModAppointment appointment)
         {
             monthCalendar_AppointmentDate.SetDate(this.OldAppointment.DateTimeStart.Date);
+            comboBox_Availabilities.Text = this.OldAppointment.DateTimeStart.ToShortTimeString() + " - " + this.OldAppointment.DateTimeEnd.ToShortTimeString();
 
             comboBox_Specialities.SelectedItem = this.OldAppointment.SpecialityName;
 
@@ -189,39 +189,45 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBox_Hospitals.Items.Clear();
-            comboBox_Hospitals.Text = "";
-            label_loading.Visible = true;
-            lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
-
-            foreach (var hospital in lstAvailableHospitals)
+            if (!OldAppointment.Confirmed)
             {
-                if (!comboBox_Hospitals.Items.Contains(hospital.Name))
-                    comboBox_Hospitals.Items.Add(hospital.Name);
+                comboBox_Hospitals.Items.Clear();
+                comboBox_Hospitals.Text = "";
+                label_loading.Visible = true;
+                lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
+
+                foreach (var hospital in lstAvailableHospitals)
+                {
+                    if (!comboBox_Hospitals.Items.Contains(hospital.Name))
+                        comboBox_Hospitals.Items.Add(hospital.Name);
+                }
+
+                if (lstAvailableHospitals.Count == 0)
+                    comboBox_Hospitals.Items.Add("No available hospitals");
+
+                label_loading.Visible = false;
+                comboBox_Hospitals.Enabled = true;
             }
-
-            if (lstAvailableHospitals.Count == 0)
-                comboBox_Hospitals.Items.Add("No available hospitals");
-
-            label_loading.Visible = false;
-            comboBox_Hospitals.Enabled = true;
         }
 
         private async void comboBox_Hospitals_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox_Specialities.SelectedItem.ToString() != ""
-                && comboBox_Doctors.SelectedItem.ToString() != ""
-                && comboBox_Hospitals.SelectedItem.ToString() != "")
+            if (!OldAppointment.Confirmed)
             {
-                label_loading.Visible = true;
-                var timeslots = await GetAvailableTimeSlots(
-                    comboBox_Doctors.SelectedItem.ToString(),
-                    comboBox_Specialities.SelectedItem.ToString(),
-                    comboBox_Hospitals.SelectedItem.ToString(),
-                    monthCalendar_AppointmentDate.SelectionRange.Start);
+                if (comboBox_Specialities.SelectedItem.ToString() != ""
+                    && comboBox_Doctors.SelectedItem.ToString() != ""
+                    && comboBox_Hospitals.SelectedItem.ToString() != "")
+                {
+                    label_loading.Visible = true;
+                    var timeslots = await GetAvailableTimeSlots(
+                        comboBox_Doctors.SelectedItem.ToString(),
+                        comboBox_Specialities.SelectedItem.ToString(),
+                        comboBox_Hospitals.SelectedItem.ToString(),
+                        monthCalendar_AppointmentDate.SelectionRange.Start);
 
-                ShowAvailableTimeSlots(timeslots);
-                label_loading.Visible = false;
+                    ShowAvailableTimeSlots(timeslots);
+                    label_loading.Visible = false;
+                }
             }
         }
 
@@ -286,52 +292,59 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private void ShowAvailableTimeSlots(List<DateTime[]> timeSlots)
         {
-            comboBox_Availabilities.Enabled = false;
-            comboBox_Availabilities.Items.Clear();
-            comboBox_Availabilities.Text = "";
-            AppointmentTimeSlot.Clear();
-
-            foreach (var timeSlot in timeSlots)
+            if (!OldAppointment.Confirmed) 
             {
-                AppointmentTimeSlot.Add(timeSlot[0].ToShortTimeString() + " - " + timeSlot[1].ToShortTimeString(), timeSlot);
+                comboBox_Availabilities.Enabled = false;
+                comboBox_Availabilities.Items.Clear();
+                comboBox_Availabilities.Text = "";
+                AppointmentTimeSlot.Clear();
+
+                foreach (var timeSlot in timeSlots)
+                {
+                    AppointmentTimeSlot.Add(timeSlot[0].ToShortTimeString() + " - " + timeSlot[1].ToShortTimeString(), timeSlot);
+                }
+
+                foreach (var timeSlot in AppointmentTimeSlot)
+                {
+                    comboBox_Availabilities.Items.Add(timeSlot.Key);
+                }
+
+                if (comboBox_Availabilities.Items.Count == 0)
+                    comboBox_Availabilities.Items.Add("No availabilities");
+
+                comboBox_Availabilities.Enabled = true;
             }
 
-            foreach (var timeSlot in AppointmentTimeSlot)
-            {
-                comboBox_Availabilities.Items.Add(timeSlot.Key);
-            }
-
-            if (comboBox_Availabilities.Items.Count == 0)
-                comboBox_Availabilities.Items.Add("No availabilities");
-
-            comboBox_Availabilities.Enabled = true;
             comboBox_Availabilities.Text = this.OldAppointment.DateTimeStart.ToShortTimeString() + " - " + this.OldAppointment.DateTimeEnd.ToShortTimeString();
         }
 
         private async void comboBox_Specialities_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Reset combobox in case of speciality change
-            comboBox_Doctors.Enabled = false;
-            comboBox_Doctors.Items.Clear();
-            comboBox_Doctors.Text = "";
-            comboBox_Hospitals.Items.Clear();
-            comboBox_Hospitals.Text = "";
-            label_loading.Visible = true;
-
-            string speciality = comboBox_Specialities.SelectedItem.ToString();
-
-            List<Models.ModDoctor> lstDoctor = await GetDoctorsBasedOnSpeciality(speciality);
-
-            foreach (var doctor in lstDoctor)
+            if (!OldAppointment.Confirmed)
             {
-                comboBox_Doctors.Items.Add(doctor.FirstName + " " + doctor.LastName);
+                // Reset combobox in case of speciality change
+                comboBox_Doctors.Enabled = false;
+                comboBox_Doctors.Items.Clear();
+                comboBox_Doctors.Text = "";
+                comboBox_Hospitals.Items.Clear();
+                comboBox_Hospitals.Text = "";
+                label_loading.Visible = true;
+
+                string speciality = comboBox_Specialities.SelectedItem.ToString();
+
+                List<Models.ModDoctor> lstDoctor = await GetDoctorsBasedOnSpeciality(speciality);
+
+                foreach (var doctor in lstDoctor)
+                {
+                    comboBox_Doctors.Items.Add(doctor.FirstName + " " + doctor.LastName);
+                }
+
+                if (lstDoctor.Count == 0)
+                    comboBox_Doctors.Items.Add("No available doctors");
+
+                comboBox_Doctors.Enabled = true;
+                label_loading.Visible = false;
             }
-
-            if (lstDoctor.Count == 0)
-                comboBox_Doctors.Items.Add("No available doctors");
-
-            comboBox_Doctors.Enabled = true;
-            label_loading.Visible = false;
         }
 
         private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)

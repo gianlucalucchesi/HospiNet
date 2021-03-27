@@ -208,9 +208,9 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label_Success.ForeColor = System.Drawing.Color.ForestGreen;
             this.label_Success.Location = new System.Drawing.Point(377, 122);
             this.label_Success.Name = "label_Success";
-            this.label_Success.Size = new System.Drawing.Size(272, 24);
+            this.label_Success.Size = new System.Drawing.Size(271, 24);
             this.label_Success.TabIndex = 32;
-            this.label_Success.Text = "Attendence successfully added";
+            this.label_Success.Text = "Attendance successfully added";
             this.label_Success.Visible = false;
             // 
             // label8

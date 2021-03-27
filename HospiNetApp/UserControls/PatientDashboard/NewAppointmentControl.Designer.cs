@@ -47,6 +47,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.button_AddAppointment = new System.Windows.Forms.Button();
             this.label_SuccessFailed = new System.Windows.Forms.Label();
             this.comboBox_Availabilities = new System.Windows.Forms.ComboBox();
+            this.label_loading = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox_Specialities
@@ -262,10 +263,23 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Availabilities.Size = new System.Drawing.Size(227, 32);
             this.comboBox_Availabilities.TabIndex = 24;
             // 
+            // label_loading
+            // 
+            this.label_loading.AutoSize = true;
+            this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loading.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label_loading.Location = new System.Drawing.Point(713, 517);
+            this.label_loading.Name = "label_loading";
+            this.label_loading.Size = new System.Drawing.Size(93, 24);
+            this.label_loading.TabIndex = 51;
+            this.label_loading.Text = "Loading...";
+            this.label_loading.Visible = false;
+            // 
             // NewAppointmentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_loading);
             this.Controls.Add(this.comboBox_Availabilities);
             this.Controls.Add(this.label_SuccessFailed);
             this.Controls.Add(this.button_AddAppointment);
@@ -312,5 +326,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private System.Windows.Forms.Button button_AddAppointment;
         private System.Windows.Forms.Label label_SuccessFailed;
         private System.Windows.Forms.ComboBox comboBox_Availabilities;
+        private System.Windows.Forms.Label label_loading;
     }
 }

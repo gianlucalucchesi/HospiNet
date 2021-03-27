@@ -57,6 +57,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             comboBox_Doctors.Enabled = false;
             comboBox_Doctors.Items.Clear();
             comboBox_Doctors.Text = "";
+            label_loading.Visible = true;
 
             string speciality = comboBox_Specialities.SelectedItem.ToString();
 
@@ -67,7 +68,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Doctors.Items.Add(doctor.FirstName + " " + doctor.LastName);
             }
 
+            if (lstDoctor.Count == 0)
+                comboBox_Doctors.Items.Add("No available doctors");
+
             comboBox_Doctors.Enabled = true;
+            label_loading.Visible = false;
         }
 
         private async void button_AddAppointment_Click(object sender, EventArgs e)
@@ -131,6 +136,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private async void comboBox_Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox_Hospitals.Items.Clear();
+            label_loading.Visible = true;
             lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
 
             foreach (var hospital in lstAvailableHospitals)
@@ -143,6 +149,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Hospitals.Items.Add("No available hospitals");
 
             comboBox_Hospitals.Enabled = true;
+            label_loading.Visible = false;
         }
 
         private async void comboBox_Hospitals_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -151,6 +158,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     && comboBox_Doctors.SelectedItem.ToString() != ""
                     && comboBox_Hospitals.SelectedItem.ToString() != "")
             {
+                label_loading.Visible = true;
                 var timeslots = await GetAvailableTimeSlots(
                     comboBox_Doctors.SelectedItem.ToString(),
                     comboBox_Specialities.SelectedItem.ToString(),
@@ -158,6 +166,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     monthCalendar_AppointmentDate.SelectionRange.Start);
 
                 ShowAvailableTimeSlots(timeslots);
+                label_loading.Visible = false;
             }
         }
 
@@ -247,6 +256,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         {
             if (comboBox_Hospitals.Enabled && comboBox_Hospitals.SelectedItem.ToString() != "")
             {
+                label_loading.Visible = true;
                 var timeslots = await GetAvailableTimeSlots(
                     comboBox_Doctors.SelectedItem.ToString(),
                     comboBox_Specialities.SelectedItem.ToString(),
@@ -254,6 +264,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     monthCalendar_AppointmentDate.SelectionRange.Start);
 
                 ShowAvailableTimeSlots(timeslots);
+                label_loading.Visible = false;
             }
         }
     }

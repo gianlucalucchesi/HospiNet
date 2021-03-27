@@ -46,6 +46,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.label_SuccessFailed = new System.Windows.Forms.Label();
             this.label_Confirmed = new System.Windows.Forms.Label();
             this.label_NotFound = new System.Windows.Forms.Label();
+            this.label_loading = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_search)).BeginInit();
             this.SuspendLayout();
             // 
@@ -261,10 +262,23 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.label_NotFound.Text = "Not found";
             this.label_NotFound.Visible = false;
             // 
+            // label_loading
+            // 
+            this.label_loading.AutoSize = true;
+            this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loading.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label_loading.Location = new System.Drawing.Point(472, 564);
+            this.label_loading.Name = "label_loading";
+            this.label_loading.Size = new System.Drawing.Size(93, 24);
+            this.label_loading.TabIndex = 50;
+            this.label_loading.Text = "Loading...";
+            this.label_loading.Visible = false;
+            // 
             // ManageAppointmentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_loading);
             this.Controls.Add(this.label_SuccessFailed);
             this.Controls.Add(this.label_NotFound);
             this.Controls.Add(this.label_Confirmed);
@@ -308,5 +322,6 @@ namespace HospiNetApp.UserControls.PatientDashboard
         private System.Windows.Forms.Label label_SuccessFailed;
         private System.Windows.Forms.Label label_Confirmed;
         private System.Windows.Forms.Label label_NotFound;
+        private System.Windows.Forms.Label label_loading;
     }
 }

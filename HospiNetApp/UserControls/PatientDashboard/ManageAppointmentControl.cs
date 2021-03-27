@@ -27,12 +27,15 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async void pictureBox_search_ClickAsync(object sender, EventArgs e)
         {
+            label_loading.Visible = true;
             this.OldAppointment = await GetAppointment();
 
             if (this.OldAppointment.DoctorName != null)
             {
                 ShowAppointment(this.OldAppointment);
             }
+
+            label_loading.Visible = false;
         }
 
         private async Task<Models.ModAppointment> GetAppointment()
@@ -188,6 +191,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
         {
             comboBox_Hospitals.Items.Clear();
             comboBox_Hospitals.Text = "";
+            label_loading.Visible = true;
             lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
 
             foreach (var hospital in lstAvailableHospitals)
@@ -199,6 +203,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             if (lstAvailableHospitals.Count == 0)
                 comboBox_Hospitals.Items.Add("No available hospitals");
 
+            label_loading.Visible = false;
             comboBox_Hospitals.Enabled = true;
         }
 
@@ -208,6 +213,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 && comboBox_Doctors.SelectedItem.ToString() != ""
                 && comboBox_Hospitals.SelectedItem.ToString() != "")
             {
+                label_loading.Visible = true;
                 var timeslots = await GetAvailableTimeSlots(
                     comboBox_Doctors.SelectedItem.ToString(),
                     comboBox_Specialities.SelectedItem.ToString(),
@@ -215,6 +221,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                     monthCalendar_AppointmentDate.SelectionRange.Start);
 
                 ShowAvailableTimeSlots(timeslots);
+                label_loading.Visible = false;
             }
         }
 
@@ -309,6 +316,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             comboBox_Doctors.Text = "";
             comboBox_Hospitals.Items.Clear();
             comboBox_Hospitals.Text = "";
+            label_loading.Visible = true;
 
             string speciality = comboBox_Specialities.SelectedItem.ToString();
 
@@ -319,7 +327,11 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Doctors.Items.Add(doctor.FirstName + " " + doctor.LastName);
             }
 
+            if (lstDoctor.Count == 0)
+                comboBox_Doctors.Items.Add("No available doctors");
+
             comboBox_Doctors.Enabled = true;
+            label_loading.Visible = false;
         }
 
         private async Task<List<Models.ModDoctor>> GetDoctorsBasedOnSpeciality(string pSpeciality)

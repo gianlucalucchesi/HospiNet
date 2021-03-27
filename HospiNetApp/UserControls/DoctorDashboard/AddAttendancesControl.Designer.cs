@@ -197,7 +197,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.button_Confirm.Name = "button_Confirm";
             this.button_Confirm.Size = new System.Drawing.Size(142, 66);
             this.button_Confirm.TabIndex = 10;
-            this.button_Confirm.Text = "Add Attendence";
+            this.button_Confirm.Text = "Add Attendance";
             this.button_Confirm.UseVisualStyleBackColor = true;
             this.button_Confirm.Click += new System.EventHandler(this.button_Confirm_Click);
             // 

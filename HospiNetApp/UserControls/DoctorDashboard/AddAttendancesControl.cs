@@ -170,7 +170,7 @@ namespace HospiNetApp.UserControls.DoctorDashboard
                 DateTime timeEnd = monthCalendar_AttendanceDay.SelectionRange.Start.AddHours(toHour).AddMinutes(toMinutes);
 
                 // Multiple day selection
-                while (timeStart < monthCalendar_AttendanceDay.SelectionRange.End)
+                while (timeStart < monthCalendar_AttendanceDay.SelectionRange.End.AddDays(1.00))
                 {
                     Models.ModSpeciality speciality = lstSpecialities.SingleOrDefault(x => x.Name == comboBox_Specialities.Text);
 

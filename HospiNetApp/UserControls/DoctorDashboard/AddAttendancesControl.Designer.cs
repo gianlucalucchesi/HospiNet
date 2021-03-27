@@ -337,9 +337,9 @@ namespace HospiNetApp.UserControls.DoctorDashboard
             this.label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label10.Location = new System.Drawing.Point(69, 485);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(108, 13);
+            this.label10.Size = new System.Drawing.Size(152, 13);
             this.label10.TabIndex = 41;
-            this.label10.Text = "Drag for multiple days";
+            this.label10.Text = "Drag calendar for multiple days";
             // 
             // AddAttendancesControl
             // 

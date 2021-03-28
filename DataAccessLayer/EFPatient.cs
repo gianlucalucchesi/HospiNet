@@ -10,7 +10,7 @@ namespace DataAccessLayer
     {
         public List<Models.ModPatient> GetAllPatients()
         {
-            HospiNetEntities oDatabase = new HospiNetEntities();
+            HospiNetEntitiesPatient oDatabase = new HospiNetEntitiesPatient();
             List<usp_GetAllPatients_Result> lstResult = oDatabase.usp_GetAllPatients().ToList();
             List<Models.ModPatient> lstPatients = new List<Models.ModPatient>();
 
@@ -30,7 +30,7 @@ namespace DataAccessLayer
 
         public Guid? AddPatient(string FirstName, string LastName, DateTime Birthday)
         {
-            using (var oDatabase = new HospiNetEntities())
+            using (var oDatabase = new HospiNetEntitiesPatient())
             {
                 try
                 {
@@ -46,7 +46,7 @@ namespace DataAccessLayer
 
         public void UpdatePatient(Models.ModPatient oPatient)
         {
-            using (var oDatabase = new HospiNetEntities())
+            using (var oDatabase = new HospiNetEntitiesPatient())
             {
                 oDatabase.usp_UpdatePatient(oPatient.Id, oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
             }

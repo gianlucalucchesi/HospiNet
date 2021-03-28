@@ -72,39 +72,69 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HospiNetDatabase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HospiNetDatabaseDoctor.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospiNetDatabaseDoctor.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HospiNetDatabaseDoctor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HospiNetDatabaseDoctor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospiNetDatabaseDoctor.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="HospiNetDatabasePatient.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospiNetDatabasePatient.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HospiNetDatabasePatient.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospiNetDatabasePatient.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HospiNetDatabasePatient.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospiNetDatabasePatient.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="usp_GetAllDoctors_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetAllPatients_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabasePatient.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetAllRooms_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetAppointment_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabasePatient.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDayAppointments_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDoctorAppointments_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDoctorAvailabilities_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDoctorsBasedOnSpeciality_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDoctorSpecialities_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetHospitals_Result.cs">
       <DependentUpon>HospiNetDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_SelectAllSpecialities_Result.cs">
-      <DependentUpon>HospiNetDatabase.tt</DependentUpon>
+      <DependentUpon>HospiNetDatabaseDoctor.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +145,20 @@
     </EntityDeploy>
     <None Include="HospiNetDatabase.edmx.diagram">
       <DependentUpon>HospiNetDatabase.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="HospiNetDatabasePatient.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HospiNetDatabasePatient.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="HospiNetDatabaseDoctor.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HospiNetDatabaseDoctor.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="HospiNetDatabaseDoctor.edmx.diagram">
+      <DependentUpon>HospiNetDatabaseDoctor.edmx</DependentUpon>
+    </None>
+    <None Include="HospiNetDatabasePatient.edmx.diagram">
+      <DependentUpon>HospiNetDatabasePatient.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -141,6 +185,26 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HospiNetDatabase.edmx</DependentUpon>
       <LastGenOutput>HospiNetDatabase.cs</LastGenOutput>
+    </Content>
+    <Content Include="HospiNetDatabaseDoctor.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospiNetDatabaseDoctor.edmx</DependentUpon>
+      <LastGenOutput>HospiNetDatabaseDoctor.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HospiNetDatabaseDoctor.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospiNetDatabaseDoctor.edmx</DependentUpon>
+      <LastGenOutput>HospiNetDatabaseDoctor.cs</LastGenOutput>
+    </Content>
+    <Content Include="HospiNetDatabasePatient.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospiNetDatabasePatient.edmx</DependentUpon>
+      <LastGenOutput>HospiNetDatabasePatient.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HospiNetDatabasePatient.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospiNetDatabasePatient.edmx</DependentUpon>
+      <LastGenOutput>HospiNetDatabasePatient.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,7 +33,7 @@ namespace DataAccessLayer
 
         public usp_GetAppointment_Result GetAppointment(int appointmentId)
         {
-            using (var oDatabase = new HospiNetEntities())
+            using (var oDatabase = new HospiNetEntitiesPatient())
             {
                 return oDatabase.usp_GetAppointment(appointmentId).SingleOrDefault();
             }
@@ -41,7 +41,7 @@ namespace DataAccessLayer
 
         public int CancelAppointment(int appointmentId)
         {
-            using (var oDatabase = new HospiNetEntities())
+            using (var oDatabase = new HospiNetEntitiesPatient())
             {
                 return oDatabase.usp_CancelAppointment(appointmentId);
             }

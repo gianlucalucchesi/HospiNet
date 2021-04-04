@@ -69,7 +69,7 @@ namespace HospiNetApp.UserControls
             }
         }
 
-        private async Task<Guid?> UserExists(string Firstname, string LastName, string Type)
+        private async Task<Guid?> UserExists(string Firstname, string LastName, string Role)
         {
             Guid? UserId = null;
             const string apiRequest = "https://localhost:44310/api/hospitals/UserExists";
@@ -78,7 +78,7 @@ namespace HospiNetApp.UserControls
             {
                 using (var client = new HttpClient())
                 {
-                    var response = await client.GetAsync($"{apiRequest}/?FirstName={Firstname}&LastName={LastName}&Type={Type}");
+                    var response = await client.GetAsync($"{apiRequest}/?FirstName={Firstname}&LastName={LastName}&Role={Role}");
 
                     if (response.IsSuccessStatusCode)
                     {

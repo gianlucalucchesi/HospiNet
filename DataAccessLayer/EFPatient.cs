@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,19 +11,40 @@ namespace DataAccessLayer
     {
         public List<Models.ModPatient> GetAllPatients()
         {
-            HospiNetEntitiesPatient oDatabase = new HospiNetEntitiesPatient();
-            List<usp_GetAllPatients_Result> lstResult = oDatabase.usp_GetAllPatients().ToList();
             List<Models.ModPatient> lstPatients = new List<Models.ModPatient>();
 
-            foreach (var result in lstResult)
+            try
             {
-                var oPatient = new Models.ModPatient();
-                oPatient.Id = result.Id;
-                oPatient.FirstName = result.FirstName;
-                oPatient.LastName = result.LastName;
-                oPatient.Birthday = result.Birthday;
+                HospiNetEntitiesPatient oDatabase = new HospiNetEntitiesPatient();
+                List<usp_GetAllPatients_Result> lstResult = oDatabase.usp_GetAllPatients().ToList();
 
-                lstPatients.Add(oPatient);
+                foreach (var result in lstResult)
+                {
+                    var oPatient = new Models.ModPatient();
+                    oPatient.Id = result.Id;
+                    oPatient.FirstName = result.FirstName;
+                    oPatient.LastName = result.LastName;
+                    oPatient.Birthday = result.Birthday;
+
+                    lstPatients.Add(oPatient);
+                }
+            }
+            catch (Exception e)
+            {
+                var exc = e.GetBaseException() as SqlException; 
+
+                if (!(exc is null))
+                {
+                    CustomErrors.CustomSqlErrors customException = new CustomErrors.CustomSqlErrors(exc.Number);
+                    customException.ExceptionDescription = exc.Message;
+
+                    throw customException;
+                }
+                else
+                {
+                    Console.WriteLine("Other error: " + e.Message);
+                    throw;
+                }
             }
 
             return lstPatients;

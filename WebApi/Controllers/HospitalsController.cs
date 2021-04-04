@@ -31,10 +31,10 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("api/hospitals/UserExists")]
-        public IHttpActionResult UserExists(string FirstName, string LastName, string Type)
+        public IHttpActionResult UserExists(string FirstName, string LastName, string Role)
         {
             BusinessLogic.BlHospitals oData = new BusinessLogic.BlHospitals();
-            var userId = oData.UserExists(FirstName, LastName, Type);
+            var userId = oData.UserExists(FirstName, LastName, Role);
 
             if (userId != null)
                 return Ok(userId);

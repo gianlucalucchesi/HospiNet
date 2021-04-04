@@ -58,19 +58,51 @@ namespace DataAccessLayer
                 {
                     return oDatabase.usp_AddPatient(FirstName, LastName, Birthday).FirstOrDefault();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    var exc = e.GetBaseException() as SqlException;
 
-                    throw;
+                    if (!(exc is null))
+                    {
+                        CustomErrors.CustomSqlErrors customException = new CustomErrors.CustomSqlErrors(exc.Number);
+                        customException.ExceptionDescription = exc.Message;
+
+                        throw customException;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Other error: " + e.Message);
+                        throw;
+                    }
                 }
             }
         }
 
         public void UpdatePatient(Models.ModPatient oPatient)
         {
-            using (var oDatabase = new HospiNetEntitiesPatient())
+            try
             {
-                oDatabase.usp_UpdatePatient(oPatient.Id, oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
+                using (var oDatabase = new HospiNetEntitiesPatient())
+                {
+                    oDatabase.usp_UpdatePatient(oPatient.Id, oPatient.FirstName, oPatient.LastName, oPatient.Birthday);
+                }
+            }
+            catch (Exception e)
+            {
+                var exc = e.GetBaseException() as SqlException;
+
+                if (!(exc is null))
+                {
+                    CustomErrors.CustomSqlErrors customException = new CustomErrors.CustomSqlErrors(exc.Number);
+                    customException.ExceptionDescription = exc.Message;
+
+                    throw customException;
+                }
+                else
+                {
+                    Console.WriteLine("Other error: " + e.Message);
+                    throw;
+                }
             }
         }
     }

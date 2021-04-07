@@ -57,6 +57,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
             this.comboBox_Specialities.Items.AddRange(new object[] {
             "Allergy & Immunology",
             "Anesthesiology",
+            "Cardiology",
             "Dermatology",
             "Emergency Medicine",
             "Family Medicine",

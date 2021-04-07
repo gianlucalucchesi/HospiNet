@@ -246,7 +246,7 @@ namespace HospiNetApp.UserControls.PatientDashboard
                 comboBox_Availabilities.Items.Add(timeSlot.Key);
             }
 
-            if (comboBox_Availabilities.Items.Count == 0)
+            if (comboBox_Availabilities.Items.Count == 0 || monthCalendar_AppointmentDate.SelectionRange.Start < DateTime.Today.AddDays(-1.00))
                 comboBox_Availabilities.Items.Add("No availabilities");
 
             comboBox_Availabilities.Enabled = true;

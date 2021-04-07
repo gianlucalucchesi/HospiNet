@@ -273,6 +273,17 @@ namespace HospiNetApp.UserControls.DoctorDashboard
 
         private bool DataCheck()
         {
+            DateTime DateStart = monthCalendar_AttendanceDay.SelectionRange.Start;
+            DateTime DateEnd = monthCalendar_AttendanceDay.SelectionRange.End.AddDays(1.00); // Add 1 to make inclusive
+
+            while (DateStart < DateEnd)
+            {
+                if (DateStart < DateTime.Today.AddDays(-1.00))
+                    return false;
+
+                DateStart = DateStart.AddDays(1.00);
+            }
+
             if ((comboBox_FromHour.Text == "" || comboBox_FromHour == null) && !checkBox_AllDay.Checked)
                 return false;
             else if ((comboBox_FromMinutes.Text == "" || comboBox_FromMinutes == null) && !checkBox_AllDay.Checked)

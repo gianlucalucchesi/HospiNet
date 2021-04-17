@@ -97,19 +97,21 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
             if (appointmentId != -1)
             {
+                label_SuccessFailed.ForeColor = Color.ForestGreen;
                 label_SuccessFailed.Text = "Appointment created: " + appointmentId.ToString();
                 label_SuccessFailed.Visible = true;
             }
             else
             {
                 label_SuccessFailed.ForeColor = Color.DarkRed;
-                label_SuccessFailed.Text = "Conflict";
+                label_SuccessFailed.Text = "           Conflict";
+                label_SuccessFailed.Visible = true;
             }
         }
 
         private async Task<int> PostAppointment(Models.ModAppointment newAppointment)
         {
-            int appointmentId = -99;
+            int appointmentId = -1;
             const string apiRequest = "https://localhost:44310/api/appointments/add";
 
             string content = JsonConvert.SerializeObject(newAppointment);

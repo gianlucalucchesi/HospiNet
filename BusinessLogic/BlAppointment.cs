@@ -21,7 +21,7 @@ namespace BusinessLogic
 
             appointment.Patient.Id = blHospitals.UserExists(appointment.Patient.FirstName, appointment.Patient.LastName, "Patient");
 
-            if (appointment.Patient.Id == null) // If does not exist
+            if (appointment.Patient.Id == null) // If patient does not exist -> create in db
             {
                 blPatients.AddPatient(appointment.Patient);
                 appointment.Patient.Id = blHospitals.UserExists(appointment.Patient.FirstName, appointment.Patient.LastName, "Patient");
@@ -36,8 +36,53 @@ namespace BusinessLogic
                 Id = oDatabase.GetAvailableRoom(oHospital.Id, appointment.DateTimeStart, appointment.DateTimeEnd)
             };
 
-            return oDatabase.AddAppointment(oHospital.Id, oRoom.Id, appointment.Patient.Id, oDoctor.Id, 
-                oSpeciality.Id, appointment.DateTimeStart, appointment.DateTimeEnd);
+            if(CheckConstraints(appointment.Patient.FirstName, appointment.Patient.LastName, appointment.HospitalName, appointment.DateTimeStart))
+            {
+                return oDatabase.AddAppointment(oHospital.Id, oRoom.Id, appointment.Patient.Id, oDoctor.Id,
+                       oSpeciality.Id, appointment.DateTimeStart, appointment.DateTimeEnd);
+            } else
+            {
+                return -1;
+            }
+
+
+        }
+
+        public bool CheckConstraints(string patientFirstName, string patientLastName, string hospitalName, DateTime appointmentDay)
+        {
+            bool validation = true;
+            var lstExistingAppointments = GetExistingDayAppointments(appointmentDay);
+
+            foreach (var existingAppointment in lstExistingAppointments)
+            {
+                // Different appointments in other hospital on same day not allowed
+                if(patientFirstName == existingAppointment.FirstName &&
+                   patientLastName == existingAppointment.LastName &&
+                   hospitalName != existingAppointment.HospitalName)
+                {
+                    validation = false; break;
+                }
+
+                // Different appointments in same hospital allowed in other "day half"
+                if (patientFirstName == existingAppointment.FirstName &&
+                    patientLastName == existingAppointment.LastName &&
+                    hospitalName == existingAppointment.HospitalName &&
+                    appointmentDay != existingAppointment.DateTimeStart // Do not include old appointment for updates
+                    )
+                {
+                    if (existingAppointment.DateTimeStart.Hour < 12 && appointmentDay.Hour < 12) //if both in the morning
+                    {
+                        validation = false; break;
+                    }
+                    
+                    if(existingAppointment.DateTimeStart.Hour >= 12 && appointmentDay.Hour >= 12) //If both in the afternoon
+                    {
+                        validation = false; break;
+                    }
+                }
+            }
+
+            return validation;
         }
 
         private int? GetAppointmentDuration(Guid? doctorId, Guid? hospitalId, DateTime dateTimeStart, Guid? specialityId)
@@ -173,8 +218,9 @@ namespace BusinessLogic
 
                 foreach (var Existingappointment in lstExistingAppointmentsDateTime)
                 {
-                    if ((Existingappointment[0] >= timeSlot[0] && Existingappointment[0] <= timeSlot[1]) ||
-                        (Existingappointment[1] >= timeSlot[0] && Existingappointment[1] <= timeSlot[1]))
+                    // Add 1min to avoid conflict with appointment before and after
+                    if ((Existingappointment[0] >= timeSlot[0].AddMinutes(1.00) && Existingappointment[0] <= timeSlot[1].AddMinutes(1.00)) ||
+                        (Existingappointment[1] >= timeSlot[0].AddMinutes(1.00) && Existingappointment[1] <= timeSlot[1].AddMinutes(1.00)))
                     {
                         available = false;                                                                   
                     } 

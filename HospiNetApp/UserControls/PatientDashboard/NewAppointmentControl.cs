@@ -139,12 +139,18 @@ namespace HospiNetApp.UserControls.PatientDashboard
         {
             comboBox_Hospitals.Items.Clear();
             label_loading.Visible = true;
-            lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
 
-            foreach (var hospital in lstAvailableHospitals)
+            if (comboBox_Doctors.SelectedItem.ToString() != ""
+                && comboBox_Doctors.SelectedItem.ToString() != "No available doctors")
             {
-                if (!comboBox_Hospitals.Items.Contains(hospital.Name))
-                    comboBox_Hospitals.Items.Add(hospital.Name);
+                lstAvailableHospitals = await GetAvailableHospitals(comboBox_Doctors.Text, comboBox_Specialities.Text);
+
+                foreach (var hospital in lstAvailableHospitals)
+                {
+                    if (!comboBox_Hospitals.Items.Contains(hospital.Name))
+                        comboBox_Hospitals.Items.Add(hospital.Name);
+                }
+
             }
 
             if (lstAvailableHospitals.Count == 0)
@@ -158,7 +164,8 @@ namespace HospiNetApp.UserControls.PatientDashboard
         {
             if (comboBox_Specialities.SelectedItem.ToString() != ""
                     && comboBox_Doctors.SelectedItem.ToString() != ""
-                    && comboBox_Hospitals.SelectedItem.ToString() != "")
+                    && comboBox_Hospitals.SelectedItem.ToString() != "" 
+                    && comboBox_Hospitals.SelectedItem.ToString() != "No available hospitals")
             {
                 label_loading.Visible = true;
                 var timeslots = await GetAvailableTimeSlots(
@@ -256,7 +263,9 @@ namespace HospiNetApp.UserControls.PatientDashboard
 
         private async void monthCalendar_AppointmentDate_DateChanged(object sender, DateRangeEventArgs e)
         {
-            if (comboBox_Hospitals.Enabled && comboBox_Hospitals.SelectedItem.ToString() != "")
+            if (comboBox_Hospitals.Enabled 
+                && comboBox_Hospitals.SelectedItem.ToString() != "" 
+                && comboBox_Hospitals.SelectedItem.ToString() != "No available hospitals")
             {
                 label_loading.Visible = true;
                 var timeslots = await GetAvailableTimeSlots(
